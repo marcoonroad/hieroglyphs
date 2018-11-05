@@ -1,0 +1,21 @@
+opam-version: "1.2"
+maintainer: "marcoonroad@gmail.com"
+authors: ["Marco Aurélio da Silva"]
+homepage: "https://github.com/marcoonroad/hieroglyphs"
+bug-reports: "https://github.com/marcoonroad/hieroglyphs/issues"
+dev-repo: "https://github.com/marcoonroad/hieroglyphs.git"
+
+build: [
+  ["dune" "subst"] {pinned}
+  ["dune" "build" "-p" name "-j" jobs]
+]
+
+build-test: ["dune" "runtest" "-p" name]
+
+depends: [
+  "core"
+  "digestif"
+  "nocrypto"
+  "dune" {build}
+  "alcotest" {test}
+]

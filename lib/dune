@@ -1,0 +1,6 @@
+(library
+  (name hieroglyphs)
+  (wrapped true)
+  (public_name hieroglyphs)
+  (libraries core unix digestif.c nocrypto.unix nocrypto)
+  (synopsis "Core / kernel module for the Hash-based signatures algorithm"))

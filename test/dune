@@ -1,0 +1,3 @@
+(test
+  (name spec)
+  (libraries alcotest hieroglyphs))
