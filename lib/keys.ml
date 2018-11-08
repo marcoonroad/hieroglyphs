@@ -1,3 +1,6 @@
+module List = Core.List
+module String = Core.String
+
 let populate _ =
   ( )
   |> Random.generate
@@ -9,7 +12,17 @@ let populate _ =
 let length = 16 * 128
 
 let generate ( ) =
-  Core.List.init length ~f:populate
+  List.init length ~f:populate
 
 let derive priv =
-  Core.List.map priv ~f:Hash.digest
+  List.map priv ~f:Hash.digest
+
+let export ~priv ~pass =
+  priv
+  |> List.reduce_exn ~f:Utils.concat_hashes
+  |> Encryption.encrypt ~pass
+
+let import ~cipher ~pass =
+  cipher
+  |> Encryption.decrypt ~pass
+  |> String.split ~on:'-'
