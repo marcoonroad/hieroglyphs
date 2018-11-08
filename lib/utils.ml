@@ -2,6 +2,21 @@ module List = Core.List
 module String = Core.String
 module Char = Core.Char
 module Int = Core.Int
+module Str = Re.Str
+
+(* 16 hex chars and 128 chars/string length for hash under hex string format *)
+let _HASH_LENGTH = 128
+let _HEX_SPACE = 16
+let _KEY_LENGTH = _HEX_SPACE * _HASH_LENGTH
+
+let regexp = Str.regexp "^[a-f0-9]+$"
+
+let is_hash text =
+  Str.string_match regexp text 0 && (String.length text = _HASH_LENGTH)
+
+let validate_key list =
+  let filtered = List.filter list ~f:is_hash in
+  if List.length filtered = _KEY_LENGTH then Some list else None
 
 let to_hex text = "0x" ^ text
 
@@ -13,7 +28,7 @@ let tag_index entries =
   List.zip_exn indexes entries
 
 let calculate_index (position, key) =
-  (position * 16) + key
+  (position * _HEX_SPACE) + key
 
 let index_at ~list position =
   List.nth_exn list position

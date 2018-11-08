@@ -8,8 +8,7 @@ let populate _ =
   |> Hash.digest
   |> Hash.digest
 
-(* 16 hex chars and 128 chars/string length for hash under hex string format *)
-let length = 16 * 128
+let length = Utils._KEY_LENGTH
 
 let generate ( ) =
   List.init length ~f:populate
@@ -26,3 +25,11 @@ let import ~cipher ~pass =
   cipher
   |> Encryption.decrypt ~pass
   |> String.split ~on:'-'
+  |> Utils.validate_key
+
+let load = Serialization.load
+let show = Serialization.show
+let address = Serialization.address
+
+let sign = Signing.sign
+let verify = Verification.verify

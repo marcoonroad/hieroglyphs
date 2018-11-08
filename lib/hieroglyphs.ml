@@ -12,5 +12,9 @@ let derive = Keys.derive
 let import = Keys.import
 let export = Keys.export
 
-let sign = Signing.sign
-let verify = Verification.verify
+let show = Keys.show
+let load = Keys.load
+let address = Keys.address
+
+let sign = Keys.sign
+let verify = Keys.verify
