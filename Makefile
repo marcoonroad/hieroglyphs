@@ -7,8 +7,14 @@ default: build
 build:
 	dune build
 
+### Alcotest environment variables:
+#
+#  -  ALCOTEST_VERBOSE=1
+#  -  ALCOTEST_QUICK_TESTS=1
+#  -  ALCOTEST_SHOW_ERRORS=1
+#
 test:
-	dune runtest -f
+	dune runtest -f --no-buffer
 
 install:
 	dune install

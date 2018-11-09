@@ -17,6 +17,8 @@ planned as well. Currently, the following things are implemented now:
   Elliptic Curves family, etc).
 - [ ] API documentation for the project (I should prefer automatic generation of
   documentation tools and provide the API documentation online under GH pages).
+- [ ] Stress tests and prediction/timing simulated attacks, to prove the underlying
+  library security and Private Key collision-free/resistance semantics.
 
 The novel approach of this library is to sign every piece of hexadecimal character
 from a given hash, so our range to sign and verify bits/bytes is smaller (we only
@@ -29,5 +31,5 @@ key stay on the same size.
 
 This library was not yet fully tested against many sort of attacks, such as timing
 attacks, but nevertheless the real security lies behind the `digestif` and `nocrypto`
-libraries, which provide strong hashes, strong RNGs and strong encryption. Use
+libraries, which both provide strong hashes, strong RNGs and strong encryption. Use
 with care and take responsibility by your own acts.
