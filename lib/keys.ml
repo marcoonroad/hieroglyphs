@@ -1,17 +1,26 @@
 module List = Core.List
 module String = Core.String
+module Float = Core.Float
+module Int64 = Core.Int64
 
-let populate _ =
+let populate time _ =
   ( )
   |> Random.generate
-  |> Core.Int64.to_string
+  |> Int64.to_string
+  |> String.(^) time
   |> Hash.digest
   |> Hash.digest
 
 let length = Utils._KEY_LENGTH
 
+let timestamp ( ) =
+  ( )
+  |> Unix.gettimeofday
+  |> Float.to_string
+
 let generate ( ) =
-  List.init length ~f:populate
+  let time = timestamp ( ) in
+  List.init length ~f:(populate time)
 
 let derive priv =
   List.map priv ~f:Hash.digest
