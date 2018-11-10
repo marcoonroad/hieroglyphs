@@ -5,3 +5,11 @@
    to create benchmarks is the Jane Street's core_bench.
 
 *)
+
+open Core_bench.Bench
+module Command = Core.Command
+
+let suite = Hiero.suite
+
+let _ =
+  Command.run (make_command suite)

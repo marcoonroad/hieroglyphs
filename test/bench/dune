@@ -1,0 +1,4 @@
+(test
+  (name bench)
+  (modules bench hiero)
+  (libraries core_bench hieroglyphs))

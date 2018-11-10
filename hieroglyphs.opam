@@ -11,7 +11,7 @@ build: [
   ["dune" "build" "-p" name "-j" jobs]
 ]
 
-build-test: ["dune" "runtest" "--no-buffer" "-p" name]
+build-test: ["dune" "build" "@test/spec/runtest" "-p" name]
 
 depends: [
   "re" {>= "1.8.0"}
@@ -20,4 +20,5 @@ depends: [
   "nocrypto" {>= "0.5.4-1"}
   "dune" {build & >= "1.5.1"}
   "alcotest" {test & >= "0.8.4"}
+  "core_bench" {test & >= "v0.11.0"}
 ]

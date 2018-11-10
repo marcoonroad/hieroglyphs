@@ -14,7 +14,10 @@ build:
 #  -  ALCOTEST_SHOW_ERRORS=1
 #
 test:
-	dune runtest -f --no-buffer
+	dune build @test/spec/runtest -f --no-buffer -j 1
+
+bench:
+	dune build @test/bench/runtest -f --no-buffer -j 1
 
 install:
 	dune install
