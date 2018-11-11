@@ -1,11 +1,19 @@
 # Frontend to dune.
 
-.PHONY: default build install uninstall test clean
+.PHONY: default vendor build doc install uninstall test coverage report clean
+
+vendor:
+	opam install . --deps-only --yes
 
 default: build
 
 build:
 	dune build
+
+doc: build
+	rm -rf docs/apiref
+	dune build @doc
+	mv _build/default/_doc/_html/ docs/apiref/
 
 ### Alcotest environment variables:
 #
@@ -24,6 +32,18 @@ install:
 
 uninstall:
 	dune uninstall
+
+coverage: clean vendor
+	rm -rf docs/coverage
+	rm -vf `find . -name 'bisect*.out'`
+	BISECT_ENABLE=YES make test
+	bisect-ppx-report -html coverage/ -I _build/default `find . -name 'bisect*.out'`
+	mv coverage/ docs/coverage/
+	bisect-ppx-report -I _build/default/ -text - `find . -name 'bisect*.out'`
+
+report: coverage
+	opam install ocveralls --yes
+	ocveralls --prefix '_build/default' `find . -name 'bisect*.out'` --send
 
 clean:
 	dune clean

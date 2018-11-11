@@ -27,6 +27,37 @@ in the case of Blake2B, 128 characters). By hashing beforehand our message, we
 can sign any size/length of input message, our signature, private key and public
 key stay on the same size.
 
+
+### Installation:
+
+If this library is available on OPAM:
+
+```shell
+$ opam install hieroglyphs
+```
+
+Otherwise, through Dune build system:
+
+```shell
+$ dune install
+```
+
+### Usage:
+
+(Assuming you've linked this library as `hieroglyphs`...)
+
+```ocaml
+module Hg = Hieroglyphs
+
+let (priv, pub) = Hg.pair ( ) in
+let msg = "Hello, World!" in
+let signature = Hg.sign ~priv ~msg in
+assert (Hg.verify ~pub ~msg ~signature)
+```
+
+For the complete API reference, check the docs
+[here](https://marcoonroad.github.io/hieroglyphs).
+
 ### Disclaimer:
 
 This library was not yet fully tested against many sort of attacks, such as timing

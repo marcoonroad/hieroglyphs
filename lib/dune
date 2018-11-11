@@ -2,5 +2,6 @@
   (name hieroglyphs)
   (wrapped true)
   (public_name hieroglyphs)
+  (preprocess (pps bisect_ppx -conditional))
   (libraries core unix digestif.c nocrypto.unix nocrypto re)
   (synopsis "Core / kernel module for the Hash-based signatures algorithm"))

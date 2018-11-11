@@ -2,3 +2,6 @@
 _build
 .merlin
 *.install
+coverage/
+.*.swp
+bisect*.out
