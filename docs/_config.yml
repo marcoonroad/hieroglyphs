@@ -1,0 +1,15 @@
+title: hieroglyphs
+description: "Quantum-resistant, purely Hash-based, Stateful, One-Time Digital Signatures for OCaml."
+repository: marcoonroad/hieroglyphs
+google_analytics: "UA-41209773-2"
+theme: jekyll-theme-hacker
+plugins:
+#- jekyll-feed
+#- jekyll-redirect-from
+#- jekyll-seo-tag
+#- jekyll-sitemap
+ - jekyll-avatar
+ - jemoji
+ - jekyll-mentions
+#- jekyll-include-cache
+

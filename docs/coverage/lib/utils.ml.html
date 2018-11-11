@@ -1,0 +1,213 @@
+<html>
+  <head>
+    <title>Coverage report</title>
+    <link rel="stylesheet" href="../coverage.css" />
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <div id="header">
+      <h1>
+        <a href="../index.html">
+          <span class="dirname">lib/</span>utils.ml
+        </a>
+      </h1>
+      <h2>100.00%</h2>
+    </div>
+    <div id="navbar">
+    </div>
+    <div id="report">
+      <div id="lines-layer">
+        <pre>
+<a id="L1"></a><span > </span>
+<a id="L2"></a><span > </span>
+<a id="L3"></a><span > </span>
+<a id="L4"></a><span > </span>
+<a id="L5"></a><span > </span>
+<a id="L6"></a><span > </span>
+<a id="L7"></a><span > </span>
+<a id="L8"></a><span class="visited"> </span>
+<a id="L9"></a><span class="visited"> </span>
+<a id="L10"></a><span class="visited"> </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span class="visited"> </span>
+<a id="L13"></a><span > </span>
+<a id="L14"></a><span > </span>
+<a id="L15"></a><span class="visited"> </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span > </span>
+<a id="L18"></a><span class="visited"> </span>
+<a id="L19"></a><span class="visited"> </span>
+<a id="L20"></a><span > </span>
+<a id="L21"></a><span class="visited"> </span>
+<a id="L22"></a><span > </span>
+<a id="L23"></a><span class="visited"> </span>
+<a id="L24"></a><span > </span>
+<a id="L25"></a><span > </span>
+<a id="L26"></a><span class="visited"> </span>
+<a id="L27"></a><span class="visited"> </span>
+<a id="L28"></a><span class="visited"> </span>
+<a id="L29"></a><span > </span>
+<a id="L30"></a><span > </span>
+<a id="L31"></a><span class="visited"> </span>
+<a id="L32"></a><span > </span>
+<a id="L33"></a><span > </span>
+<a id="L34"></a><span class="visited"> </span>
+<a id="L35"></a><span > </span>
+<a id="L36"></a><span > </span>
+<a id="L37"></a><span class="visited"> </span>
+<a id="L38"></a><span class="visited"> </span>
+<a id="L39"></a><span > </span>
+<a id="L40"></a><span > </span>
+<a id="L41"></a><span class="visited"> </span>
+<a id="L42"></a><span class="visited"> </span>
+<a id="L43"></a><span > </span>
+<a id="L44"></a><span > </span>
+<a id="L45"></a><span class="visited"> </span>
+<a id="L46"></a><span class="visited"> </span>
+<a id="L47"></a><span class="visited"> </span>
+<a id="L48"></a><span > </span>
+<a id="L49"></a><span > </span>
+<a id="L50"></a><span class="visited"> </span>
+<a id="L51"></a><span > </span>
+<a id="L52"></a><span > </span>
+<a id="L53"></a><span class="visited"> </span>
+<a id="L54"></a><span class="visited"> </span>
+<a id="L55"></a><span class="visited"> </span>
+<a id="L56"></a><span class="visited"> </span>
+<a id="L57"></a><span class="visited"> </span>
+<a id="L58"></a><span class="visited"> </span>
+<a id="L59"></a><span class="visited"> </span>
+<a id="L60"></a><span class="visited"> </span>
+</pre>
+      </div>
+      <div id="text-layer">
+        <pre id="line-numbers">
+<a href="#L1"> 1</a>
+<a href="#L2"> 2</a>
+<a href="#L3"> 3</a>
+<a href="#L4"> 4</a>
+<a href="#L5"> 5</a>
+<a href="#L6"> 6</a>
+<a href="#L7"> 7</a>
+<a href="#L8"> 8</a>
+<a href="#L9"> 9</a>
+<a href="#L10">10</a>
+<a href="#L11">11</a>
+<a href="#L12">12</a>
+<a href="#L13">13</a>
+<a href="#L14">14</a>
+<a href="#L15">15</a>
+<a href="#L16">16</a>
+<a href="#L17">17</a>
+<a href="#L18">18</a>
+<a href="#L19">19</a>
+<a href="#L20">20</a>
+<a href="#L21">21</a>
+<a href="#L22">22</a>
+<a href="#L23">23</a>
+<a href="#L24">24</a>
+<a href="#L25">25</a>
+<a href="#L26">26</a>
+<a href="#L27">27</a>
+<a href="#L28">28</a>
+<a href="#L29">29</a>
+<a href="#L30">30</a>
+<a href="#L31">31</a>
+<a href="#L32">32</a>
+<a href="#L33">33</a>
+<a href="#L34">34</a>
+<a href="#L35">35</a>
+<a href="#L36">36</a>
+<a href="#L37">37</a>
+<a href="#L38">38</a>
+<a href="#L39">39</a>
+<a href="#L40">40</a>
+<a href="#L41">41</a>
+<a href="#L42">42</a>
+<a href="#L43">43</a>
+<a href="#L44">44</a>
+<a href="#L45">45</a>
+<a href="#L46">46</a>
+<a href="#L47">47</a>
+<a href="#L48">48</a>
+<a href="#L49">49</a>
+<a href="#L50">50</a>
+<a href="#L51">51</a>
+<a href="#L52">52</a>
+<a href="#L53">53</a>
+<a href="#L54">54</a>
+<a href="#L55">55</a>
+<a href="#L56">56</a>
+<a href="#L57">57</a>
+<a href="#L58">58</a>
+<a href="#L59">59</a>
+<a href="#L60">60</a>
+</pre>
+        <pre id="code">
+module List = Core.List
+module String = Core.String
+module Char = Core.Char
+module Int = Core.Int
+module Str = Re.Str
+
+(* 16 hex chars and 128 chars/string length for hash under hex string format *)
+let _HASH_LENGTH = <span data-count="1">1</span>28
+let _HEX_SPACE = <span data-count="1">1</span>6
+let _KEY_LENGTH = <span data-count="1">_</span>HEX_SPACE * _HASH_LENGTH
+
+let regexp = <span data-count="1">S</span>tr.regexp "^[a-f0-9]+$"
+
+let is_hash text =
+  <span data-count="14414">S</span>tr.string_match regexp text 0 &amp;&amp; <span data-count="6144">(</span>String.length text = _HASH_LENGTH)
+
+let validate_key list =
+  <span data-count="5">l</span>et filtered = <span data-count="5">L</span>ist.filter list ~f:is_hash in
+  <span data-count="5">i</span>f List.length filtered = _KEY_LENGTH then <span data-count="3">S</span>ome list else <span data-count="2">N</span>one
+
+let to_hex text = <span data-count="1175">"</span>0x" ^ text
+
+let id x = <span data-count="1152">x</span>
+
+let tag_index entries =
+  <span data-count="9">l</span>et length = <span data-count="9">L</span>ist.length entries in
+  <span data-count="9">l</span>et indexes = <span data-count="9">L</span>ist.init length ~f:id in
+  <span data-count="9">L</span>ist.zip_exn indexes entries
+
+let calculate_index (position, key) =
+  <span data-count="1152">(</span>position * _HEX_SPACE) + key
+
+let index_at ~list position =
+  <span data-count="384">L</span>ist.nth_exn list position
+
+let replace_index ~matrix pairs =
+  <span data-count="3">p</span>airs
+  |&gt; <span data-count="3">L</span>ist.map ~f:(index_at ~list:matrix)
+
+let verify_at ~digest ~list (position, hash) =
+  <span data-count="768">l</span>et commitment = <span data-count="768">L</span>ist.nth_exn list position in
+  <span data-count="768">d</span>igest hash = commitment
+
+let verify_with ~matrix ~digest pairs =
+  <span data-count="6">p</span>airs
+  |&gt; <span data-count="6">L</span>ist.map ~f:(verify_at ~digest ~list:matrix)
+  |&gt; <span data-count="6">L</span>ist.reduce_exn ~f:(&amp;&amp;)
+
+let concat_hashes left right =
+  <span data-count="53603">l</span>eft ^ "-" ^ right
+
+let indexed_keys msg =
+  <span data-count="9">m</span>sg
+  |&gt; <span data-count="9">H</span>ash.digest
+  |&gt; <span data-count="9">S</span>tring.to_list
+  |&gt; <span data-count="9">L</span>ist.map ~f:Char.to_string
+  |&gt; <span data-count="9">L</span>ist.map ~f:to_hex
+  |&gt; <span data-count="9">L</span>ist.map ~f:Int.of_string
+  |&gt; <span data-count="9">t</span>ag_index
+  |&gt; <span data-count="9">L</span>ist.map ~f:calculate_index
+</pre>
+      </div>
+    </div>
+    <div id="footer">Generated on 2018-11-11 19:36:20 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <script src="../coverage.js"></script>
+  </body>
+</html>

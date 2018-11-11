@@ -10,10 +10,19 @@ default: build
 build:
 	dune build
 
+doc-index:
+#	echo "" > docs/index.md
+#	echo "---" >> docs/index.md
+#	echo "---" >> docs/index.md
+#	cat README.md >> docs/index.md
+	cp README.md docs/index.md
+
 doc: build
 	rm -rf docs/apiref
+	mkdir -p docs/apiref
 	dune build @doc
-	mv _build/default/_doc/_html/ docs/apiref/
+	make doc-index
+	mv _build/default/_doc/_html/* docs/apiref/
 
 ### Alcotest environment variables:
 #
@@ -36,9 +45,11 @@ uninstall:
 coverage: clean vendor
 	rm -rf docs/coverage
 	rm -vf `find . -name 'bisect*.out'`
+	mkdir -p docs/coverage
 	BISECT_ENABLE=YES make test
 	bisect-ppx-report -html coverage/ -I _build/default `find . -name 'bisect*.out'`
-	mv coverage/ docs/coverage/
+	make doc-index
+	mv coverage/* docs/coverage/
 	bisect-ppx-report -I _build/default/ -text - `find . -name 'bisect*.out'`
 
 report: coverage
@@ -49,4 +60,4 @@ clean:
 	dune clean
 # Optionally, remove all files/folders ignored by git as defined
 # in .gitignore (-X).
-	git clean -dfXq
+# git clean -dfXq

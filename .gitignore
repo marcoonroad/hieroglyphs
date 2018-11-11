@@ -2,6 +2,9 @@
 _build
 .merlin
 *.install
-coverage/
 .*.swp
 bisect*.out
+docs/vendor/bundle
+docs/.bundle/config
+docs/_site/
+docs/.jekyll-metadata
