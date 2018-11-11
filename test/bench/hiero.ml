@@ -14,6 +14,7 @@ let pair ( ) =
 let priv = Hg.generate ( )
 
 let signing ( ) =
+  let priv = Hg.generate ( ) in
   ignore (Hg.sign ~priv ~msg:"Benchmark signing test.")
 
 let derive ( ) =
@@ -21,7 +22,11 @@ let derive ( ) =
   |> Hg.derive
   |> ignore
 
-let signature = Hg.sign ~priv ~msg:"Benchmark signed message."
+let sign ~priv ~msg = match Hg.sign ~priv ~msg with
+  | None -> failwith "Expected a generated message signature!"
+  | Some signature -> signature
+
+let signature = sign ~priv ~msg:"Benchmark signed message."
 let pub = Hg.derive priv
 
 let verification ( ) =

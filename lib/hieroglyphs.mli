@@ -54,7 +54,7 @@ val address : pub -> string
     from {i priv} to {i id : string} (the composition of [derive] with
     [address]. *)
 
-val sign : priv:priv -> msg:string -> string
+val sign : priv:priv -> msg:string -> string option
 (** [sign ~priv ~msg] creates a deterministic string signature
     given the same private key and same message. *)
 

@@ -11,8 +11,8 @@ planned as well. Currently, the following things are implemented now:
 
 - [x] Importing/exporting encrypted private key (by now using ARC4).
 - [x] Public Key serialization+validation (to share and receive such key for verification).
-- [ ] Built-in one-time invariant protected by a blacklist of used private keys.
-- [ ] Tests covering the things here and there.
+- [x] Built-in one-time invariant protected by a blacklist of used private keys.
+- [x] Tests covering the things here and there.
 - [ ] Benchmarks against currently famous Digital Signatures algorithms (RSA family,
   Elliptic Curves family, etc).
 - [ ] API documentation for the project (I should prefer automatic generation of
