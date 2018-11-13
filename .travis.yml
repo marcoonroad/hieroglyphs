@@ -6,11 +6,28 @@ script:
   - bash -ex .travis-opam.sh
 
 env:
-  - OCAML_VERSION=4.04 PACKAGE=hieroglyphs UPDATE_GCC_BINUTILS=1 BISECT_ENABLE=YES BISECT_SILENT=YES POST_INSTALL_HOOK="make report"
-  - OCAML_VERSION=4.05 PACKAGE=hieroglyphs UPDATE_GCC_BINUTILS=1 BISECT_ENABLE=YES BISECT_SILENT=YES POST_INSTALL_HOOK="make report"
-  - OCAML_VERSION=4.06 PACKAGE=hieroglyphs UPDATE_GCC_BINUTILS=1 BISECT_ENABLE=YES BISECT_SILENT=YES POST_INSTALL_HOOK="make report"
-  - OCAML_VERSION=4.07 PACKAGE=hieroglyphs UPDATE_GCC_BINUTILS=1 BISECT_ENABLE=YES BISECT_SILENT=YES POST_INSTALL_HOOK="make report"
+  global:
+    - HIEROGLYPHS_ROOT="$HOME/build/marcoonroad/hieroglyphs/.hieroglyphs"
+    - PACKAGE=hieroglyphs
+    - UPDATE_GCC_BINUTILS=1
+    - BISECT_ENABLE=YES
+    - BISECT_SILENT=YES
+    - POST_INSTALL_HOOK="make report"
+  matrix:
+    - OCAML_VERSION=4.04
+    - OCAML_VERSION=4.05
+    - OCAML_VERSION=4.06
+    - OCAML_VERSION=4.07
 
 os:
   - linux
-  - osx
+
+before_script:
+  - mkdir -p $HIEROGLYPHS_ROOT
+  - mkdir -p $HIEROGLYPHS_ROOT/blacklist
+  - cd $HIEROGLYPHS_ROOT/blacklist && git init --bare --shared && cd $OLDPWD
+  - chmod -R a+rwx $HIEROGLYPHS_ROOT
+
+cache:
+  directories:
+    - $HIEROGLYPHS_ROOT

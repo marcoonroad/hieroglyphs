@@ -31,10 +31,10 @@ doc: build
 #  -  ALCOTEST_SHOW_ERRORS=1
 #
 test:
-	dune build @test/spec/runtest -f --no-buffer -j 1
+	HIEROGLYPHS_ROOT=`pwd`/.hieroglyphs dune build @test/spec/runtest -f --no-buffer -j 1
 
 bench:
-	dune build @test/bench/runtest -f --no-buffer -j 1
+	HIEROGLYPHS_ROOT=`pwd`/.hieroglyphs dune build @test/bench/runtest -f --no-buffer -j 1
 
 install:
 	dune install

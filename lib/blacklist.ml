@@ -12,8 +12,9 @@ let split address =
   let filename = String.sub ~pos:4 ~len:(length - 4) address in
   (directory, filename)
 
-let _HOME = Sys.getenv_exn "HOME"
-let _CONFIG_DIR = _HOME ^ "/.hieroglyphs"
+let _CONFIG_DIR = match Sys.getenv "HIEROGLYPHS_ROOT" with
+  | None -> Sys.getenv_exn "HOME" ^ "/.hieroglyphs"
+  | Some directory -> directory
 let _BLACKLIST_ROOTDIR = _CONFIG_DIR ^ "/blacklist"
 
 let config = Irmin_git.config ~bare:true _BLACKLIST_ROOTDIR
