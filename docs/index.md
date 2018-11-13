@@ -51,8 +51,9 @@ module Hg = Hieroglyphs
 
 let (priv, pub) = Hg.pair ( ) in
 let msg = "Hello, World!" in
-let signature = Hg.sign ~priv ~msg in
-assert (Hg.verify ~pub ~msg ~signature)
+match Hg.sign ~priv ~msg with
+| None -> failwith "Private key was already signed!"
+| Some signature -> assert (Hg.verify ~pub ~msg ~signature)
 ```
 
 For the complete API reference, check the docs

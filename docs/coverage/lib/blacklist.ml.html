@@ -22,22 +22,49 @@
 <a id="L2"></a><span > </span>
 <a id="L3"></a><span > </span>
 <a id="L4"></a><span > </span>
-<a id="L5"></a><span class="visited"> </span>
-<a id="L6"></a><span class="visited"> </span>
+<a id="L5"></a><span > </span>
+<a id="L6"></a><span > </span>
 <a id="L7"></a><span > </span>
 <a id="L8"></a><span > </span>
-<a id="L9"></a><span class="visited"> </span>
+<a id="L9"></a><span > </span>
 <a id="L10"></a><span class="visited"> </span>
 <a id="L11"></a><span class="visited"> </span>
 <a id="L12"></a><span class="visited"> </span>
-<a id="L13"></a><span > </span>
+<a id="L13"></a><span class="visited"> </span>
 <a id="L14"></a><span > </span>
 <a id="L15"></a><span class="visited"> </span>
 <a id="L16"></a><span class="visited"> </span>
 <a id="L17"></a><span class="visited"> </span>
 <a id="L18"></a><span > </span>
-<a id="L19"></a><span > </span>
+<a id="L19"></a><span class="visited"> </span>
 <a id="L20"></a><span class="visited"> </span>
+<a id="L21"></a><span > </span>
+<a id="L22"></a><span > </span>
+<a id="L23"></a><span class="visited"> </span>
+<a id="L24"></a><span class="visited"> </span>
+<a id="L25"></a><span class="visited"> </span>
+<a id="L26"></a><span class="visited"> </span>
+<a id="L27"></a><span class="visited"> </span>
+<a id="L28"></a><span class="visited"> </span>
+<a id="L29"></a><span > </span>
+<a id="L30"></a><span > </span>
+<a id="L31"></a><span class="visited"> </span>
+<a id="L32"></a><span > </span>
+<a id="L33"></a><span > </span>
+<a id="L34"></a><span class="visited"> </span>
+<a id="L35"></a><span class="visited"> </span>
+<a id="L36"></a><span class="visited"> </span>
+<a id="L37"></a><span class="visited"> </span>
+<a id="L38"></a><span class="visited"> </span>
+<a id="L39"></a><span > </span>
+<a id="L40"></a><span > </span>
+<a id="L41"></a><span class="visited"> </span>
+<a id="L42"></a><span class="visited"> </span>
+<a id="L43"></a><span > </span>
+<a id="L44"></a><span > </span>
+<a id="L45"></a><span class="visited"> </span>
+<a id="L46"></a><span class="visited"> </span>
+<a id="L47"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -62,32 +89,86 @@
 <a href="#L18">18</a>
 <a href="#L19">19</a>
 <a href="#L20">20</a>
+<a href="#L21">21</a>
+<a href="#L22">22</a>
+<a href="#L23">23</a>
+<a href="#L24">24</a>
+<a href="#L25">25</a>
+<a href="#L26">26</a>
+<a href="#L27">27</a>
+<a href="#L28">28</a>
+<a href="#L29">29</a>
+<a href="#L30">30</a>
+<a href="#L31">31</a>
+<a href="#L32">32</a>
+<a href="#L33">33</a>
+<a href="#L34">34</a>
+<a href="#L35">35</a>
+<a href="#L36">36</a>
+<a href="#L37">37</a>
+<a href="#L38">38</a>
+<a href="#L39">39</a>
+<a href="#L40">40</a>
+<a href="#L41">41</a>
+<a href="#L42">42</a>
+<a href="#L43">43</a>
+<a href="#L44">44</a>
+<a href="#L45">45</a>
+<a href="#L46">46</a>
+<a href="#L47">47</a>
 </pre>
         <pre id="code">
-module Sys = Core.Sys
 module Unix = Core.Unix
-module Out_channel = Core.Out_channel
+module String = Core.String
+module Sys = Core.Sys
+
+open Lwt.Infix
+
+module Store = Irmin_unix.Git.FS.KV(Irmin.Contents.String)
+
+let split address =
+  <span data-count="16">l</span>et length = <span data-count="16">S</span>tring.length address in
+  <span data-count="16">l</span>et directory = <span data-count="16">S</span>tring.sub ~pos:2 ~len:2 address in
+  <span data-count="16">l</span>et filename = <span data-count="16">S</span>tring.sub ~pos:4 ~len:(length - 4) address in
+  <span data-count="16">(</span>directory, filename)
 
 let _HOME = <span data-count="1">S</span>ys.getenv_exn "HOME"
-let _BLACKLIST_ROOTDIR = <span data-count="1">_</span>HOME ^ "/.hieroglyphs-blacklist"
+let _CONFIG_DIR = <span data-count="1">_</span>HOME ^ "/.hieroglyphs"
+let _BLACKLIST_ROOTDIR = <span data-count="1">_</span>CONFIG_DIR ^ "/blacklist"
+
+let config = <span data-count="1">I</span>rmin_git.config ~bare:true _BLACKLIST_ROOTDIR
+let info fmt = <span data-count="3">I</span>rmin_unix.info fmt
 
 let add address =
-  <span data-count="3">l</span>et filename = <span data-count="3">_</span>BLACKLIST_ROOTDIR ^ "/" ^ address in
-  <span data-count="3">l</span>et filehandler = <span data-count="3">O</span>ut_channel.create ~append:false ~binary:false ~fail_if_exists:true filename in
-  <span data-count="3">O</span>ut_channel.output_string filehandler "";
-  <span data-count="3">O</span>ut_channel.close filehandler
+  <span data-count="3">l</span>et (directory, filename) = <span data-count="3">s</span>plit address in
+  <span data-count="3">l</span>et path = <span data-count="3">[</span>directory; filename] in
+  <span data-count="3">l</span>et msg = <span data-count="3">i</span>nfo "Revoking Private Key." in
+  <span data-count="3">l</span>et transaction ( ) =
+    <span data-count="3">S</span>tore.Repo.v config &gt;&gt;= function <span data-count="3">r</span>epo -&gt;
+    Store.master repo &gt;&gt;= function <span data-count="3">b</span>ranch -&gt;
+    Store.set branch ~info:msg path ""
+  in
+  <span data-count="3">L</span>wt_main.run (transaction ( ))
 
 let exists address =
-  <span data-count="13">l</span>et open Sys in
-  let filename = <span data-count="13">_</span>BLACKLIST_ROOTDIR ^ "/" ^ address in
-  <span data-count="13">f</span>ile_exists_exn ~follow_symlinks:true filename
+  <span data-count="13">l</span>et (directory, filename) = <span data-count="13">s</span>plit address in
+  <span data-count="13">l</span>et path = <span data-count="13">[</span>directory; filename] in
+  <span data-count="13">l</span>et transaction ( ) =
+    <span data-count="13">S</span>tore.Repo.v config &gt;&gt;= function <span data-count="13">r</span>epo -&gt;
+    Store.master repo &gt;&gt;= function <span data-count="13">b</span>ranch -&gt;
+    Store.get branch path
+  in
+  <span data-count="13">t</span>ry ignore(Lwt_main.run (transaction ( ))); <span data-count="2">t</span>rue
+  with <span data-count="11">I</span>nvalid_argument _ -&gt; false
 
 let ( ) =
-  <span data-count="1">U</span>nix.mkdir_p _BLACKLIST_ROOTDIR
+  <span data-count="1">U</span>nix.mkdir_p _CONFIG_DIR;
+  <span data-count="1">U</span>nix.mkdir_p _BLACKLIST_ROOTDIR;
+  <span data-count="1">I</span>rmin_unix.set_listen_dir_hook ()
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-11 19:36:20 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-13 02:12:47 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>
