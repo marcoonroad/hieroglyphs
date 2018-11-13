@@ -8,3 +8,4 @@ docs/vendor/bundle
 docs/.bundle/config
 docs/_site/
 docs/.jekyll-metadata
+dune-workspace
