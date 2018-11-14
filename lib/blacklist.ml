@@ -6,12 +6,6 @@ open Lwt.Infix
 
 module Store = Irmin_unix.Git.FS.KV(Irmin.Contents.String)
 
-let split address =
-  let length = String.length address in
-  let directory = String.sub ~pos:2 ~len:2 address in
-  let filename = String.sub ~pos:4 ~len:(length - 4) address in
-  (directory, filename)
-
 let _CONFIG_DIR = match Sys.getenv "HIEROGLYPHS_ROOT" with
   | None -> Sys.getenv_exn "HOME" ^ "/.hieroglyphs"
   | Some directory -> directory
@@ -21,8 +15,7 @@ let config = Irmin_git.config ~bare:true _BLACKLIST_ROOTDIR
 let info fmt = Irmin_unix.info fmt
 
 let add address =
-  let (directory, filename) = split address in
-  let path = [directory; filename] in
+  let path = [address] in
   let msg = info "Revoking Private Key." in
   let transaction ( ) =
     Store.Repo.v config >>= function repo ->
@@ -32,8 +25,7 @@ let add address =
   Lwt_main.run (transaction ( ))
 
 let exists address =
-  let (directory, filename) = split address in
-  let path = [directory; filename] in
+  let path = [address] in
   let transaction ( ) =
     Store.Repo.v config >>= function repo ->
     Store.master repo >>= function branch ->

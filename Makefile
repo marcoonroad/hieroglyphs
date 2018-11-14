@@ -31,10 +31,10 @@ doc: build
 #  -  ALCOTEST_SHOW_ERRORS=1
 #
 test:
-	HIEROGLYPHS_ROOT=`pwd`/.hieroglyphs dune build @test/spec/runtest -f --no-buffer -j 1
+	dune build @test/spec/runtest -f --no-buffer -j 1
 
 bench:
-	HIEROGLYPHS_ROOT=`pwd`/.hieroglyphs dune build @test/bench/runtest -f --no-buffer -j 1
+	dune build @test/bench/runtest -f --no-buffer -j 1
 
 install:
 	dune install
@@ -55,6 +55,9 @@ coverage: clean vendor
 report: coverage
 	opam install ocveralls --yes
 	ocveralls --prefix '_build/default' `find . -name 'bisect*.out'` --send
+
+blacklist:
+	irmin init --bare --root=${HOME}/.hieroglyphs/blacklist
 
 clean:
 	dune clean

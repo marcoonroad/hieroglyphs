@@ -7,11 +7,11 @@ script:
 
 env:
   global:
-    - HIEROGLYPHS_ROOT="$HOME/build/marcoonroad/hieroglyphs/.hieroglyphs"
     - PACKAGE=hieroglyphs
     - UPDATE_GCC_BINUTILS=1
     - BISECT_ENABLE=YES
     - BISECT_SILENT=YES
+    - PRE_INSTALL_HOOK="make blacklist"
     - POST_INSTALL_HOOK="make report"
   matrix:
     - OCAML_VERSION=4.04
@@ -22,12 +22,6 @@ env:
 os:
   - linux
 
-before_script:
-  - mkdir -p $HIEROGLYPHS_ROOT
-  - mkdir -p $HIEROGLYPHS_ROOT/blacklist
-  - cd $HIEROGLYPHS_ROOT/blacklist && git init --bare --shared && cd $OLDPWD
-  - chmod -R a+rwx $HIEROGLYPHS_ROOT
-
 cache:
   directories:
-    - $HIEROGLYPHS_ROOT
+    - $HOME/.hieroglyphs
