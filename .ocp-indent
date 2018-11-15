@@ -1,5 +1,7 @@
 # See https://github.com/OCamlPro/ocp-indent/blob/master/.ocp-indent for more
 
+base = 2
+
 # Indent for clauses inside a pattern-match (after the arrow):
 #    match foo with
 #    | _ ->

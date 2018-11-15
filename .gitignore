@@ -10,3 +10,4 @@ docs/_site/
 docs/.jekyll-metadata
 dune-workspace
 .hieroglyphs/
+node_modules/

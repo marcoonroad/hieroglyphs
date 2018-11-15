@@ -2,6 +2,23 @@
 
 Quantum-resistant, purely Hash-based, Stateful, One-Time Digital Signatures for OCaml.
 
+<div align="center">
+<a style="margin: 0.1em;" href="https://travis-ci.com/marcoonroad/hieroglyphs">
+<img src="https://img.shields.io/travis/com/marcoonroad/hieroglyphs.svg?logo=travis&style=flat-square"/></a>
+<a style="margin: 0.1em;" href="https://coveralls.io/github/marcoonroad/hieroglyphs?branch=master">
+<img src="https://img.shields.io/coveralls/github/marcoonroad/hieroglyphs.svg?style=flat-square"/></a>
+<a style="margin: 0.1em;" href="https://github.com/marcoonroad/hieroglyphs/blob/master/LICENSE.md">
+<img src="https://img.shields.io/github/license/marcoonroad/hieroglyphs.svg?style=flat-square"/> </a>
+<a style="margin: 0.1em;" href="https://github.com/marcoonroad/hieroglyphs/compare">
+<img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square&logo=github"/>
+</a>
+<a style="margin: 0.1em;" href="https://www.blockchain.com/btc/address/1PEpBFvkKQtSHj56dCGgDFQBwz45VpMTTQ">
+<img src="https://img.shields.io/badge/donate-BTC-yellow.svg?logo=bitcoin&style=flat-square"/>
+</a>
+</div>
+
+---
+
 For further information, see:
 - [this wikipedia entry](https://en.wikipedia.org/wiki/Hash-based_cryptography)
 - [this blog post](https://blog.cryptographyengineering.com/2018/04/07/hash-based-signatures-an-illustrated-primer/)

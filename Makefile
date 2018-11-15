@@ -7,7 +7,7 @@ vendor:
 
 default: build
 
-build:
+build: vendor
 	dune build
 
 doc-index:
@@ -30,19 +30,19 @@ doc: build
 #  -  ALCOTEST_QUICK_TESTS=1
 #  -  ALCOTEST_SHOW_ERRORS=1
 #
-test:
+test: build
 	dune build @test/spec/runtest -f --no-buffer -j 1
 
-bench:
+bench: build
 	dune build @test/bench/runtest -f --no-buffer -j 1
 
-install:
+install: build
 	dune install
 
 uninstall:
 	dune uninstall
 
-coverage: clean vendor
+coverage: clean build
 	rm -rf docs/coverage
 	rm -vf `find . -name 'bisect*.out'`
 	mkdir -p docs/coverage
@@ -56,7 +56,7 @@ report: coverage
 	opam install ocveralls --yes
 	ocveralls --prefix '_build/default' `find . -name 'bisect*.out'` --send
 
-blacklist:
+blacklist: build
 	irmin init --bare --root=${HOME}/.hieroglyphs/state
 
 clean:

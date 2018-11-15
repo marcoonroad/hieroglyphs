@@ -26,58 +26,60 @@
 <a id="L6"></a><span > </span>
 <a id="L7"></a><span > </span>
 <a id="L8"></a><span class="visited"> </span>
-<a id="L9"></a><span class="visited"> </span>
+<a id="L9"></a><span > </span>
 <a id="L10"></a><span class="visited"> </span>
 <a id="L11"></a><span > </span>
 <a id="L12"></a><span class="visited"> </span>
 <a id="L13"></a><span > </span>
-<a id="L14"></a><span > </span>
-<a id="L15"></a><span class="visited"> </span>
+<a id="L14"></a><span class="visited"> </span>
+<a id="L15"></a><span > </span>
 <a id="L16"></a><span > </span>
-<a id="L17"></a><span > </span>
-<a id="L18"></a><span class="visited"> </span>
-<a id="L19"></a><span class="visited"> </span>
+<a id="L17"></a><span class="visited"> </span>
+<a id="L18"></a><span > </span>
+<a id="L19"></a><span > </span>
 <a id="L20"></a><span > </span>
 <a id="L21"></a><span class="visited"> </span>
-<a id="L22"></a><span > </span>
-<a id="L23"></a><span class="visited"> </span>
+<a id="L22"></a><span class="visited"> </span>
+<a id="L23"></a><span > </span>
 <a id="L24"></a><span > </span>
-<a id="L25"></a><span > </span>
-<a id="L26"></a><span class="visited"> </span>
+<a id="L25"></a><span class="visited"> </span>
+<a id="L26"></a><span > </span>
 <a id="L27"></a><span class="visited"> </span>
-<a id="L28"></a><span class="visited"> </span>
+<a id="L28"></a><span > </span>
 <a id="L29"></a><span > </span>
-<a id="L30"></a><span > </span>
+<a id="L30"></a><span class="visited"> </span>
 <a id="L31"></a><span class="visited"> </span>
-<a id="L32"></a><span > </span>
+<a id="L32"></a><span class="visited"> </span>
 <a id="L33"></a><span > </span>
-<a id="L34"></a><span class="visited"> </span>
-<a id="L35"></a><span > </span>
+<a id="L34"></a><span > </span>
+<a id="L35"></a><span class="visited"> </span>
 <a id="L36"></a><span > </span>
 <a id="L37"></a><span class="visited"> </span>
-<a id="L38"></a><span class="visited"> </span>
-<a id="L39"></a><span > </span>
+<a id="L38"></a><span > </span>
+<a id="L39"></a><span class="visited"> </span>
 <a id="L40"></a><span > </span>
-<a id="L41"></a><span class="visited"> </span>
+<a id="L41"></a><span > </span>
 <a id="L42"></a><span class="visited"> </span>
-<a id="L43"></a><span > </span>
+<a id="L43"></a><span class="visited"> </span>
 <a id="L44"></a><span > </span>
-<a id="L45"></a><span class="visited"> </span>
-<a id="L46"></a><span class="visited"> </span>
+<a id="L45"></a><span > </span>
+<a id="L46"></a><span > </span>
 <a id="L47"></a><span class="visited"> </span>
-<a id="L48"></a><span > </span>
-<a id="L49"></a><span > </span>
-<a id="L50"></a><span class="visited"> </span>
+<a id="L48"></a><span class="visited"> </span>
+<a id="L49"></a><span class="visited"> </span>
+<a id="L50"></a><span > </span>
 <a id="L51"></a><span > </span>
-<a id="L52"></a><span > </span>
-<a id="L53"></a><span class="visited"> </span>
-<a id="L54"></a><span class="visited"> </span>
+<a id="L52"></a><span class="visited"> </span>
+<a id="L53"></a><span > </span>
+<a id="L54"></a><span > </span>
 <a id="L55"></a><span class="visited"> </span>
 <a id="L56"></a><span class="visited"> </span>
 <a id="L57"></a><span class="visited"> </span>
 <a id="L58"></a><span class="visited"> </span>
 <a id="L59"></a><span class="visited"> </span>
 <a id="L60"></a><span class="visited"> </span>
+<a id="L61"></a><span class="visited"> </span>
+<a id="L62"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -142,6 +144,8 @@
 <a href="#L58">58</a>
 <a href="#L59">59</a>
 <a href="#L60">60</a>
+<a href="#L61">61</a>
+<a href="#L62">62</a>
 </pre>
         <pre id="code">
 module List = Core.List
@@ -152,17 +156,21 @@ module Str = Re.Str
 
 (* 16 hex chars and 128 chars/string length for hash under hex string format *)
 let _HASH_LENGTH = <span data-count="1">1</span>28
+
 let _HEX_SPACE = <span data-count="1">1</span>6
+
 let _KEY_LENGTH = <span data-count="1">_</span>HEX_SPACE * _HASH_LENGTH
 
 let regexp = <span data-count="1">S</span>tr.regexp "^[a-f0-9]+$"
 
 let is_hash text =
-  <span data-count="14378">S</span>tr.string_match regexp text 0 &amp;&amp; <span data-count="6144">(</span>String.length text = _HASH_LENGTH)
+  <span data-count="14358">S</span>tr.string_match regexp text 0 &amp;&amp; <span data-count="6144">S</span>tring.length text = _HASH_LENGTH
+
 
 let validate_key list =
   <span data-count="5">l</span>et filtered = <span data-count="5">L</span>ist.filter list ~f:is_hash in
   <span data-count="5">i</span>f List.length filtered = _KEY_LENGTH then <span data-count="3">S</span>ome list else <span data-count="2">N</span>one
+
 
 let to_hex text = <span data-count="1175">"</span>0x" ^ text
 
@@ -173,27 +181,25 @@ let tag_index entries =
   <span data-count="9">l</span>et indexes = <span data-count="9">L</span>ist.init length ~f:id in
   <span data-count="9">L</span>ist.zip_exn indexes entries
 
-let calculate_index (position, key) =
-  <span data-count="1152">(</span>position * _HEX_SPACE) + key
 
-let index_at ~list position =
-  <span data-count="384">L</span>ist.nth_exn list position
+let calculate_index (position, key) = <span data-count="1152">(</span>position * _HEX_SPACE) + key
 
-let replace_index ~matrix pairs =
-  <span data-count="3">p</span>airs
-  |&gt; <span data-count="3">L</span>ist.map ~f:(index_at ~list:matrix)
+let index_at ~list position = <span data-count="384">L</span>ist.nth_exn list position
+
+let replace_index ~matrix pairs = <span data-count="3">p</span>airs |&gt; <span data-count="3">L</span>ist.map ~f:(index_at ~list:matrix)
 
 let verify_at ~digest ~list (position, hash) =
   <span data-count="768">l</span>et commitment = <span data-count="768">L</span>ist.nth_exn list position in
   <span data-count="768">d</span>igest hash = commitment
 
+
 let verify_with ~matrix ~digest pairs =
   <span data-count="6">p</span>airs
   |&gt; <span data-count="6">L</span>ist.map ~f:(verify_at ~digest ~list:matrix)
-  |&gt; <span data-count="6">L</span>ist.reduce_exn ~f:(&amp;&amp;)
+  |&gt; <span data-count="6">L</span>ist.reduce_exn ~f:( &amp;&amp; )
 
-let concat_hashes left right =
-  <span data-count="53603">l</span>eft ^ "-" ^ right
+
+let concat_hashes left right = <span data-count="53603">l</span>eft ^ "-" ^ right
 
 let indexed_keys msg =
   <span data-count="9">m</span>sg
@@ -207,7 +213,7 @@ let indexed_keys msg =
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-13 02:12:47 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-15 13:30:23 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

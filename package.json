@@ -1,0 +1,48 @@
+{
+  "name": "hieroglyphs",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Quantum-resistant, purely Hash-based, Stateful, One-Time Digital Signatures for OCaml.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "make test",
+    "coverage": "make coverage",
+    "bench": "make bench"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{ml,mli}": [
+      "ocamlformat --inplace --ocp-indent-config",
+      "git add"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcoonroad/hieroglyphs.git"
+  },
+  "keywords": [
+    "one-time-signatures",
+    "hash-based-signatures",
+    "ocaml"
+  ],
+  "author": "Marco Aurélio da Silva",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marcoonroad/hieroglyphs/issues"
+  },
+  "homepage": "https://github.com/marcoonroad/hieroglyphs#readme",
+  "devDependencies": {
+    "husky": "^1.1.4",
+    "lint-staged": "^8.0.4"
+  },
+  "dependencies": {}
+}
