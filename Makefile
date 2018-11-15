@@ -42,7 +42,7 @@ install: build
 uninstall:
 	dune uninstall
 
-coverage: clean build
+coverage: clean
 	rm -rf docs/coverage
 	rm -vf `find . -name 'bisect*.out'`
 	mkdir -p docs/coverage

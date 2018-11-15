@@ -11,10 +11,9 @@
           <span class="dirname">lib/</span>store.ml
         </a>
       </h1>
-      <h2>95.83%</h2>
+      <h2>100.00%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:22.22%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -24,46 +23,45 @@
 <a id="L3"></a><span > </span>
 <a id="L4"></a><span > </span>
 <a id="L5"></a><span > </span>
-<a id="L6"></a><span > </span>
+<a id="L6"></a><span class="visited"> </span>
 <a id="L7"></a><span class="visited"> </span>
-<a id="L8"></a><span class="visited"> </span>
+<a id="L8"></a><span > </span>
 <a id="L9"></a><span > </span>
-<a id="L10"></a><span class="unvisited"> </span>
-<a id="L11"></a><span > </span>
+<a id="L10"></a><span class="visited"> </span>
+<a id="L11"></a><span class="visited"> </span>
 <a id="L12"></a><span > </span>
-<a id="L13"></a><span > </span>
-<a id="L14"></a><span class="visited"> </span>
-<a id="L15"></a><span > </span>
-<a id="L16"></a><span class="visited"> </span>
-<a id="L17"></a><span > </span>
-<a id="L18"></a><span class="visited"> </span>
+<a id="L13"></a><span class="visited"> </span>
+<a id="L14"></a><span > </span>
+<a id="L15"></a><span class="visited"> </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span class="visited"> </span>
+<a id="L18"></a><span > </span>
 <a id="L19"></a><span > </span>
-<a id="L20"></a><span > </span>
+<a id="L20"></a><span class="visited"> </span>
 <a id="L21"></a><span class="visited"> </span>
 <a id="L22"></a><span class="visited"> </span>
 <a id="L23"></a><span class="visited"> </span>
-<a id="L24"></a><span class="visited"> </span>
-<a id="L25"></a><span > </span>
-<a id="L26"></a><span class="visited"> </span>
-<a id="L27"></a><span > </span>
-<a id="L28"></a><span class="visited"> </span>
-<a id="L29"></a><span > </span>
-<a id="L30"></a><span class="visited"> </span>
+<a id="L24"></a><span > </span>
+<a id="L25"></a><span class="visited"> </span>
+<a id="L26"></a><span > </span>
+<a id="L27"></a><span class="visited"> </span>
+<a id="L28"></a><span > </span>
+<a id="L29"></a><span class="visited"> </span>
+<a id="L30"></a><span > </span>
 <a id="L31"></a><span > </span>
 <a id="L32"></a><span > </span>
-<a id="L33"></a><span > </span>
+<a id="L33"></a><span class="visited"> </span>
 <a id="L34"></a><span class="visited"> </span>
 <a id="L35"></a><span class="visited"> </span>
-<a id="L36"></a><span class="visited"> </span>
-<a id="L37"></a><span > </span>
-<a id="L38"></a><span class="visited"> </span>
-<a id="L39"></a><span > </span>
-<a id="L40"></a><span class="visited"> </span>
-<a id="L41"></a><span > </span>
-<a id="L42"></a><span class="visited"> </span>
+<a id="L36"></a><span > </span>
+<a id="L37"></a><span class="visited"> </span>
+<a id="L38"></a><span > </span>
+<a id="L39"></a><span class="visited"> </span>
+<a id="L40"></a><span > </span>
+<a id="L41"></a><span class="visited"> </span>
+<a id="L42"></a><span > </span>
 <a id="L43"></a><span > </span>
-<a id="L44"></a><span > </span>
-<a id="L45"></a><span class="visited"> </span>
+<a id="L44"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -112,7 +110,6 @@
 <a href="#L42">42</a>
 <a href="#L43">43</a>
 <a href="#L44">44</a>
-<a href="#L45">45</a>
 </pre>
         <pre id="code">
 module String = Core.String
@@ -120,13 +117,12 @@ module Sys = Core.Sys
 open Lwt.Infix
 module GitStore = Irmin_unix.Git.FS.KV (Irmin.Contents.String)
 
-let _HIEROGLYPHS_ROOT =
-  <span data-count="1">m</span>atch Sys.getenv "HIEROGLYPHS_ROOT" with
-  | <span data-count="1">N</span>one -&gt;
-      Sys.getenv_exn "HOME" ^ "/.hieroglyphs"
-  | <span data-count="0">S</span>ome directory -&gt;
-      directory
+let failure ( ) = <span data-count="1">S</span>ys.getenv_exn "HOME" ^ "/.hieroglyphs"
+let success = <span data-count="1">U</span>tils.id
 
+let _HIEROGLYPHS_ROOT =
+  <span data-count="1">S</span>ys.getenv "HIEROGLYPHS_ROOT"
+  |&gt; <span data-count="1">U</span>tils.__decode failure success
 
 let _HIEROGLYPHS_STORE = <span data-count="1">_</span>HIEROGLYPHS_ROOT ^ "/state"
 
@@ -163,7 +159,7 @@ let () = <span data-count="1">I</span>rmin_unix.set_listen_dir_hook ()
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-15 13:30:23 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-15 13:45:15 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

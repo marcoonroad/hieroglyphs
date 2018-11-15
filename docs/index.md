@@ -7,7 +7,7 @@ Quantum-resistant, purely Hash-based, Stateful, One-Time Digital Signatures for 
 <img src="https://img.shields.io/travis/com/marcoonroad/hieroglyphs.svg?logo=travis&style=flat-square"/></a>
 <a style="margin: 0.1em;" href="https://coveralls.io/github/marcoonroad/hieroglyphs?branch=master">
 <img src="https://img.shields.io/coveralls/github/marcoonroad/hieroglyphs.svg?style=flat-square"/></a>
-<a style="margin: 0.1em;" href="https://github.com/marcoonroad/hieroglyphs/blob/master/LICENSE.md">
+<a style="margin: 0.1em;" href="https://github.com/marcoonroad/hieroglyphs/blob/master/LICENSE">
 <img src="https://img.shields.io/github/license/marcoonroad/hieroglyphs.svg?style=flat-square"/> </a>
 <a style="margin: 0.1em;" href="https://github.com/marcoonroad/hieroglyphs/compare">
 <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square&logo=github"/>
