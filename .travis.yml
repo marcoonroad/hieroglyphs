@@ -7,11 +7,11 @@ script:
 
 env:
   global:
+    - HIEROGLYPHS_ROOT=/tmp/hieroglyphs
     - PACKAGE=hieroglyphs
     - UPDATE_GCC_BINUTILS=1
     - BISECT_ENABLE=YES
     - BISECT_SILENT=YES
-    - PRE_INSTALL_HOOK="make blacklist"
     - POST_INSTALL_HOOK="make report"
   matrix:
     - OCAML_VERSION=4.04
@@ -24,4 +24,4 @@ os:
 
 cache:
   directories:
-    - $HOME/.hieroglyphs
+    - $HIEROGLYPHS_ROOT

@@ -57,7 +57,7 @@ report: coverage
 	ocveralls --prefix '_build/default' `find . -name 'bisect*.out'` --send
 
 blacklist:
-	irmin init --bare --root=${HOME}/.hieroglyphs/blacklist
+	irmin init --bare --root=${HOME}/.hieroglyphs/state
 
 clean:
 	dune clean
