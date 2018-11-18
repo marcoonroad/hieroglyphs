@@ -25,6 +25,7 @@ env:
 os:
   - linux
 
-cache:
-  directories:
-    - $HIEROGLYPHS_ROOT
+### Commented to force cache invalidation between some builds: #################
+# cache:
+#  directories:
+#    - $HIEROGLYPHS_ROOT

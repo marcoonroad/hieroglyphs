@@ -19,15 +19,16 @@
       <div id="lines-layer">
         <pre>
 <a id="L1"></a><span > </span>
-<a id="L2"></a><span class="visited"> </span>
-<a id="L3"></a><span class="visited"> </span>
+<a id="L2"></a><span > </span>
+<a id="L3"></a><span > </span>
 <a id="L4"></a><span class="visited"> </span>
-<a id="L5"></a><span > </span>
-<a id="L6"></a><span > </span>
-<a id="L7"></a><span class="visited"> </span>
-<a id="L8"></a><span class="visited"> </span>
-<a id="L9"></a><span class="visited"> </span>
+<a id="L5"></a><span class="visited"> </span>
+<a id="L6"></a><span class="visited"> </span>
+<a id="L7"></a><span > </span>
+<a id="L8"></a><span > </span>
+<a id="L9"></a><span > </span>
 <a id="L10"></a><span class="visited"> </span>
+<a id="L11"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -42,22 +43,24 @@
 <a href="#L8"> 8</a>
 <a href="#L9"> 9</a>
 <a href="#L10">10</a>
+<a href="#L11">11</a>
 </pre>
         <pre id="code">
+module String = Core.String
+
 let add address =
   <span data-count="3">l</span>et key = <span data-count="3">"</span>blacklist/" ^ address in
-  <span data-count="3">l</span>et msg = <span data-count="3">"</span>Revoking Private Key " ^ address ^ "." in
+  <span data-count="3">l</span>et msg = <span data-count="3">"</span>Revoking private key " ^ address ^ "." in
   <span data-count="3">S</span>tore.set ~msg ~key ""
+
 
 let exists address =
   <span data-count="13">l</span>et key = <span data-count="13">"</span>blacklist/" ^ address in
-  <span data-count="13">m</span>atch Store.get ~key with
-  | <span data-count="11">N</span>one -&gt; false
-  | <span data-count="2">S</span>ome _ -&gt; true
+  <span data-count="13">m</span>atch Store.get ~key with <span data-count="11">N</span>one -&gt; false | <span data-count="2">S</span>ome _ -&gt; true
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-18 07:19:56 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-18 18:07:05 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

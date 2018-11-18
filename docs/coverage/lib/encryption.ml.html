@@ -23,25 +23,18 @@
 <a id="L3"></a><span > </span>
 <a id="L4"></a><span > </span>
 <a id="L5"></a><span > </span>
-<a id="L6"></a><span > </span>
+<a id="L6"></a><span class="visited"> </span>
 <a id="L7"></a><span class="visited"> </span>
 <a id="L8"></a><span class="visited"> </span>
-<a id="L9"></a><span class="visited"> </span>
-<a id="L10"></a><span class="visited"> </span>
-<a id="L11"></a><span class="visited"> </span>
-<a id="L12"></a><span > </span>
-<a id="L13"></a><span > </span>
-<a id="L14"></a><span > </span>
-<a id="L15"></a><span class="visited"> </span>
-<a id="L16"></a><span class="visited"> </span>
+<a id="L9"></a><span > </span>
+<a id="L10"></a><span > </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span class="visited"> </span>
+<a id="L13"></a><span class="visited"> </span>
+<a id="L14"></a><span class="visited"> </span>
+<a id="L15"></a><span > </span>
+<a id="L16"></a><span > </span>
 <a id="L17"></a><span class="visited"> </span>
-<a id="L18"></a><span > </span>
-<a id="L19"></a><span > </span>
-<a id="L20"></a><span class="visited"> </span>
-<a id="L21"></a><span class="visited"> </span>
-<a id="L22"></a><span class="visited"> </span>
-<a id="L23"></a><span class="visited"> </span>
-<a id="L24"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -63,26 +56,16 @@
 <a href="#L15">15</a>
 <a href="#L16">16</a>
 <a href="#L17">17</a>
-<a href="#L18">18</a>
-<a href="#L19">19</a>
-<a href="#L20">20</a>
-<a href="#L21">21</a>
-<a href="#L22">22</a>
-<a href="#L23">23</a>
-<a href="#L24">24</a>
 </pre>
         <pre id="code">
 open Nocrypto.Cipher_block.AES.ECB
-
 module Option = Core.Option
 module Base64 = Nocrypto.Base64
 
 let encrypt msg ~pass =
   <span data-count="2">l</span>et key = <span data-count="2">o</span>f_secret (Cstruct.of_string (Hash.sha256 pass)) in
   <span data-count="2">l</span>et result = <span data-count="2">e</span>ncrypt ~key (Utils.pad ~basis:16 msg) in
-  <span data-count="2">r</span>esult
-  |&gt; <span data-count="2">B</span>ase64.encode
-  |&gt; <span data-count="2">C</span>struct.to_string
+  <span data-count="2">r</span>esult |&gt; <span data-count="2">B</span>ase64.encode |&gt; <span data-count="2">C</span>struct.to_string
 
 
 let decrypt cipher ~pass =
@@ -91,15 +74,11 @@ let decrypt cipher ~pass =
   <span data-count="3">l</span>et open Option in
   result
   &gt;&gt;= fun msg -&gt;
-  <span data-count="3">m</span>sg
-  |&gt; <span data-count="3">d</span>ecrypt ~key
-  |&gt; <span data-count="3">C</span>struct.to_string
-  |&gt; <span data-count="3">U</span>tils.unpad
-  |&gt; <span data-count="3">s</span>ome
+  <span data-count="3">m</span>sg |&gt; <span data-count="3">d</span>ecrypt ~key |&gt; <span data-count="3">C</span>struct.to_string |&gt; <span data-count="3">U</span>tils.unpad |&gt; <span data-count="3">s</span>ome
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-18 07:19:56 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-18 18:07:05 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

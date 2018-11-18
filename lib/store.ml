@@ -14,7 +14,9 @@ let _HIEROGLYPHS_STORE = _HIEROGLYPHS_ROOT ^ "/state"
 
 let config = Irmin_git.config ~bare:true _HIEROGLYPHS_STORE
 
-let info fmt = Irmin_unix.info fmt
+let author = "Hieroglyphs library"
+
+let info fmt = Irmin_unix.info ~author fmt
 
 let set ~msg ~key value =
   let path = String.split ~on:'/' key in
@@ -38,4 +40,22 @@ let get ~key =
   try Some (Lwt_main.run (transaction ())) with Invalid_argument _ -> None
 
 
-let () = Irmin_unix.set_listen_dir_hook ()
+module Sync = Irmin.Sync (GitStore)
+
+let path = "https://github.com/marcoonroad/hieroglyphs-boot.git"
+
+let remote = Irmin.remote_uri path
+
+let pull () =
+  let transaction () =
+    GitStore.Repo.v config
+    >>= fun repo ->
+    GitStore.master repo >>= fun branch -> Sync.pull_exn branch remote `Set
+  in
+  try Lwt_main.run (transaction ()) with _ ->
+    failwith ("Failed to fetch boot stream repository " ^ path ^ "!")
+
+
+let () =
+  pull () ;
+  Irmin_unix.set_listen_dir_hook ()

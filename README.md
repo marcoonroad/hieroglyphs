@@ -71,9 +71,9 @@ match Hg.sign ~priv ~msg with
 | Some signature -> assert (Hg.verify ~pub ~msg ~signature)
 ```
 
-A blacklist of revoked Private Key unique IDs is maintained at the directory
-`$HOME/.hieroglyphs/state/blacklist`. It's used to preserve the one-time
-signing invariant. You can inspect the additional bare Git repository
+A blacklist of revoked Private Key unique & deterministic IDs is maintained at
+the directory `$HOME/.hieroglyphs/state/blacklist`. It's used to preserve the
+one-time signing invariant. You can inspect the additional bare Git repository
 provided by the Irmin library at `$HOME/.hieroglyphs/state`. If you don't like
 to pollute your home directory with configuration noise / garbage, you may
 override that with the environment variable `$HIEROGLYPHS_ROOT`. For instance,

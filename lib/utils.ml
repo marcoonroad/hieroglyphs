@@ -67,7 +67,7 @@ let nullchar = Char.of_int_exn 0
 let pad ~basis msg =
   let length = String.length msg in
   let remainder = Int.( % ) length basis in
-  let zerofill = String.make (16 - remainder) nullchar in
+  let zerofill = String.make (basis - remainder) nullchar in
   Cstruct.of_string (msg ^ zerofill)
 
 
