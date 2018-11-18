@@ -24,7 +24,7 @@ For further information, see:
 This library uses the Blake2B hash algorithm, but further / additional hashes are
 planned as well. Currently, the following things are implemented now:
 
-- [x] Importing/exporting encrypted private key (by now using ARC4).
+- [x] Importing/exporting encrypted private key (by now using AES CBC).
 - [x] Public Key serialization+validation (to share and receive such key for verification).
 - [x] Built-in one-time invariant protected by a blacklist of used private keys.
 - [x] Tests covering the things here and there.
@@ -70,6 +70,22 @@ match Hg.sign ~priv ~msg with
 | None -> failwith "Private key was already signed!"
 | Some signature -> assert (Hg.verify ~pub ~msg ~signature)
 ```
+
+A blacklist of revoked Private Key unique IDs is maintained at the directory
+`$HOME/.hieroglyphs/state/blacklist`. It's used to preserve the one-time
+signing invariant. You can inspect the additional bare Git repository
+provided by the Irmin library at `$HOME/.hieroglyphs/state`. If you don't like
+to pollute your home directory with configuration noise / garbage, you may
+override that with the environment variable `$HIEROGLYPHS_ROOT`. For instance,
+if you define:
+
+```shell
+HIEROGLYPHS_ROOT=/tmp/hg-data
+export HIEROGLYPHS_ROOT
+```
+
+Then, your blacklist will be available under `/tmp/hg-data/state/blacklist`, and
+your Git repository under `/tmp/hg-data/state`.
 
 For the complete API reference, check the docs
 [here](https://marcoonroad.github.io/hieroglyphs/apiref/). Coverage reports are

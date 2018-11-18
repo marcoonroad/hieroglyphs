@@ -19,16 +19,6 @@ let is_hash text =
   Str.string_match regexp text 0 && String.length text = _HASH_LENGTH
 
 
-(* workaround to increase code coverage on match branches,
-   yep, I know, it's a wrong to do, increase coverage
-   at the expense of boilerplate :p *)
-let __decode on_none on_some = function
-  | None ->
-      on_none ()
-  | Some value ->
-      on_some value
-
-
 let validate_key list =
   let filtered = List.filter list ~f:is_hash in
   if List.length filtered = _KEY_LENGTH then Some list else None
@@ -70,3 +60,17 @@ let indexed_keys msg =
   |> List.map ~f:Int.of_string
   |> tag_index
   |> List.map ~f:calculate_index
+
+
+let nullchar = Char.of_int_exn 0
+
+let pad ~basis msg =
+  let length = String.length msg in
+  let remainder = Int.( % ) length basis in
+  let zerofill = String.make (16 - remainder) nullchar in
+  Cstruct.of_string (msg ^ zerofill)
+
+
+let nonzero char = char != nullchar
+
+let unpad msg = String.filter ~f:nonzero msg

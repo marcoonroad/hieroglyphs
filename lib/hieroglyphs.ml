@@ -29,13 +29,13 @@ let __check priv =
 
 
 let sign ~priv ~msg =
-  let failure () = None in
   let success pub =
     let signature = sign ~priv ~msg in
     Blacklist.add (address pub) ;
     Some signature
   in
-  priv |> __check |> Utils.__decode failure success
+  let open Option in
+  __check priv >>= success
 
 
 let import ~cipher ~pass =
@@ -46,8 +46,10 @@ let import ~cipher ~pass =
 
 let rec generate () =
   let priv = Keys.generate () in
-  let success _ = priv in
-  priv |> __check |> Utils.__decode generate success
+  let const _ _ = priv in
+  let option = __check priv in
+  let step = Option.value_map option ~default:generate ~f:const in
+  step ()
 
 
 let pair () =
