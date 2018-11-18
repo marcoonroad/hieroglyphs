@@ -1,14 +1,13 @@
 module String = Core.String
+module Option = Core.Option
 module Sys = Core.Sys
 open Lwt.Infix
 module GitStore = Irmin_unix.Git.FS.KV (Irmin.Contents.String)
 
-let failure () = Sys.getenv_exn "HOME" ^ "/.hieroglyphs"
-
-let success = Utils.id
-
 let _HIEROGLYPHS_ROOT =
-  Sys.getenv "HIEROGLYPHS_ROOT" |> Utils.__decode failure success
+  let root = Sys.getenv "HIEROGLYPHS_ROOT" in
+  let default = Sys.getenv_exn "HOME" ^ "/.hieroglyphs" in
+  Option.value root ~default
 
 
 let _HIEROGLYPHS_STORE = _HIEROGLYPHS_ROOT ^ "/state"

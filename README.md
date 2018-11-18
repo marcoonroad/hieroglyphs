@@ -29,7 +29,7 @@ planned as well. Currently, the following things are implemented now:
 - [x] Built-in one-time invariant protected by a blacklist of used private keys.
 - [x] Tests covering the things here and there.
 - [ ] Benchmarks against currently famous Digital Signatures algorithms (RSA family,
-  Elliptic Curves family, etc).
+  Elliptic Curves family, etc - by now only RSA).
 - [x] API documentation for the project (I should prefer automatic generation of
   documentation tools and provide the API documentation online under GH pages).
 - [ ] Stress tests and prediction/timing simulated attacks, to prove the underlying

@@ -16,11 +16,11 @@
     (said to be resistant to Quantum key inversion attacks).
 *)
 
-type priv
 (** The opaque/abstract type for our private keys. *)
+type priv
 
-type pub
 (** The opaque/abstract type for our public keys. *)
+type pub
 
 val generate : unit -> priv
 (** Generates an unique private key. *)
@@ -56,7 +56,11 @@ val address : pub -> string
 
 val sign : priv:priv -> msg:string -> string option
 (** [sign ~priv ~msg] creates a deterministic string signature
-    given the same private key and same message. *)
+    given the same private key and same message. Fails if the private
+    key was already used previously to sign a message, even if the
+    message was the same (TODO: it's safe to sign many times the
+    same message, 'cause it still makes inversion/prediction attacks
+    impossible). *)
 
 val verify : pub:pub -> msg:string -> signature:string -> bool
 (** [verify ~pub ~msg ~signature] succeeds if the signature is valid
