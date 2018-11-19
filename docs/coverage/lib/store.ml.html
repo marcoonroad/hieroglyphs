@@ -11,10 +11,9 @@
           <span class="dirname">lib/</span>store.ml
         </a>
       </h1>
-      <h2>97.22%</h2>
+      <h2>100.00%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:92.86%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -36,45 +35,47 @@
 <a id="L15"></a><span class="visited"> </span>
 <a id="L16"></a><span > </span>
 <a id="L17"></a><span class="visited"> </span>
-<a id="L18"></a><span class="visited"> </span>
-<a id="L19"></a><span > </span>
+<a id="L18"></a><span > </span>
+<a id="L19"></a><span class="visited"> </span>
 <a id="L20"></a><span > </span>
-<a id="L21"></a><span class="visited"> </span>
+<a id="L21"></a><span > </span>
 <a id="L22"></a><span class="visited"> </span>
 <a id="L23"></a><span class="visited"> </span>
 <a id="L24"></a><span class="visited"> </span>
-<a id="L25"></a><span > </span>
-<a id="L26"></a><span class="visited"> </span>
+<a id="L25"></a><span class="visited"> </span>
+<a id="L26"></a><span > </span>
 <a id="L27"></a><span class="visited"> </span>
-<a id="L28"></a><span > </span>
-<a id="L29"></a><span class="visited"> </span>
-<a id="L30"></a><span > </span>
+<a id="L28"></a><span class="visited"> </span>
+<a id="L29"></a><span > </span>
+<a id="L30"></a><span class="visited"> </span>
 <a id="L31"></a><span > </span>
 <a id="L32"></a><span > </span>
-<a id="L33"></a><span class="visited"> </span>
+<a id="L33"></a><span > </span>
 <a id="L34"></a><span class="visited"> </span>
 <a id="L35"></a><span class="visited"> </span>
-<a id="L36"></a><span > </span>
-<a id="L37"></a><span class="visited"> </span>
-<a id="L38"></a><span > </span>
-<a id="L39"></a><span class="visited"> </span>
-<a id="L40"></a><span > </span>
+<a id="L36"></a><span class="visited"> </span>
+<a id="L37"></a><span > </span>
+<a id="L38"></a><span class="visited"> </span>
+<a id="L39"></a><span > </span>
+<a id="L40"></a><span class="visited"> </span>
 <a id="L41"></a><span > </span>
-<a id="L42"></a><span class="visited"> </span>
-<a id="L43"></a><span class="visited"> </span>
-<a id="L44"></a><span > </span>
-<a id="L45"></a><span > </span>
+<a id="L42"></a><span > </span>
+<a id="L43"></a><span > </span>
+<a id="L44"></a><span class="visited"> </span>
+<a id="L45"></a><span class="visited"> </span>
 <a id="L46"></a><span class="visited"> </span>
 <a id="L47"></a><span class="visited"> </span>
 <a id="L48"></a><span class="visited"> </span>
 <a id="L49"></a><span class="visited"> </span>
-<a id="L50"></a><span > </span>
+<a id="L50"></a><span class="visited"> </span>
 <a id="L51"></a><span class="visited"> </span>
-<a id="L52"></a><span class="unvisited"> </span>
+<a id="L52"></a><span class="visited"> </span>
 <a id="L53"></a><span > </span>
-<a id="L54"></a><span > </span>
-<a id="L55"></a><span class="visited"> </span>
-<a id="L56"></a><span class="visited"> </span>
+<a id="L54"></a><span class="visited"> </span>
+<a id="L55"></a><span > </span>
+<a id="L56"></a><span > </span>
+<a id="L57"></a><span class="visited"> </span>
+<a id="L58"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -135,6 +136,8 @@
 <a href="#L54">54</a>
 <a href="#L55">55</a>
 <a href="#L56">56</a>
+<a href="#L57">57</a>
+<a href="#L58">58</a>
 </pre>
         <pre id="code">
 module String = Core.String
@@ -154,6 +157,7 @@ let _HIEROGLYPHS_STORE = <span data-count="1">_</span>HIEROGLYPHS_ROOT ^ "/state
 let config = <span data-count="1">I</span>rmin_git.config ~bare:true _HIEROGLYPHS_STORE
 
 let author = <span data-count="1">"</span>Hieroglyphs library"
+
 let info fmt = <span data-count="3">I</span>rmin_unix.info ~author fmt
 
 let set ~msg ~key value =
@@ -177,26 +181,27 @@ let get ~key =
   in
   <span data-count="13">t</span>ry Some (Lwt_main.run (transaction ())) with <span data-count="11">I</span>nvalid_argument _ -&gt; None
 
-module Sync = Irmin.Sync(GitStore)
-let path = <span data-count="1">"</span>git://github.com/marcoonroad/hieroglyphs-boot.git"
-let remote = <span data-count="1">I</span>rmin.remote_uri path
 
-let pull ( ) =
+let boot () =
+  <span data-count="1">l</span>et date = <span data-count="1">9</span>46684800L (* Sat Jan 1 00:00:00 2000 +0000 *) in
+  <span data-count="1">l</span>et address = <span data-count="1">"</span>0x" ^ String.make Utils._HASH_LENGTH '0' in
+  <span data-count="1">l</span>et path = <span data-count="1">[</span>"blacklist"; address] in
+  <span data-count="1">l</span>et msg = <span data-count="1">"</span>Revoking private key " ^ address ^ "." in
+  <span data-count="1">l</span>et info = <span data-count="1">C</span>ore.const (Irmin.Info.v ~date:date ~author msg) in
   <span data-count="1">l</span>et transaction () =
     <span data-count="1">G</span>itStore.Repo.v config &gt;&gt;= fun repo -&gt;
     <span data-count="1">G</span>itStore.master repo &gt;&gt;= fun branch -&gt;
-    <span data-count="1">S</span>ync.pull_exn branch remote `Set
+    <span data-count="1">G</span>itStore.set branch ~info:info path ""
   in
-  <span data-count="1">t</span>ry Lwt_main.run (transaction ()) with
-  | <span data-count="0">_</span> -&gt; failwith ("Failed to fetch boot stream repository " ^ path ^ "!")
+  <span data-count="1">L</span>wt_main.run (transaction ())
 
 let () =
-  <span data-count="1">p</span>ull ();
+  <span data-count="1">b</span>oot ();
   <span data-count="1">I</span>rmin_unix.set_listen_dir_hook ()
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-18 18:07:05 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-19 00:53:52 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

@@ -40,22 +40,20 @@ let get ~key =
   try Some (Lwt_main.run (transaction ())) with Invalid_argument _ -> None
 
 
-module Sync = Irmin.Sync (GitStore)
-
-let path = "https://github.com/marcoonroad/hieroglyphs-boot.git"
-
-let remote = Irmin.remote_uri path
-
-let pull () =
+let boot () =
+  let date = 946684800L (* Sat Jan 1 00:00:00 2000 +0000 *) in
+  let address = "0x" ^ String.make Utils._HASH_LENGTH '0' in
+  let path = ["blacklist"; address] in
+  let msg = "Revoking private key " ^ address ^ "." in
+  let info = Core.const (Irmin.Info.v ~date ~author msg) in
   let transaction () =
     GitStore.Repo.v config
     >>= fun repo ->
-    GitStore.master repo >>= fun branch -> Sync.pull_exn branch remote `Set
+    GitStore.master repo >>= fun branch -> GitStore.set branch ~info path ""
   in
-  try Lwt_main.run (transaction ()) with _ ->
-    failwith ("Failed to fetch boot stream repository " ^ path ^ "!")
+  Lwt_main.run (transaction ())
 
 
 let () =
-  pull () ;
+  boot () ;
   Irmin_unix.set_listen_dir_hook ()
