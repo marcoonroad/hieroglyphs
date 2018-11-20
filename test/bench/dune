@@ -1,4 +1,15 @@
 (test
   (name bench)
-  (modules bench hiero rsa_pss)
-  (libraries core_bench hieroglyphs nocrypto))
+  (modules bench hiero rsa_pss secp secp_helper)
+  (libraries core_bench hieroglyphs nocrypto secp256k1))
+
+;; (alias
+;;  (name runtest)
+;;  (action (run ./bench.exe -help)))
+
+;; (rule
+;;   (with-stdout-to bench.output (run ./bench.exe)))
+
+(alias
+   (name runtest)
+   (action (diff bench.expected bench.output)))

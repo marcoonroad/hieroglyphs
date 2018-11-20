@@ -68,14 +68,15 @@
 <a id="L48"></a><span class="visited"> </span>
 <a id="L49"></a><span class="visited"> </span>
 <a id="L50"></a><span class="visited"> </span>
-<a id="L51"></a><span class="visited"> </span>
+<a id="L51"></a><span > </span>
 <a id="L52"></a><span class="visited"> </span>
 <a id="L53"></a><span > </span>
 <a id="L54"></a><span class="visited"> </span>
 <a id="L55"></a><span > </span>
 <a id="L56"></a><span > </span>
-<a id="L57"></a><span class="visited"> </span>
+<a id="L57"></a><span > </span>
 <a id="L58"></a><span class="visited"> </span>
+<a id="L59"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -138,6 +139,7 @@
 <a href="#L56">56</a>
 <a href="#L57">57</a>
 <a href="#L58">58</a>
+<a href="#L59">59</a>
 </pre>
         <pre id="code">
 module String = Core.String
@@ -187,21 +189,22 @@ let boot () =
   <span data-count="1">l</span>et address = <span data-count="1">"</span>0x" ^ String.make Utils._HASH_LENGTH '0' in
   <span data-count="1">l</span>et path = <span data-count="1">[</span>"blacklist"; address] in
   <span data-count="1">l</span>et msg = <span data-count="1">"</span>Revoking private key " ^ address ^ "." in
-  <span data-count="1">l</span>et info = <span data-count="1">C</span>ore.const (Irmin.Info.v ~date:date ~author msg) in
+  <span data-count="1">l</span>et info = <span data-count="1">C</span>ore.const (Irmin.Info.v ~date ~author msg) in
   <span data-count="1">l</span>et transaction () =
-    <span data-count="1">G</span>itStore.Repo.v config &gt;&gt;= fun repo -&gt;
-    <span data-count="1">G</span>itStore.master repo &gt;&gt;= fun branch -&gt;
-    <span data-count="1">G</span>itStore.set branch ~info:info path ""
+    <span data-count="1">G</span>itStore.Repo.v config
+    &gt;&gt;= fun repo -&gt;
+    <span data-count="1">G</span>itStore.master repo &gt;&gt;= fun branch -&gt; <span data-count="1">G</span>itStore.set branch ~info path ""
   in
   <span data-count="1">L</span>wt_main.run (transaction ())
 
+
 let () =
-  <span data-count="1">b</span>oot ();
+  <span data-count="1">b</span>oot () ;
   <span data-count="1">I</span>rmin_unix.set_listen_dir_hook ()
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-19 00:53:52 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-20 19:07:56 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

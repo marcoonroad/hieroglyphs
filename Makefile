@@ -2,8 +2,12 @@
 
 .PHONY: default vendor build doc install uninstall test coverage report clean
 
+os-vendor:
+	sudo apt-get install libsecp256k1-dev --yes
+
 vendor:
 	opam install . --deps-only --yes
+	opam install secp256k1 --yes
 
 default: build
 
@@ -34,7 +38,8 @@ test: build
 	dune build @test/spec/runtest -f --no-buffer -j 1
 
 bench: build
-	dune build @test/bench/runtest -f --no-buffer -j 1
+	dune build @test/bench/runtest -f --no-buffer -j 1 \
+	  --auto-promote || echo "=== Differences detected! ==="
 
 install: build
 	dune install
