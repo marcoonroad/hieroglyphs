@@ -7,7 +7,6 @@ os-vendor:
 
 vendor:
 	opam install . --deps-only --yes
-	opam install secp256k1 --yes
 
 default: build
 
@@ -37,9 +36,11 @@ doc: build
 test: build
 	dune build @test/spec/runtest -f --no-buffer -j 1
 
-bench: build
-	dune build @test/bench/runtest -f --no-buffer -j 1 \
-	  --auto-promote || echo "=== Differences detected! ==="
+bench: clean build
+	opam install secp256k1 --yes
+	dune build @test/bench/runtest -f --no-buffer -j 1 --auto-promote \
+		--diff-command="git diff --unified=10 --break-rewrites --no-index --exit-code --histogram --word-diff=none --color --no-prefix" || echo \
+		"\n\n=== Differences detected! ===\n\n"
 
 install: build
 	dune install

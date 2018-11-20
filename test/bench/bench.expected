@@ -2,18 +2,18 @@ Estimated testing time 2m (12 benchmarks x 10s). Change using -quota SECS.
 ┌─────────────────────────────────────────────────────┬────────────────────┬───────────────┬─────────────────┬─────────────┬────────────┐
 │ Name                                                │           Time/Run │       mWd/Run │        mjWd/Run │    Prom/Run │ Percentage │
 ├─────────────────────────────────────────────────────┼────────────────────┼───────────────┼─────────────────┼─────────────┼────────────┤
-│ hieroglyphs + blake2b ------ private key generation │   370_455_559.56ns │ 1_006_857.43w │  33_922_445.62w │  88_370.62w │     28.46% │
-│ hieroglyphs + blake2b ------ message signing        │ 1_301_495_027.37ns │ 4_783_650.60w │ 102_184_810.50w │ 456_457.80w │    100.00% │
-│ hieroglyphs + blake2b ------ public key derivation  │     6_592_944.51ns │   206_848.84w │      15_295.39w │  15_295.39w │      0.51% │
-│ hieroglyphs + blake2b ------ signature verification │     1_704_312.46ns │    21_148.32w │         114.93w │     114.93w │      0.13% │
-│ rsa pss/sha256 1024 bits --- private key generation │    37_611_677.52ns │       870.98w │           0.35w │       0.35w │      2.89% │
-│ rsa pss/sha256 1024 bits --- public key derivation  │            10.43ns │         3.00w │                 │             │            │
-│ rsa pss/sha256 1024 bits --- message signing        │       737_858.23ns │     1_714.73w │           0.57w │       0.57w │      0.06% │
-│ rsa pss/sha256 1024 bits --- signature verification │        80_628.08ns │     1_547.02w │           0.34w │       0.34w │            │
-│ secp256k1 + sha256 hash ---- private key generation │        11_515.44ns │       355.77w │                 │             │            │
-│ secp256k1 + sha256 hash ---- public key derivation  │       198_462.42ns │        13.00w │                 │             │      0.02% │
-│ secp256k1 + sha256 hash ---- message signing        │       313_701.04ns │       585.24w │           0.16w │       0.16w │      0.02% │
-│ secp256k1 + sha256 hash ---- signature verification │       331_097.72ns │       214.00w │                 │             │      0.03% │
+│ hieroglyphs + blake2b ------ private key generation │   366_881_777.49ns │ 1_021_683.25w │  33_922_455.18w │  88_380.18w │     30.81% │
+│ hieroglyphs + blake2b ------ message signing        │ 1_190_694_816.73ns │ 5_939_168.30w │ 102_341_609.30w │ 574_410.60w │    100.00% │
+│ hieroglyphs + blake2b ------ public key derivation  │     6_480_246.44ns │   206_848.88w │      15_323.15w │  15_323.15w │      0.54% │
+│ hieroglyphs + blake2b ------ signature verification │     1_687_990.61ns │    21_148.32w │         114.51w │     114.51w │      0.14% │
+│ rsa pss/sha256 1024 bits --- private key generation │    37_070_763.78ns │       870.65w │          -0.23w │      -0.23w │      3.11% │
+│ rsa pss/sha256 1024 bits --- public key derivation  │            11.57ns │         3.00w │                 │             │            │
+│ rsa pss/sha256 1024 bits --- message signing        │       746_937.92ns │     1_715.43w │           0.57w │       0.57w │      0.06% │
+│ rsa pss/sha256 1024 bits --- signature verification │        88_208.60ns │     1_547.02w │           0.34w │       0.34w │            │
+│ secp256k1 + sha256 hash ---- private key generation │        11_657.71ns │       355.69w │                 │             │            │
+│ secp256k1 + sha256 hash ---- public key derivation  │       226_280.60ns │        13.00w │                 │             │      0.02% │
+│ secp256k1 + sha256 hash ---- message signing        │       360_432.37ns │       585.35w │           0.16w │       0.16w │      0.03% │
+│ secp256k1 + sha256 hash ---- signature verification │       616_700.03ns │       214.00w │                 │             │      0.05% │
 └─────────────────────────────────────────────────────┴────────────────────┴───────────────┴─────────────────┴─────────────┴────────────┘
 Benchmarks that take 1ns to 100ms can be estimated precisely. For more reliable 
 estimates, redesign your benchmark to have a shorter execution time.

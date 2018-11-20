@@ -95,7 +95,7 @@ shown at this [page](https://marcoonroad.github.io/hieroglyphs/coverage/).
 ### Benchmarks:
 
 Currently, we run them against the `nocrypto` RSA/PSS implementation, and the
-`secp256k1` library (using a SHA256 hash on the message), besides our our
+`secp256k1` library (using a SHA256 hash on the message), besides our
 implementation in pure OCaml code (although future plans include C bindings).
 The reports are shown on the build logs of Travis CI. You can as well run a
 benchmark test suite, it is available under the command `$ make bench`. It uses

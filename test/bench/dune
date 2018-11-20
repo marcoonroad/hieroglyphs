@@ -5,11 +5,11 @@
 
 ;; (alias
 ;;  (name runtest)
-;;  (action (run ./bench.exe -help)))
+;;  (action (run ./bench.exe)))
 
 ;; (rule
 ;;   (with-stdout-to bench.output (run ./bench.exe)))
 
-(alias
-   (name runtest)
-   (action (diff bench.expected bench.output)))
+;; (alias
+;;   (name runtest)
+;;   (action (diff bench.expected bench.output)))
