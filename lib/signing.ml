@@ -1,5 +1,4 @@
 module List = Core.List
-module String = Core.String
 
 let sign ~priv ~msg =
   msg

@@ -1,5 +1,3 @@
-module String = Core.String
-
 let add address =
   let key = "blacklist/" ^ address in
   let msg = "Revoking private key " ^ address ^ "." in

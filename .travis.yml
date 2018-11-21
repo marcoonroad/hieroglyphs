@@ -1,5 +1,5 @@
 language: c
-dist: xenial
+sudo: required
 install: wget https://raw.githubusercontent.com/ocaml/ocaml-ci-scripts/master/.travis-opam.sh
 
 script:
@@ -17,10 +17,6 @@ env:
     - OCAML_VERSION=4.05 POST_INSTALL_HOOK="make report"
     - OCAML_VERSION=4.06 POST_INSTALL_HOOK="make report"
     - OCAML_VERSION=4.07 POST_INSTALL_HOOK="make report"
-    - OCAML_VERSION=4.04 POST_INSTALL_HOOK="make os-vendor; make bench"
-    - OCAML_VERSION=4.05 POST_INSTALL_HOOK="make os-vendor; make bench"
-    - OCAML_VERSION=4.06 POST_INSTALL_HOOK="make os-vendor; make bench"
-    - OCAML_VERSION=4.07 POST_INSTALL_HOOK="make os-vendor; make bench"
 
 os:
   - linux

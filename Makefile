@@ -21,6 +21,7 @@ doc-index:
 	cp README.md docs/index.md
 
 doc: build
+	opam install odoc --yes
 	rm -rf docs/apiref
 	mkdir -p docs/apiref
 	dune build @doc
@@ -36,7 +37,8 @@ doc: build
 test: build
 	dune build @test/spec/runtest -f --no-buffer -j 1
 
-bench: clean build
+bench: os-vendor clean build
+	opam install core_bench --yes
 	opam install secp256k1 --yes
 	dune build @test/bench/runtest -f --no-buffer -j 1 --auto-promote \
 		--diff-command="git diff --unified=10 --break-rewrites --no-index --exit-code --histogram --word-diff=none --color --no-prefix" || echo \
