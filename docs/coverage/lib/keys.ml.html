@@ -121,24 +121,24 @@ module Int64 = Core.Int64
 module Option = Core.Option
 
 let populate time _ =
-  <span data-count="14336">(</span>)
-  |&gt; <span data-count="14336">R</span>andom.generate
-  |&gt; <span data-count="14336">I</span>nt64.to_string
-  |&gt; <span data-count="14336">S</span>tring.( ^ ) time
-  |&gt; <span data-count="14336">H</span>ash.digest
-  |&gt; <span data-count="14336">H</span>ash.digest
+  <span data-count="18432">(</span>)
+  |&gt; <span data-count="18432">R</span>andom.generate
+  |&gt; <span data-count="18432">I</span>nt64.to_string
+  |&gt; <span data-count="18432">S</span>tring.( ^ ) time
+  |&gt; <span data-count="18432">H</span>ash.digest
+  |&gt; <span data-count="18432">H</span>ash.digest
 
 
 let length = <span data-count="1">U</span>tils._KEY_LENGTH
 
-let timestamp () = <span data-count="7">(</span>) |&gt; <span data-count="7">U</span>nix.gettimeofday |&gt; <span data-count="7">F</span>loat.to_string
+let timestamp () = <span data-count="9">(</span>) |&gt; <span data-count="9">U</span>nix.gettimeofday |&gt; <span data-count="9">F</span>loat.to_string
 
 let generate () =
-  <span data-count="7">l</span>et time = <span data-count="7">t</span>imestamp () in
-  <span data-count="7">L</span>ist.init length ~f:(populate time)
+  <span data-count="9">l</span>et time = <span data-count="9">t</span>imestamp () in
+  <span data-count="9">L</span>ist.init length ~f:(populate time)
 
 
-let derive priv = <span data-count="21">L</span>ist.map priv ~f:Hash.digest
+let derive priv = <span data-count="25">L</span>ist.map priv ~f:Hash.digest
 
 let export ~priv ~pass =
   <span data-count="2">p</span>riv |&gt; <span data-count="2">L</span>ist.reduce_exn ~f:Utils.concat_hashes |&gt; <span data-count="2">E</span>ncryption.encrypt ~pass
@@ -162,7 +162,7 @@ let verify = <span data-count="1">V</span>erification.verify
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-20 23:23:48 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-22 13:00:36 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

@@ -58,21 +58,21 @@ module List = Core.List
 module String = Core.String
 
 let show pub =
- <span data-count="24">L</span>ist.reduce_exn pub ~f:Utils.concat_hashes
+ <span data-count="29">L</span>ist.reduce_exn pub ~f:Utils.concat_hashes
 
 let load text =
   <span data-count="2">l</span>et list = <span data-count="2">S</span>tring.split text ~on:'-' in
   <span data-count="2">U</span>tils.validate_key list
 
 let address pub =
-  <span data-count="23">p</span>ub
-  |&gt; <span data-count="23">s</span>how
-  |&gt; <span data-count="23">H</span>ash.digest
-  |&gt; <span data-count="23">U</span>tils.to_hex
+  <span data-count="27">p</span>ub
+  |&gt; <span data-count="27">s</span>how
+  |&gt; <span data-count="27">H</span>ash.digest
+  |&gt; <span data-count="27">U</span>tils.to_hex
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-20 23:23:48 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-22 13:00:36 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

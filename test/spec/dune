@@ -1,4 +1,4 @@
 (test
   (name spec)
-  (modules spec keys sign)
-  (libraries alcotest hieroglyphs))
+  (modules spec keys sign utils)
+  (libraries alcotest hieroglyphs core re))
