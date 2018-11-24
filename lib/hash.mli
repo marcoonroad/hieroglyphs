@@ -1,3 +1,3 @@
 val digest : string -> string
 
-val sha256 : string -> string
+val mine : difficulty:int -> string -> Cstruct.t
