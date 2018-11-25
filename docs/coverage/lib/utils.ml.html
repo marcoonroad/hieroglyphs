@@ -61,39 +61,50 @@
 <a id="L41"></a><span > </span>
 <a id="L42"></a><span class="visited"> </span>
 <a id="L43"></a><span class="visited"> </span>
-<a id="L44"></a><span > </span>
+<a id="L44"></a><span class="visited"> </span>
 <a id="L45"></a><span > </span>
 <a id="L46"></a><span > </span>
-<a id="L47"></a><span class="visited"> </span>
+<a id="L47"></a><span > </span>
 <a id="L48"></a><span class="visited"> </span>
 <a id="L49"></a><span class="visited"> </span>
-<a id="L50"></a><span > </span>
+<a id="L50"></a><span class="visited"> </span>
 <a id="L51"></a><span > </span>
-<a id="L52"></a><span class="visited"> </span>
-<a id="L53"></a><span > </span>
+<a id="L52"></a><span > </span>
+<a id="L53"></a><span class="visited"> </span>
 <a id="L54"></a><span > </span>
-<a id="L55"></a><span class="visited"> </span>
+<a id="L55"></a><span > </span>
 <a id="L56"></a><span class="visited"> </span>
 <a id="L57"></a><span class="visited"> </span>
 <a id="L58"></a><span class="visited"> </span>
 <a id="L59"></a><span class="visited"> </span>
-<a id="L60"></a><span class="visited"> </span>
-<a id="L61"></a><span class="visited"> </span>
+<a id="L60"></a><span > </span>
+<a id="L61"></a><span > </span>
 <a id="L62"></a><span class="visited"> </span>
-<a id="L63"></a><span > </span>
-<a id="L64"></a><span > </span>
+<a id="L63"></a><span class="visited"> </span>
+<a id="L64"></a><span class="visited"> </span>
 <a id="L65"></a><span class="visited"> </span>
-<a id="L66"></a><span > </span>
-<a id="L67"></a><span > </span>
-<a id="L68"></a><span class="visited"> </span>
-<a id="L69"></a><span class="visited"> </span>
+<a id="L66"></a><span class="visited"> </span>
+<a id="L67"></a><span class="visited"> </span>
+<a id="L68"></a><span > </span>
+<a id="L69"></a><span > </span>
 <a id="L70"></a><span class="visited"> </span>
-<a id="L71"></a><span class="visited"> </span>
+<a id="L71"></a><span > </span>
 <a id="L72"></a><span > </span>
-<a id="L73"></a><span > </span>
+<a id="L73"></a><span class="visited"> </span>
 <a id="L74"></a><span class="visited"> </span>
-<a id="L75"></a><span > </span>
+<a id="L75"></a><span class="visited"> </span>
 <a id="L76"></a><span class="visited"> </span>
+<a id="L77"></a><span > </span>
+<a id="L78"></a><span > </span>
+<a id="L79"></a><span class="visited"> </span>
+<a id="L80"></a><span > </span>
+<a id="L81"></a><span class="visited"> </span>
+<a id="L82"></a><span > </span>
+<a id="L83"></a><span > </span>
+<a id="L84"></a><span class="visited"> </span>
+<a id="L85"></a><span > </span>
+<a id="L86"></a><span > </span>
+<a id="L87"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -174,6 +185,17 @@
 <a href="#L74">74</a>
 <a href="#L75">75</a>
 <a href="#L76">76</a>
+<a href="#L77">77</a>
+<a href="#L78">78</a>
+<a href="#L79">79</a>
+<a href="#L80">80</a>
+<a href="#L81">81</a>
+<a href="#L82">82</a>
+<a href="#L83">83</a>
+<a href="#L84">84</a>
+<a href="#L85">85</a>
+<a href="#L86">86</a>
+<a href="#L87">87</a>
 </pre>
         <pre id="code">
 module List = Core.List
@@ -194,7 +216,7 @@ let regexp = <span data-count="1">S</span>tr.regexp "^[a-f0-9]+$"
 let id value = <span data-count="1280">v</span>alue
 
 let is_hash text =
-  <span data-count="14330">S</span>tr.string_match regexp text 0 &amp;&amp; <span data-count="6145">S</span>tring.length text = _HASH_LENGTH
+  <span data-count="14342">S</span>tr.string_match regexp text 0 &amp;&amp; <span data-count="6144">S</span>tring.length text = _HASH_LENGTH
 
 
 let validate_key list =
@@ -202,7 +224,7 @@ let validate_key list =
   <span data-count="5">i</span>f List.length filtered = _KEY_LENGTH then <span data-count="3">S</span>ome list else <span data-count="2">N</span>one
 
 
-let to_hex text = <span data-count="1307">"</span>0x" ^ text
+let to_hex text = <span data-count="1303">"</span>0x" ^ text
 
 let tag_index entries =
   <span data-count="10">l</span>et length = <span data-count="10">L</span>ist.length entries in
@@ -218,7 +240,8 @@ let replace_index ~matrix pairs = <span data-count="4">p</span>airs |&gt; <span 
 
 let verify_at ~digest ~list (position, hash) =
   <span data-count="768">l</span>et commitment = <span data-count="768">L</span>ist.nth_exn list position in
-  <span data-count="768">d</span>igest hash = commitment
+  <span data-count="768">l</span>et opening = <span data-count="768">d</span>igest hash in
+  <span data-count="768">o</span>pening = commitment
 
 
 let verify_with ~matrix ~digest pairs =
@@ -227,15 +250,19 @@ let verify_with ~matrix ~digest pairs =
   |&gt; <span data-count="6">L</span>ist.reduce_exn ~f:( &amp;&amp; )
 
 
-let concat_hashes left right = <span data-count="63965">l</span>eft ^ "-" ^ right
+let concat_hashes left right = <span data-count="55777">l</span>eft ^ "-" ^ right
+
+let char_to_hex_int char =
+  <span data-count="1280">c</span>har
+  |&gt; <span data-count="1280">C</span>har.to_string
+  |&gt; <span data-count="1280">t</span>o_hex
+  |&gt; <span data-count="1280">I</span>nt.of_string
 
 let indexed_keys msg =
   <span data-count="10">m</span>sg
   |&gt; <span data-count="10">H</span>ash.digest
   |&gt; <span data-count="10">S</span>tring.to_list
-  |&gt; <span data-count="10">L</span>ist.map ~f:Char.to_string
-  |&gt; <span data-count="10">L</span>ist.map ~f:to_hex
-  |&gt; <span data-count="10">L</span>ist.map ~f:Int.of_string
+  |&gt; <span data-count="10">L</span>ist.map ~f:char_to_hex_int
   |&gt; <span data-count="10">t</span>ag_index
   |&gt; <span data-count="10">L</span>ist.map ~f:calculate_index
 
@@ -252,10 +279,16 @@ let pad ~basis msg =
 let nonzero char = <span data-count="792576">c</span>har != nullchar
 
 let unpad msg = <span data-count="3">S</span>tring.filter ~f:nonzero msg
+
+let bytes_of_string string =
+  <span data-count="6144">C</span>struct.to_bytes @@ Cstruct.of_hex string
+
+let bytes_to_string bytes =
+  <span data-count="75776">H</span>ex.show @@ Hex.of_cstruct @@ Cstruct.of_bytes bytes
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-24 20:15:12 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-25 16:49:48 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

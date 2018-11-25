@@ -19,25 +19,30 @@
       <div id="lines-layer">
         <pre>
 <a id="L1"></a><span > </span>
-<a id="L2"></a><span class="visited"> </span>
+<a id="L2"></a><span > </span>
 <a id="L3"></a><span > </span>
-<a id="L4"></a><span > </span>
-<a id="L5"></a><span class="visited"> </span>
-<a id="L6"></a><span class="visited"> </span>
+<a id="L4"></a><span class="visited"> </span>
+<a id="L5"></a><span > </span>
+<a id="L6"></a><span > </span>
 <a id="L7"></a><span class="visited"> </span>
 <a id="L8"></a><span class="visited"> </span>
 <a id="L9"></a><span class="visited"> </span>
 <a id="L10"></a><span class="visited"> </span>
-<a id="L11"></a><span class="visited"> </span>
-<a id="L12"></a><span class="visited"> </span>
-<a id="L13"></a><span > </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span > </span>
+<a id="L13"></a><span class="visited"> </span>
 <a id="L14"></a><span class="visited"> </span>
-<a id="L15"></a><span > </span>
-<a id="L16"></a><span > </span>
+<a id="L15"></a><span class="visited"> </span>
+<a id="L16"></a><span class="visited"> </span>
 <a id="L17"></a><span class="visited"> </span>
 <a id="L18"></a><span class="visited"> </span>
 <a id="L19"></a><span class="visited"> </span>
-<a id="L20"></a><span class="visited"> </span>
+<a id="L20"></a><span > </span>
+<a id="L21"></a><span > </span>
+<a id="L22"></a><span class="visited"> </span>
+<a id="L23"></a><span class="visited"> </span>
+<a id="L24"></a><span class="visited"> </span>
+<a id="L25"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -62,22 +67,32 @@
 <a href="#L18">18</a>
 <a href="#L19">19</a>
 <a href="#L20">20</a>
+<a href="#L21">21</a>
+<a href="#L22">22</a>
+<a href="#L23">23</a>
+<a href="#L24">24</a>
+<a href="#L25">25</a>
 </pre>
         <pre id="code">
+module Bytes = Core.Bytes
+
 let digest text =
-  <span data-count="88869">t</span>ext |&gt; <span data-count="88869">D</span>igestif.BLAKE2B.digest_string |&gt; <span data-count="88869">D</span>igestif.BLAKE2B.to_hex
+  <span data-count="33">t</span>ext |&gt; <span data-count="33">D</span>igestif.BLAKE2B.digest_string |&gt; <span data-count="33">D</span>igestif.BLAKE2B.to_hex
+
+let digest_bytes bytes =
+  <span data-count="43776">b</span>ytes
+  |&gt; <span data-count="43776">D</span>igestif.BLAKE2B.digest_bytes
+  |&gt; <span data-count="43776">D</span>igestif.BLAKE2B.to_raw_string
+  |&gt; <span data-count="43776">B</span>ytes.of_string
 
 let rec __mining input pattern nonce =
-  <span data-count="71866060">l</span>et length = <span data-count="71866060">C</span>ore.String.length pattern in
-  <span data-count="71866060">l</span>et salt = <span data-count="71866060">N</span>ocrypto.Numeric.Z.to_cstruct_be nonce in
-  <span data-count="71866060">l</span>et message = <span data-count="71866060">C</span>struct.append input salt in
-  <span data-count="71866060">l</span>et result = <span data-count="71866060">N</span>ocrypto.Hash.SHA256.digest message in
-  <span data-count="71866060">l</span>et digest = <span data-count="71866060">H</span>ex.show @@ Hex.of_cstruct result in
-  <span data-count="71866060">l</span>et part = <span data-count="71866060">C</span>ore.String.sub ~pos:0 ~len:length digest in
-  <span data-count="71866060">i</span>f pattern = part then
-    <span data-count="5">r</span>esult
-  else
-    <span data-count="71866055">_</span>_mining input pattern @@ Z.succ nonce
+  <span data-count="14498560">l</span>et length = <span data-count="14498560">C</span>ore.String.length pattern in
+  <span data-count="14498560">l</span>et salt = <span data-count="14498560">N</span>ocrypto.Numeric.Z.to_cstruct_be nonce in
+  <span data-count="14498560">l</span>et message = <span data-count="14498560">C</span>struct.append input salt in
+  <span data-count="14498560">l</span>et result = <span data-count="14498560">N</span>ocrypto.Hash.SHA256.digest message in
+  <span data-count="14498560">l</span>et digest = <span data-count="14498560">H</span>ex.show @@ Hex.of_cstruct result in
+  <span data-count="14498560">l</span>et part = <span data-count="14498560">C</span>ore.String.sub ~pos:0 ~len:length digest in
+  <span data-count="14498560">i</span>f pattern = part then <span data-count="5">r</span>esult else <span data-count="14498555">_</span>_mining input pattern @@ Z.succ nonce
 
 let mine ~difficulty text =
   <span data-count="5">l</span>et input = <span data-count="5">C</span>struct.of_string text in
@@ -87,7 +102,7 @@ let mine ~difficulty text =
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-24 20:15:12 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-25 16:49:48 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

@@ -25,6 +25,7 @@
 <a id="L5"></a><span class="visited"> </span>
 <a id="L6"></a><span class="visited"> </span>
 <a id="L7"></a><span class="visited"> </span>
+<a id="L8"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -36,11 +37,13 @@
 <a href="#L5">5</a>
 <a href="#L6">6</a>
 <a href="#L7">7</a>
+<a href="#L8">8</a>
 </pre>
         <pre id="code">
 module List = Core.List
 
 let sign ~priv ~msg =
+  <span data-count="4">l</span>et priv = <span data-count="4">L</span>ist.map priv ~f:Utils.bytes_to_string in
   <span data-count="4">m</span>sg
   |&gt; <span data-count="4">U</span>tils.indexed_keys
   |&gt; <span data-count="4">U</span>tils.replace_index ~matrix:priv
@@ -48,7 +51,7 @@ let sign ~priv ~msg =
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-24 20:15:12 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-25 16:49:48 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

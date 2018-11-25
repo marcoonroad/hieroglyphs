@@ -63,13 +63,13 @@ module Option = Core.Option
 module Base64 = Nocrypto.Base64
 
 let encrypt msg ~pass =
-  <span data-count="2">l</span>et key = <span data-count="2">o</span>f_secret (Hash.mine pass ~difficulty:6) in
+  <span data-count="2">l</span>et key = <span data-count="2">o</span>f_secret (Hash.mine pass ~difficulty:5) in
   <span data-count="2">l</span>et result = <span data-count="2">e</span>ncrypt ~key (Utils.pad ~basis:16 msg) in
   <span data-count="2">r</span>esult |&gt; <span data-count="2">B</span>ase64.encode |&gt; <span data-count="2">C</span>struct.to_string
 
 
 let decrypt cipher ~pass =
-  <span data-count="3">l</span>et key = <span data-count="3">o</span>f_secret (Hash.mine pass ~difficulty:6) in
+  <span data-count="3">l</span>et key = <span data-count="3">o</span>f_secret (Hash.mine pass ~difficulty:5) in
   <span data-count="3">l</span>et result = <span data-count="3">c</span>ipher |&gt; <span data-count="3">C</span>struct.of_string |&gt; <span data-count="3">B</span>ase64.decode in
   <span data-count="3">l</span>et open Option in
   result
@@ -78,7 +78,7 @@ let decrypt cipher ~pass =
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-24 20:15:12 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2018-11-25 16:49:48 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>
