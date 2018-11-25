@@ -1,5 +1,5 @@
-val address : string list -> string
+val address : bytes list -> string
 
-val show : string list -> string
+val show : bytes list -> string
 
-val load : string -> string list option
+val load : string -> bytes list option

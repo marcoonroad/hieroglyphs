@@ -4,6 +4,7 @@ module Float = Core.Float
 module Int64 = Core.Int64
 module Option = Core.Option
 
+(*
 let populate time _ =
   ()
   |> Random.generate
@@ -11,27 +12,45 @@ let populate time _ =
   |> String.( ^ ) time
   |> Hash.digest
   |> Hash.digest
-
+*)
 
 let length = Utils._KEY_LENGTH
 
+(*
 let timestamp () = () |> Unix.gettimeofday |> Float.to_string
 
 let generate () =
   let time = timestamp () in
   List.init length ~f:(populate time)
+*)
 
+let _random_hex _ = Random.generate512 ()
 
-let derive priv = List.map priv ~f:Hash.digest
+let generate () = List.init length ~f:_random_hex
+
+let derive priv = List.map priv ~f:Hash.digest_bytes
+
+let pair () =
+  let priv = generate () in
+  let pub = derive priv in
+  (priv, pub)
+
 
 let export ~priv ~pass =
-  priv |> List.reduce_exn ~f:Utils.concat_hashes |> Encryption.encrypt ~pass
+  priv
+  |> List.map ~f:Utils.bytes_to_string
+  |> List.reduce_exn ~f:Utils.concat_hashes
+  |> Encryption.encrypt ~pass
 
 
 let import ~cipher ~pass =
   let open Option in
   Encryption.decrypt ~pass cipher
-  >>= fun result -> result |> String.split ~on:'-' |> Utils.validate_key
+  >>= fun result ->
+  result
+  |> String.split ~on:'-'
+  |> Utils.validate_key
+  >>= fun list -> some @@ List.map list ~f:Utils.bytes_of_string
 
 
 let load = Serialization.load

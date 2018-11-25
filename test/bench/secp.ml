@@ -22,7 +22,7 @@ let derive () =
 
 
 let signing () =
-  let priv = ECC.generate () in
+  (* let priv = ECC.generate () in *)
   ignore @@ ECC.sign ~priv ~msg:"Benchmark signing test."
 
 
@@ -35,17 +35,27 @@ let verification () =
   assert result
 
 
-let suite =
-  [ Test.create
-      ~name:"secp256k1 + sha256 hash ---- private key generation"
-      generate
-  ; Test.create
-      ~name:"secp256k1 + sha256 hash ---- public key derivation"
-      derive
-  ; Test.create ~name:"secp256k1 + sha256 hash ---- message signing" signing
-  ; Test.create
-      ~name:"secp256k1 + sha256 hash ---- signature verification"
-      verification ]
+(*** test cases ***************************************************************)
+let __generation =
+  let name = "secp256k1 + sha256 hash ---- private key generation" in
+  Test.create ~name generate
 
+
+let __derivation =
+  let name = "secp256k1 + sha256 hash ---- public key derivation" in
+  Test.create ~name derive
+
+
+let __signing =
+  let name = "secp256k1 + sha256 hash ---- message signing" in
+  Test.create ~name signing
+
+
+let __verification =
+  let name = "secp256k1 + sha256 hash ---- signature verification" in
+  Test.create ~name verification
+
+
+let suite = [__generation; __derivation; __signing; __verification]
 
 let () = Nocrypto_entropy_unix.initialize ()

@@ -85,4 +85,4 @@ let __one_time_signing () =
 let suite =
   [ ("signature validation size and format", `Quick, __signature_validation)
   ; ("signing and verification must match", `Quick, __signing_and_verification)
-  ; ("signing must be performed only once", `Quick, __one_time_signing) ]
+  ; ("signing must be performed only once", `Slow, __one_time_signing) ]

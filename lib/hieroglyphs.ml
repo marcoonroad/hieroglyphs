@@ -1,10 +1,12 @@
 module Option = Core.Option
 
-type priv = string list
+type priv = bytes list
 
-type pub = string list
+type pub = bytes list
 
 let derive = Keys.derive
+
+let pair = Keys.pair
 
 let import = Keys.import
 
@@ -50,9 +52,3 @@ let rec generate () =
   let option = __check priv in
   let step = Option.value_map option ~default:generate ~f:const in
   step ()
-
-
-let pair () =
-  let priv = generate () in
-  let pub = derive priv in
-  (priv, pub)

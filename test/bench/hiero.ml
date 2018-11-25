@@ -1,24 +1,21 @@
 open Core_bench.Bench
-module Hg = Hieroglyphs
+module Hg = Hieroglyphs__Keys
 
 let generate () = ignore @@ Hg.generate ()
 
 let priv = Hg.generate ()
 
+let priv' = Hg.generate ()
+
 let signing () =
-  let priv = Hg.generate () in
-  ignore @@ Hg.sign ~priv ~msg:"Benchmark signing test."
+  (* TODO: it's safe to sign the same message twice and many times, I should
+     fix and cover that on the test specification *)
+  ignore @@ Hg.sign ~priv:priv' ~msg:"Benchmark signing test."
 
 
 let derive () = ignore @@ Hg.derive priv
 
-let sign ~priv ~msg =
-  match Hg.sign ~priv ~msg with
-  | None ->
-      failwith "Expected a generated message signature!"
-  | Some signature ->
-      signature
-
+let sign ~priv ~msg = Hg.sign ~priv ~msg
 
 let signature = sign ~priv ~msg:"Benchmark signed message."
 
@@ -28,14 +25,25 @@ let verification () =
   ignore @@ Hg.verify ~pub ~signature ~msg:"Benchmark signed message."
 
 
-let suite =
-  [ Test.create
-      ~name:"hieroglyphs + blake2b ------ private key generation"
-      generate
-  ; Test.create ~name:"hieroglyphs + blake2b ------ message signing" signing
-  ; Test.create
-      ~name:"hieroglyphs + blake2b ------ public key derivation"
-      derive
-  ; Test.create
-      ~name:"hieroglyphs + blake2b ------ signature verification"
-      verification ]
+(*** test cases ***************************************************************)
+let __generation =
+  let name = "hieroglyphs + blake2b ------ private key generation" in
+  Test.create ~name generate
+
+
+let __signing =
+  let name = "hieroglyphs + blake2b ------ message signing" in
+  Test.create ~name signing
+
+
+let __derivation =
+  let name = "hieroglyphs + blake2b ------ public key derivation" in
+  Test.create ~name derive
+
+
+let __verification =
+  let name = "hieroglyphs + blake2b ------ signature verification" in
+  Test.create ~name verification
+
+
+let suite = [__generation; __signing; __derivation; __verification]

@@ -1,5 +1,14 @@
+module Bytes = Core.Bytes
+
 let digest text =
   text |> Digestif.BLAKE2B.digest_string |> Digestif.BLAKE2B.to_hex
+
+
+let digest_bytes bytes =
+  bytes
+  |> Digestif.BLAKE2B.digest_bytes
+  |> Digestif.BLAKE2B.to_raw_string
+  |> Bytes.of_string
 
 
 let rec __mining input pattern nonce =

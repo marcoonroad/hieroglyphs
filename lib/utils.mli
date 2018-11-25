@@ -21,3 +21,7 @@ val verify_with :
 val pad : basis:int -> string -> Cstruct.t
 
 val unpad : string -> string
+
+val bytes_of_string : string -> bytes
+
+val bytes_to_string : bytes -> string

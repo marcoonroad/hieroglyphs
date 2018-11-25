@@ -40,7 +40,8 @@ let replace_index ~matrix pairs = pairs |> List.map ~f:(index_at ~list:matrix)
 
 let verify_at ~digest ~list (position, hash) =
   let commitment = List.nth_exn list position in
-  digest hash = commitment
+  let opening = digest hash in
+  opening = commitment
 
 
 let verify_with ~matrix ~digest pairs =
@@ -51,13 +52,13 @@ let verify_with ~matrix ~digest pairs =
 
 let concat_hashes left right = left ^ "-" ^ right
 
+let char_to_hex_int char = char |> Char.to_string |> to_hex |> Int.of_string
+
 let indexed_keys msg =
   msg
   |> Hash.digest
   |> String.to_list
-  |> List.map ~f:Char.to_string
-  |> List.map ~f:to_hex
-  |> List.map ~f:Int.of_string
+  |> List.map ~f:char_to_hex_int
   |> tag_index
   |> List.map ~f:calculate_index
 
@@ -74,3 +75,8 @@ let pad ~basis msg =
 let nonzero char = char != nullchar
 
 let unpad msg = String.filter ~f:nonzero msg
+
+let bytes_of_string string = Cstruct.to_bytes @@ Cstruct.of_hex string
+
+let bytes_to_string bytes =
+  Hex.show @@ Hex.of_cstruct @@ Cstruct.of_bytes bytes
