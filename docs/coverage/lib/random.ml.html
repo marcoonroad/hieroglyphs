@@ -19,17 +19,19 @@
       <div id="lines-layer">
         <pre>
 <a id="L1"></a><span class="visited"> </span>
-<a id="L2"></a><span class="visited"> </span>
-<a id="L3"></a><span > </span>
-<a id="L4"></a><span class="visited"> </span>
+<a id="L2"></a><span > </span>
+<a id="L3"></a><span class="visited"> </span>
+<a id="L4"></a><span > </span>
 <a id="L5"></a><span class="visited"> </span>
 <a id="L6"></a><span > </span>
-<a id="L7"></a><span > </span>
-<a id="L8"></a><span class="visited"> </span>
-<a id="L9"></a><span class="visited"> </span>
-<a id="L10"></a><span > </span>
-<a id="L11"></a><span > </span>
-<a id="L12"></a><span class="visited"> </span>
+<a id="L7"></a><span class="visited"> </span>
+<a id="L8"></a><span > </span>
+<a id="L9"></a><span > </span>
+<a id="L10"></a><span class="visited"> </span>
+<a id="L11"></a><span class="visited"> </span>
+<a id="L12"></a><span > </span>
+<a id="L13"></a><span > </span>
+<a id="L14"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -46,24 +48,28 @@
 <a href="#L10">10</a>
 <a href="#L11">11</a>
 <a href="#L12">12</a>
+<a href="#L13">13</a>
+<a href="#L14">14</a>
 </pre>
         <pre id="code">
 let _MIN_RANDOM = <span data-count="1">"</span>1" ^ Core.String.init 511 ~f:(Core.const '0')
+
 let _MAX_RANDOM = <span data-count="1">C</span>ore.String.init 512 ~f:(Core.const '1')
 
 let _min_random = <span data-count="1">Z</span>.of_string_base 2 _MIN_RANDOM
+
 let _max_random = <span data-count="1">Z</span>.of_string_base 2 _MAX_RANDOM
 
-let generate512 ( ) =
-  <span data-count="18432">l</span>et number = <span data-count="18432">N</span>ocrypto.Rng.Z.gen_r _min_random _max_random in
-  <span data-count="18432">C</span>struct.to_bytes @@ Nocrypto.Numeric.Z.to_cstruct_be number
+let generate512 () =
+  <span data-count="9">l</span>et number = <span data-count="9">N</span>ocrypto.Rng.Z.gen_r _min_random _max_random in
+  <span data-count="9">C</span>struct.to_bytes @@ Nocrypto.Numeric.Z.to_cstruct_be number
 
-let _ =
-  <span data-count="1">N</span>ocrypto_entropy_unix.initialize ( )
+
+let _ = <span data-count="1">N</span>ocrypto_entropy_unix.initialize ()
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-25 16:49:48 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2019-03-02 14:10:09 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

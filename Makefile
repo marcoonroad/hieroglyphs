@@ -1,6 +1,11 @@
 # Frontend to dune.
 
+OCAML_VERSION := $(shell opam var switch)
+
 .PHONY: default vendor build doc install uninstall test coverage report clean
+
+addon:
+	opam install merlin ocp-indent ocamlformat utop --yes
 
 vendor:
 	opam install . --deps-only --yes
@@ -23,7 +28,8 @@ doc: build
 	mkdir -p docs/apiref
 	dune build @doc
 	make doc-index
-	mv _build/default/_doc/_html/* docs/apiref/
+	mv _build/$(OCAML_VERSION)/_doc/_html/* docs/apiref/ || \
+		mv _build/default/_doc/_html/* docs/apiref/
 
 ### Alcotest environment variables:
 #
@@ -36,7 +42,7 @@ test: build
 
 bench: clean build
 	opam install core_bench --yes
-	opam depext conf-secp256k1 secp256k1 --install
+	opam depext conf-secp256k1 secp256k1 --install --yes
 	dune build @test/bench/runtest -f --no-buffer -j 1 --auto-promote \
 		--diff-command="git diff --unified=10 --break-rewrites --no-index --exit-code --histogram --word-diff=none --color --no-prefix" || echo \
 		"\n\n=== Differences detected! ===\n\n"

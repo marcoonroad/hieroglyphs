@@ -24,9 +24,19 @@ let generate () =
   List.init length ~f:(populate time)
 *)
 
-let _random_hex _ = Random.generate512 ()
+let _random_hex _ = Cstruct.of_bytes @@ Random.generate512 ()
 
-let generate () = List.init length ~f:_random_hex
+let _int_to_cstruct number = Cstruct.of_string @@ string_of_int number
+
+let _hash_both prefix suffix =
+  Cstruct.append prefix suffix |> Cstruct.to_bytes |> Hash.digest_bytes
+
+
+let generate () =
+  let nums = List.init length ~f:_int_to_cstruct in
+  let rand = _random_hex () in
+  List.map nums ~f:(_hash_both rand)
+
 
 let derive priv = List.map priv ~f:Hash.digest_bytes
 

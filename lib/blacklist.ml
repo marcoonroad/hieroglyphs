@@ -1,6 +1,6 @@
 let add address =
   let key = "blacklist/" ^ address in
-  let msg = "Revoking private key " ^ address ^ "." in
+  let msg = "Revoking private key ID " ^ address ^ "." in
   Store.set ~msg ~key ""
 
 

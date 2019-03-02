@@ -11,11 +11,13 @@ let digest_bytes bytes =
   |> Bytes.of_string
 
 
+let __digest message = Nocrypto.Hash.SHA256.digest message
+
 let rec __mining input pattern nonce =
   let length = Core.String.length pattern in
   let salt = Nocrypto.Numeric.Z.to_cstruct_be nonce in
   let message = Cstruct.append input salt in
-  let result = Nocrypto.Hash.SHA256.digest message in
+  let result = __digest message in
   let digest = Hex.show @@ Hex.of_cstruct result in
   let part = Core.String.sub ~pos:0 ~len:length digest in
   if pattern = part then result else __mining input pattern @@ Z.succ nonce
