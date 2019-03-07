@@ -8,6 +8,8 @@ val concat_hashes : string -> string -> string
 
 val validate_key : string list -> string list option
 
+val generate_pieces : digest:(bytes -> bytes) -> bytes -> bytes list
+
 val replace_index : matrix:string list -> int list -> string list
 
 val indexed_keys : string -> int list

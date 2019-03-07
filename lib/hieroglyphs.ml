@@ -1,6 +1,6 @@
 module Option = Core.Option
 
-type priv = bytes list
+type priv = bytes
 
 type pub = bytes list
 

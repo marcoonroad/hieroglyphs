@@ -19,6 +19,18 @@ let is_hash text =
   Str.string_match regexp text 0 && String.length text = _HASH_LENGTH
 
 
+let _int_to_cstruct number = Cstruct.of_string @@ string_of_int number
+
+let _hash_both ~digest prefix suffix =
+  Cstruct.append prefix suffix |> Cstruct.to_bytes |> digest
+
+
+let generate_pieces ~digest random =
+  let blob = Cstruct.of_bytes random in
+  let nums = List.init _KEY_LENGTH ~f:_int_to_cstruct in
+  List.map nums ~f:(_hash_both ~digest blob)
+
+
 let validate_key list =
   let filtered = List.filter list ~f:is_hash in
   if List.length filtered = _KEY_LENGTH then Some list else None

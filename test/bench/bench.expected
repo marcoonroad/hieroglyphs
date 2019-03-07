@@ -2,16 +2,16 @@ Estimated testing time 2m (12 benchmarks x 10s). Change using -quota SECS.
 ┌─────────────────────────────────────────────────────┬─────────────────┬─────────────┬─────────────┬────────────┬────────────┐
 │ Name                                                │        Time/Run │     mWd/Run │    mjWd/Run │   Prom/Run │ Percentage │
 ├─────────────────────────────────────────────────────┼─────────────────┼─────────────┼─────────────┼────────────┼────────────┤
-│ hieroglyphs + blake2b ------ private key generation │  6_952_726.97ns │ 275_068.02w │  24_239.21w │ 24_239.21w │     17.11% │
-│ hieroglyphs + blake2b ------ message signing        │ 12_302_250.23ns │ 552_974.78w │ 160_031.31w │ 28_676.31w │     30.28% │
-│ hieroglyphs + blake2b ------ public key derivation  │  3_167_539.72ns │ 190_464.87w │   7_976.50w │  7_976.50w │      7.80% │
-│ hieroglyphs + blake2b ------ signature verification │ 18_234_267.33ns │ 865_711.50w │  44_985.63w │ 44_985.63w │     44.88% │
-│ rsa pss/sha256 1024 bits --- private key generation │ 40_629_482.92ns │     870.95w │      -0.25w │     -0.25w │    100.00% │
-│ rsa pss/sha256 1024 bits --- public key derivation  │         14.20ns │       3.00w │             │            │            │
-│ rsa pss/sha256 1024 bits --- message signing        │    846_542.56ns │   1_714.96w │       0.59w │      0.59w │      2.08% │
-│ rsa pss/sha256 1024 bits --- signature verification │    102_568.59ns │   1_543.02w │       0.34w │      0.34w │      0.25% │
-│ secp256k1 + sha256 hash ---- private key generation │     19_958.41ns │     355.77w │             │            │      0.05% │
-│ secp256k1 + sha256 hash ---- public key derivation  │    261_015.99ns │      13.00w │             │            │      0.64% │
-│ secp256k1 + sha256 hash ---- message signing        │    407_385.47ns │     230.00w │             │            │      1.00% │
-│ secp256k1 + sha256 hash ---- signature verification │    440_845.54ns │     214.00w │             │            │      1.09% │
+│ hieroglyphs + blake2b ------ private key generation │     15_274.58ns │     610.85w │       0.12w │      0.12w │      0.04% │
+│ hieroglyphs + blake2b ------ message signing        │ 19_095_133.16ns │ 827_432.56w │ 201_696.20w │ 70_341.20w │     46.48% │
+│ hieroglyphs + blake2b ------ public key derivation  │ 11_211_926.50ns │ 464_922.99w │  41_060.12w │ 41_060.12w │     27.29% │
+│ hieroglyphs + blake2b ------ signature verification │ 13_771_316.54ns │ 865_711.29w │  44_975.73w │ 44_975.73w │     33.52% │
+│ rsa pss/sha256 1024 bits --- private key generation │ 41_080_520.75ns │     870.94w │      -0.25w │     -0.25w │    100.00% │
+│ rsa pss/sha256 1024 bits --- public key derivation  │         11.44ns │       3.00w │             │            │            │
+│ rsa pss/sha256 1024 bits --- message signing        │    821_579.08ns │   1_714.97w │       0.56w │      0.56w │      2.00% │
+│ rsa pss/sha256 1024 bits --- signature verification │     89_740.97ns │   1_547.02w │       0.34w │      0.34w │      0.22% │
+│ secp256k1 + sha256 hash ---- private key generation │     14_261.81ns │     355.66w │             │            │      0.03% │
+│ secp256k1 + sha256 hash ---- public key derivation  │    213_010.17ns │      13.00w │             │            │      0.52% │
+│ secp256k1 + sha256 hash ---- message signing        │    320_362.44ns │     230.00w │             │            │      0.78% │
+│ secp256k1 + sha256 hash ---- signature verification │    380_186.52ns │     214.00w │             │            │      0.93% │
 └─────────────────────────────────────────────────────┴─────────────────┴─────────────┴─────────────┴────────────┴────────────┘
