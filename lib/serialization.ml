@@ -15,4 +15,4 @@ let load text =
   >>= fun list -> some @@ List.map ~f:Utils.bytes_of_string list
 
 
-let address pub = pub |> show |> Hash.digest |> Utils.to_hex
+let digest pub = pub |> show |> Hash.digest

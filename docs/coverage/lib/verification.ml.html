@@ -22,21 +22,34 @@
 <a id="L2"></a><span > </span>
 <a id="L3"></a><span > </span>
 <a id="L4"></a><span > </span>
-<a id="L5"></a><span class="visited"> </span>
+<a id="L5"></a><span > </span>
 <a id="L6"></a><span class="visited"> </span>
 <a id="L7"></a><span class="visited"> </span>
 <a id="L8"></a><span class="visited"> </span>
 <a id="L9"></a><span class="visited"> </span>
 <a id="L10"></a><span class="visited"> </span>
 <a id="L11"></a><span class="visited"> </span>
-<a id="L12"></a><span > </span>
+<a id="L12"></a><span class="visited"> </span>
 <a id="L13"></a><span > </span>
 <a id="L14"></a><span > </span>
-<a id="L15"></a><span class="visited"> </span>
+<a id="L15"></a><span > </span>
 <a id="L16"></a><span class="visited"> </span>
 <a id="L17"></a><span class="visited"> </span>
 <a id="L18"></a><span class="visited"> </span>
 <a id="L19"></a><span class="visited"> </span>
+<a id="L20"></a><span > </span>
+<a id="L21"></a><span class="visited"> </span>
+<a id="L22"></a><span > </span>
+<a id="L23"></a><span > </span>
+<a id="L24"></a><span class="visited"> </span>
+<a id="L25"></a><span class="visited"> </span>
+<a id="L26"></a><span class="visited"> </span>
+<a id="L27"></a><span class="visited"> </span>
+<a id="L28"></a><span class="visited"> </span>
+<a id="L29"></a><span class="visited"> </span>
+<a id="L30"></a><span class="visited"> </span>
+<a id="L31"></a><span class="visited"> </span>
+<a id="L32"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -60,10 +73,24 @@
 <a href="#L17">17</a>
 <a href="#L18">18</a>
 <a href="#L19">19</a>
+<a href="#L20">20</a>
+<a href="#L21">21</a>
+<a href="#L22">22</a>
+<a href="#L23">23</a>
+<a href="#L24">24</a>
+<a href="#L25">25</a>
+<a href="#L26">26</a>
+<a href="#L27">27</a>
+<a href="#L28">28</a>
+<a href="#L29">29</a>
+<a href="#L30">30</a>
+<a href="#L31">31</a>
+<a href="#L32">32</a>
 </pre>
         <pre id="code">
 module String = Core.String
 module List = Core.List
+module Option = Core.Option
 
 let digest message =
   <span data-count="768">m</span>essage
@@ -76,15 +103,27 @@ let digest message =
 
 
 let verify ~pub ~msg ~signature =
-  <span data-count="6">l</span>et pub = <span data-count="6">L</span>ist.map ~f:Utils.bytes_to_string pub in
-  <span data-count="6">l</span>et indexed_keys = <span data-count="6">U</span>tils.indexed_keys msg in
-  <span data-count="6">l</span>et hashes = <span data-count="6">S</span>tring.split signature ~on:'-' in
-  <span data-count="6">l</span>et proofs = <span data-count="6">L</span>ist.zip_exn indexed_keys hashes in
-  <span data-count="6">U</span>tils.verify_with ~matrix:pub ~digest proofs
+  <span data-count="7">t</span>ry
+    let parts = <span data-count="7">S</span>tring.split signature ~on:'\n' in
+    <span data-count="7">l</span>et ver_text = <span data-count="7">L</span>ist.nth_exn parts 0
+    |&gt; <span data-count="7">S</span>tring.split ~on:'-'
+    in
+    <span data-count="7">l</span>et ver_key_bytes = <span data-count="7">O</span>ption.value_exn (
+      Serialization.load @@ List.nth_exn parts 1
+    ) in
+    <span data-count="6">l</span>et ver_key = <span data-count="6">L</span>ist.map ~f:Utils.bytes_to_string ver_key_bytes in
+    <span data-count="6">l</span>et indexed_keys = <span data-count="6">U</span>tils.indexed_keys msg in
+    <span data-count="6">l</span>et proofs = <span data-count="6">L</span>ist.zip_exn indexed_keys ver_text in
+    <span data-count="6">l</span>et verified = <span data-count="6">U</span>tils.verify_with ~matrix:ver_key ~digest proofs in
+    <span data-count="6">i</span>f verified then
+      <span data-count="4">l</span>et fingerprint = <span data-count="4">S</span>erialization.digest ver_key_bytes in
+      <span data-count="4">f</span>ingerprint = Utils.bytes_to_string pub
+    else <span data-count="2">f</span>alse
+  with <span data-count="1">_</span> -&gt; false
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2019-03-06 22:55:38 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2019-03-10 20:28:32 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

@@ -19,177 +19,18 @@
       <div id="lines-layer">
         <pre>
 <a id="L1"></a><span > </span>
-<a id="L2"></a><span > </span>
-<a id="L3"></a><span > </span>
-<a id="L4"></a><span > </span>
-<a id="L5"></a><span > </span>
-<a id="L6"></a><span > </span>
-<a id="L7"></a><span class="visited"> </span>
-<a id="L8"></a><span > </span>
-<a id="L9"></a><span class="visited"> </span>
-<a id="L10"></a><span > </span>
-<a id="L11"></a><span class="visited"> </span>
-<a id="L12"></a><span > </span>
-<a id="L13"></a><span class="visited"> </span>
-<a id="L14"></a><span > </span>
-<a id="L15"></a><span class="visited"> </span>
-<a id="L16"></a><span > </span>
-<a id="L17"></a><span class="visited"> </span>
-<a id="L18"></a><span > </span>
-<a id="L19"></a><span class="visited"> </span>
-<a id="L20"></a><span > </span>
-<a id="L21"></a><span class="visited"> </span>
-<a id="L22"></a><span > </span>
-<a id="L23"></a><span class="visited"> </span>
-<a id="L24"></a><span > </span>
-<a id="L25"></a><span > </span>
-<a id="L26"></a><span > </span>
-<a id="L27"></a><span > </span>
-<a id="L28"></a><span class="visited"> </span>
-<a id="L29"></a><span class="visited"> </span>
-<a id="L30"></a><span class="visited"> </span>
-<a id="L31"></a><span > </span>
-<a id="L32"></a><span > </span>
-<a id="L33"></a><span > </span>
-<a id="L34"></a><span class="visited"> </span>
-<a id="L35"></a><span class="visited"> </span>
-<a id="L36"></a><span class="visited"> </span>
-<a id="L37"></a><span class="visited"> </span>
-<a id="L38"></a><span > </span>
-<a id="L39"></a><span class="visited"> </span>
-<a id="L40"></a><span > </span>
-<a id="L41"></a><span > </span>
-<a id="L42"></a><span > </span>
-<a id="L43"></a><span > </span>
-<a id="L44"></a><span class="visited"> </span>
-<a id="L45"></a><span > </span>
-<a id="L46"></a><span class="visited"> </span>
-<a id="L47"></a><span > </span>
-<a id="L48"></a><span > </span>
-<a id="L49"></a><span > </span>
-<a id="L50"></a><span class="visited"> </span>
-<a id="L51"></a><span class="visited"> </span>
-<a id="L52"></a><span class="visited"> </span>
-<a id="L53"></a><span class="visited"> </span>
-<a id="L54"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
         <pre id="line-numbers">
-<a href="#L1"> 1</a>
-<a href="#L2"> 2</a>
-<a href="#L3"> 3</a>
-<a href="#L4"> 4</a>
-<a href="#L5"> 5</a>
-<a href="#L6"> 6</a>
-<a href="#L7"> 7</a>
-<a href="#L8"> 8</a>
-<a href="#L9"> 9</a>
-<a href="#L10">10</a>
-<a href="#L11">11</a>
-<a href="#L12">12</a>
-<a href="#L13">13</a>
-<a href="#L14">14</a>
-<a href="#L15">15</a>
-<a href="#L16">16</a>
-<a href="#L17">17</a>
-<a href="#L18">18</a>
-<a href="#L19">19</a>
-<a href="#L20">20</a>
-<a href="#L21">21</a>
-<a href="#L22">22</a>
-<a href="#L23">23</a>
-<a href="#L24">24</a>
-<a href="#L25">25</a>
-<a href="#L26">26</a>
-<a href="#L27">27</a>
-<a href="#L28">28</a>
-<a href="#L29">29</a>
-<a href="#L30">30</a>
-<a href="#L31">31</a>
-<a href="#L32">32</a>
-<a href="#L33">33</a>
-<a href="#L34">34</a>
-<a href="#L35">35</a>
-<a href="#L36">36</a>
-<a href="#L37">37</a>
-<a href="#L38">38</a>
-<a href="#L39">39</a>
-<a href="#L40">40</a>
-<a href="#L41">41</a>
-<a href="#L42">42</a>
-<a href="#L43">43</a>
-<a href="#L44">44</a>
-<a href="#L45">45</a>
-<a href="#L46">46</a>
-<a href="#L47">47</a>
-<a href="#L48">48</a>
-<a href="#L49">49</a>
-<a href="#L50">50</a>
-<a href="#L51">51</a>
-<a href="#L52">52</a>
-<a href="#L53">53</a>
-<a href="#L54">54</a>
+<a href="#L1">1</a>
 </pre>
         <pre id="code">
-module Option = Core.Option
-
-type priv = bytes
-
-type pub = bytes list
-
-let derive = <span data-count="1">K</span>eys.derive
-
-let pair = <span data-count="1">K</span>eys.pair
-
-let import = <span data-count="1">K</span>eys.import
-
-let export = <span data-count="1">K</span>eys.export
-
-let show = <span data-count="1">K</span>eys.show
-
-let load = <span data-count="1">K</span>eys.load
-
-let address = <span data-count="1">K</span>eys.address
-
-let sign = <span data-count="1">K</span>eys.sign
-
-let verify = <span data-count="1">K</span>eys.verify
-
-(*** wrappers *****************************************************************)
-
-let __check priv =
-  <span data-count="12">l</span>et pub = <span data-count="12">d</span>erive priv in
-  <span data-count="12">l</span>et id = <span data-count="12">a</span>ddress pub in
-  <span data-count="12">i</span>f Blacklist.exists id then <span data-count="2">N</span>one else <span data-count="10">S</span>ome pub
-
-
-let sign ~priv ~msg =
-  <span data-count="5">l</span>et success pub =
-    <span data-count="4">l</span>et signature = <span data-count="4">s</span>ign ~priv ~msg in
-    <span data-count="4">B</span>lacklist.add (address pub) ;
-    <span data-count="4">S</span>ome signature
-  in
-  <span data-count="5">l</span>et open Option in
-  __check priv &gt;&gt;= success
-
-
-let import ~cipher ~pass =
-  <span data-count="3">l</span>et open Option in
-  import ~cipher ~pass
-  &gt;&gt;= function <span data-count="2">p</span>riv -&gt; __check priv &gt;&gt;= (function <span data-count="1">_</span> -&gt; Some priv)
-
-
-let rec generate () =
-  <span data-count="5">l</span>et priv = <span data-count="5">K</span>eys.generate () in
-  <span data-count="5">l</span>et const _ _ = <span data-count="5">p</span>riv in
-  <span data-count="5">l</span>et option = <span data-count="5">_</span>_check priv in
-  <span data-count="5">l</span>et step = <span data-count="5">O</span>ption.value_map option ~default:generate ~f:const in
-  <span data-count="5">s</span>tep ()
+include Main
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2019-03-06 22:55:38 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2019-03-10 20:28:32 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

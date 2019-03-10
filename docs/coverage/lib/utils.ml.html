@@ -33,15 +33,15 @@
 <a id="L13"></a><span > </span>
 <a id="L14"></a><span class="visited"> </span>
 <a id="L15"></a><span > </span>
-<a id="L16"></a><span class="visited"> </span>
-<a id="L17"></a><span > </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span class="visited"> </span>
 <a id="L18"></a><span > </span>
-<a id="L19"></a><span class="visited"> </span>
-<a id="L20"></a><span > </span>
-<a id="L21"></a><span class="visited"> </span>
+<a id="L19"></a><span > </span>
+<a id="L20"></a><span class="visited"> </span>
+<a id="L21"></a><span > </span>
 <a id="L22"></a><span > </span>
-<a id="L23"></a><span > </span>
-<a id="L24"></a><span class="visited"> </span>
+<a id="L23"></a><span class="visited"> </span>
+<a id="L24"></a><span > </span>
 <a id="L25"></a><span > </span>
 <a id="L26"></a><span > </span>
 <a id="L27"></a><span class="visited"> </span>
@@ -58,29 +58,29 @@
 <a id="L38"></a><span > </span>
 <a id="L39"></a><span > </span>
 <a id="L40"></a><span class="visited"> </span>
-<a id="L41"></a><span class="visited"> </span>
+<a id="L41"></a><span > </span>
 <a id="L42"></a><span class="visited"> </span>
 <a id="L43"></a><span > </span>
-<a id="L44"></a><span > </span>
-<a id="L45"></a><span class="visited"> </span>
+<a id="L44"></a><span class="visited"> </span>
+<a id="L45"></a><span > </span>
 <a id="L46"></a><span > </span>
 <a id="L47"></a><span class="visited"> </span>
-<a id="L48"></a><span > </span>
+<a id="L48"></a><span class="visited"> </span>
 <a id="L49"></a><span class="visited"> </span>
 <a id="L50"></a><span > </span>
 <a id="L51"></a><span > </span>
-<a id="L52"></a><span class="visited"> </span>
+<a id="L52"></a><span > </span>
 <a id="L53"></a><span class="visited"> </span>
 <a id="L54"></a><span class="visited"> </span>
-<a id="L55"></a><span > </span>
+<a id="L55"></a><span class="visited"> </span>
 <a id="L56"></a><span > </span>
 <a id="L57"></a><span > </span>
 <a id="L58"></a><span class="visited"> </span>
-<a id="L59"></a><span class="visited"> </span>
-<a id="L60"></a><span class="visited"> </span>
-<a id="L61"></a><span > </span>
-<a id="L62"></a><span > </span>
-<a id="L63"></a><span class="visited"> </span>
+<a id="L59"></a><span > </span>
+<a id="L60"></a><span > </span>
+<a id="L61"></a><span class="visited"> </span>
+<a id="L62"></a><span class="visited"> </span>
+<a id="L63"></a><span > </span>
 <a id="L64"></a><span > </span>
 <a id="L65"></a><span class="visited"> </span>
 <a id="L66"></a><span > </span>
@@ -89,27 +89,25 @@
 <a id="L69"></a><span class="visited"> </span>
 <a id="L70"></a><span class="visited"> </span>
 <a id="L71"></a><span class="visited"> </span>
-<a id="L72"></a><span class="visited"> </span>
-<a id="L73"></a><span class="visited"> </span>
-<a id="L74"></a><span > </span>
+<a id="L72"></a><span > </span>
+<a id="L73"></a><span > </span>
+<a id="L74"></a><span class="visited"> </span>
 <a id="L75"></a><span > </span>
-<a id="L76"></a><span class="visited"> </span>
-<a id="L77"></a><span > </span>
-<a id="L78"></a><span > </span>
+<a id="L76"></a><span > </span>
+<a id="L77"></a><span class="visited"> </span>
+<a id="L78"></a><span class="visited"> </span>
 <a id="L79"></a><span class="visited"> </span>
 <a id="L80"></a><span class="visited"> </span>
-<a id="L81"></a><span class="visited"> </span>
-<a id="L82"></a><span class="visited"> </span>
-<a id="L83"></a><span > </span>
+<a id="L81"></a><span > </span>
+<a id="L82"></a><span > </span>
+<a id="L83"></a><span class="visited"> </span>
 <a id="L84"></a><span > </span>
 <a id="L85"></a><span class="visited"> </span>
 <a id="L86"></a><span > </span>
 <a id="L87"></a><span class="visited"> </span>
 <a id="L88"></a><span > </span>
-<a id="L89"></a><span class="visited"> </span>
-<a id="L90"></a><span > </span>
-<a id="L91"></a><span > </span>
-<a id="L92"></a><span class="visited"> </span>
+<a id="L89"></a><span > </span>
+<a id="L90"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -204,8 +202,6 @@
 <a href="#L88">88</a>
 <a href="#L89">89</a>
 <a href="#L90">90</a>
-<a href="#L91">91</a>
-<a href="#L92">92</a>
 </pre>
         <pre id="code">
 module List = Core.List
@@ -223,33 +219,28 @@ let _KEY_LENGTH = <span data-count="1">_</span>HEX_SPACE * _HASH_LENGTH
 
 let regexp = <span data-count="1">S</span>tr.regexp "^[a-f0-9]+$"
 
-let id value = <span data-count="1280">v</span>alue
-
 let is_hash text =
-  <span data-count="4098">S</span>tr.string_match regexp text 0 &amp;&amp; <span data-count="2048">S</span>tring.length text = _HASH_LENGTH
+  <span data-count="24582">S</span>tr.string_match regexp text 0 &amp;&amp; <span data-count="12290">S</span>tring.length text = _HASH_LENGTH
 
-let _int_to_cstruct number = <span data-count="51200">C</span>struct.of_string @@ string_of_int number
+
+let _int_to_cstruct number = <span data-count="59392">C</span>struct.of_string @@ string_of_int number
 
 let _hash_both ~digest prefix suffix =
-  <span data-count="51200">C</span>struct.append prefix suffix |&gt; <span data-count="51200">C</span>struct.to_bytes |&gt; <span data-count="51200">d</span>igest
+  <span data-count="59392">C</span>struct.append prefix suffix |&gt; <span data-count="59392">C</span>struct.to_bytes |&gt; <span data-count="59392">d</span>igest
+
 
 let generate_pieces ~digest random =
-  <span data-count="25">l</span>et blob = <span data-count="25">C</span>struct.of_bytes random in
-  <span data-count="25">l</span>et nums = <span data-count="25">L</span>ist.init _KEY_LENGTH ~f:_int_to_cstruct in
-  <span data-count="25">L</span>ist.map nums ~f:(_hash_both ~digest blob)
+  <span data-count="29">l</span>et blob = <span data-count="29">C</span>struct.of_bytes random in
+  <span data-count="29">l</span>et nums = <span data-count="29">L</span>ist.init _KEY_LENGTH ~f:_int_to_cstruct in
+  <span data-count="29">L</span>ist.map nums ~f:(_hash_both ~digest blob)
 
 
 let validate_key list =
-  <span data-count="2">l</span>et filtered = <span data-count="2">L</span>ist.filter list ~f:is_hash in
-  <span data-count="2">i</span>f List.length filtered = _KEY_LENGTH then <span data-count="1">S</span>ome list else <span data-count="1">N</span>one
+  <span data-count="7">l</span>et filtered = <span data-count="7">L</span>ist.filter list ~f:is_hash in
+  <span data-count="7">i</span>f List.length filtered = _KEY_LENGTH then <span data-count="6">S</span>ome list else <span data-count="1">N</span>one
 
 
-let to_hex text = <span data-count="1303">"</span>0x" ^ text
-
-let tag_index entries =
-  <span data-count="10">l</span>et length = <span data-count="10">L</span>ist.length entries in
-  <span data-count="10">l</span>et indexes = <span data-count="10">L</span>ist.init length ~f:id in
-  <span data-count="10">L</span>ist.zip_exn indexes entries
+let to_hex text = <span data-count="1287">"</span>0x" ^ text
 
 
 let calculate_index (position, key) = <span data-count="1280">(</span>position * _HEX_SPACE) + key
@@ -258,10 +249,10 @@ let index_at ~list position = <span data-count="512">L</span>ist.nth_exn list po
 
 let replace_index ~matrix pairs = <span data-count="4">p</span>airs |&gt; <span data-count="4">L</span>ist.map ~f:(index_at ~list:matrix)
 
-let verify_at ~digest ~list (position, hash) =
+let verify_at ~digest ~list (position, opening) =
   <span data-count="768">l</span>et commitment = <span data-count="768">L</span>ist.nth_exn list position in
-  <span data-count="768">l</span>et opening = <span data-count="768">d</span>igest hash in
-  <span data-count="768">o</span>pening = commitment
+  <span data-count="768">l</span>et hash = <span data-count="768">d</span>igest opening in
+  <span data-count="768">h</span>ash = commitment
 
 
 let verify_with ~matrix ~digest pairs =
@@ -270,17 +261,20 @@ let verify_with ~matrix ~digest pairs =
   |&gt; <span data-count="6">L</span>ist.reduce_exn ~f:( &amp;&amp; )
 
 
-let concat_hashes left right = <span data-count="51683">l</span>eft ^ "-" ^ right
+let concat_hashes left right = <span data-count="68059">l</span>eft ^ "-" ^ right
 
-let char_to_hex_int char = <span data-count="1280">c</span>har |&gt; <span data-count="1280">C</span>har.to_string |&gt; <span data-count="1280">t</span>o_hex |&gt; <span data-count="1280">I</span>nt.of_string
+let char_to_hex_int index char =
+  <span data-count="1280">l</span>et value = <span data-count="1280">c</span>har |&gt; <span data-count="1280">C</span>har.to_string |&gt; <span data-count="1280">t</span>o_hex |&gt; <span data-count="1280">I</span>nt.of_string in
+  <span data-count="1280">(</span>index, value)
+
+let chained_index index value =
+  <span data-count="1280">c</span>alculate_index @@ char_to_hex_int index value
 
 let indexed_keys msg =
   <span data-count="10">m</span>sg
   |&gt; <span data-count="10">H</span>ash.digest
   |&gt; <span data-count="10">S</span>tring.to_list
-  |&gt; <span data-count="10">L</span>ist.map ~f:char_to_hex_int
-  |&gt; <span data-count="10">t</span>ag_index
-  |&gt; <span data-count="10">L</span>ist.map ~f:calculate_index
+  |&gt; <span data-count="10">L</span>ist.mapi ~f:chained_index
 
 
 let nullchar = <span data-count="1">C</span>har.of_int_exn 0
@@ -296,14 +290,14 @@ let nonzero char = <span data-count="432">c</span>har != nullchar
 
 let unpad msg = <span data-count="3">S</span>tring.filter ~f:nonzero msg
 
-let bytes_of_string string = <span data-count="2050">C</span>struct.to_bytes @@ Cstruct.of_hex string
+let bytes_of_string string = <span data-count="12316">C</span>struct.to_bytes @@ Cstruct.of_hex string
 
 let bytes_to_string bytes =
-  <span data-count="71682">H</span>ex.show @@ Hex.of_cstruct @@ Cstruct.of_bytes bytes
+  <span data-count="80419">H</span>ex.show @@ Hex.of_cstruct @@ Cstruct.of_bytes bytes
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2019-03-06 22:55:38 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2019-03-10 20:28:32 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>
