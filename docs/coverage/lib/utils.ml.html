@@ -56,58 +56,54 @@
 <a id="L36"></a><span > </span>
 <a id="L37"></a><span class="visited"> </span>
 <a id="L38"></a><span > </span>
-<a id="L39"></a><span > </span>
-<a id="L40"></a><span class="visited"> </span>
-<a id="L41"></a><span > </span>
-<a id="L42"></a><span class="visited"> </span>
-<a id="L43"></a><span > </span>
-<a id="L44"></a><span class="visited"> </span>
+<a id="L39"></a><span class="visited"> </span>
+<a id="L40"></a><span > </span>
+<a id="L41"></a><span class="visited"> </span>
+<a id="L42"></a><span > </span>
+<a id="L43"></a><span class="visited"> </span>
+<a id="L44"></a><span > </span>
 <a id="L45"></a><span > </span>
-<a id="L46"></a><span > </span>
+<a id="L46"></a><span class="visited"> </span>
 <a id="L47"></a><span class="visited"> </span>
 <a id="L48"></a><span class="visited"> </span>
-<a id="L49"></a><span class="visited"> </span>
+<a id="L49"></a><span > </span>
 <a id="L50"></a><span > </span>
 <a id="L51"></a><span > </span>
-<a id="L52"></a><span > </span>
+<a id="L52"></a><span class="visited"> </span>
 <a id="L53"></a><span class="visited"> </span>
 <a id="L54"></a><span class="visited"> </span>
-<a id="L55"></a><span class="visited"> </span>
+<a id="L55"></a><span > </span>
 <a id="L56"></a><span > </span>
-<a id="L57"></a><span > </span>
-<a id="L58"></a><span class="visited"> </span>
+<a id="L57"></a><span class="visited"> </span>
+<a id="L58"></a><span > </span>
 <a id="L59"></a><span > </span>
-<a id="L60"></a><span > </span>
+<a id="L60"></a><span class="visited"> </span>
 <a id="L61"></a><span class="visited"> </span>
-<a id="L62"></a><span class="visited"> </span>
+<a id="L62"></a><span > </span>
 <a id="L63"></a><span > </span>
-<a id="L64"></a><span > </span>
-<a id="L65"></a><span class="visited"> </span>
+<a id="L64"></a><span class="visited"> </span>
+<a id="L65"></a><span > </span>
 <a id="L66"></a><span > </span>
-<a id="L67"></a><span > </span>
-<a id="L68"></a><span class="visited"> </span>
-<a id="L69"></a><span class="visited"> </span>
+<a id="L67"></a><span class="visited"> </span>
+<a id="L68"></a><span > </span>
+<a id="L69"></a><span > </span>
 <a id="L70"></a><span class="visited"> </span>
-<a id="L71"></a><span class="visited"> </span>
+<a id="L71"></a><span > </span>
 <a id="L72"></a><span > </span>
-<a id="L73"></a><span > </span>
+<a id="L73"></a><span class="visited"> </span>
 <a id="L74"></a><span class="visited"> </span>
-<a id="L75"></a><span > </span>
-<a id="L76"></a><span > </span>
-<a id="L77"></a><span class="visited"> </span>
-<a id="L78"></a><span class="visited"> </span>
+<a id="L75"></a><span class="visited"> </span>
+<a id="L76"></a><span class="visited"> </span>
+<a id="L77"></a><span > </span>
+<a id="L78"></a><span > </span>
 <a id="L79"></a><span class="visited"> </span>
-<a id="L80"></a><span class="visited"> </span>
-<a id="L81"></a><span > </span>
+<a id="L80"></a><span > </span>
+<a id="L81"></a><span class="visited"> </span>
 <a id="L82"></a><span > </span>
 <a id="L83"></a><span class="visited"> </span>
 <a id="L84"></a><span > </span>
-<a id="L85"></a><span class="visited"> </span>
-<a id="L86"></a><span > </span>
-<a id="L87"></a><span class="visited"> </span>
-<a id="L88"></a><span > </span>
-<a id="L89"></a><span > </span>
-<a id="L90"></a><span class="visited"> </span>
+<a id="L85"></a><span > </span>
+<a id="L86"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -198,10 +194,6 @@
 <a href="#L84">84</a>
 <a href="#L85">85</a>
 <a href="#L86">86</a>
-<a href="#L87">87</a>
-<a href="#L88">88</a>
-<a href="#L89">89</a>
-<a href="#L90">90</a>
 </pre>
         <pre id="code">
 module List = Core.List
@@ -242,7 +234,6 @@ let validate_key list =
 
 let to_hex text = <span data-count="1287">"</span>0x" ^ text
 
-
 let calculate_index (position, key) = <span data-count="1280">(</span>position * _HEX_SPACE) + key
 
 let index_at ~list position = <span data-count="512">L</span>ist.nth_exn list position
@@ -267,14 +258,11 @@ let char_to_hex_int index char =
   <span data-count="1280">l</span>et value = <span data-count="1280">c</span>har |&gt; <span data-count="1280">C</span>har.to_string |&gt; <span data-count="1280">t</span>o_hex |&gt; <span data-count="1280">I</span>nt.of_string in
   <span data-count="1280">(</span>index, value)
 
-let chained_index index value =
-  <span data-count="1280">c</span>alculate_index @@ char_to_hex_int index value
+
+let chained_index index value = <span data-count="1280">c</span>alculate_index @@ char_to_hex_int index value
 
 let indexed_keys msg =
-  <span data-count="10">m</span>sg
-  |&gt; <span data-count="10">H</span>ash.digest
-  |&gt; <span data-count="10">S</span>tring.to_list
-  |&gt; <span data-count="10">L</span>ist.mapi ~f:chained_index
+  <span data-count="10">m</span>sg |&gt; <span data-count="10">H</span>ash.digest |&gt; <span data-count="10">S</span>tring.to_list |&gt; <span data-count="10">L</span>ist.mapi ~f:chained_index
 
 
 let nullchar = <span data-count="1">C</span>har.of_int_exn 0
@@ -297,7 +285,7 @@ let bytes_to_string bytes =
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2019-03-10 20:28:32 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2019-03-16 22:36:24 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

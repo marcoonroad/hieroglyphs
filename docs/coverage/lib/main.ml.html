@@ -72,9 +72,10 @@
 <a id="L52"></a><span class="visited"> </span>
 <a id="L53"></a><span > </span>
 <a id="L54"></a><span > </span>
-<a id="L55"></a><span class="visited"> </span>
+<a id="L55"></a><span > </span>
 <a id="L56"></a><span class="visited"> </span>
 <a id="L57"></a><span class="visited"> </span>
+<a id="L58"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -136,6 +137,7 @@
 <a href="#L55">55</a>
 <a href="#L56">56</a>
 <a href="#L57">57</a>
+<a href="#L58">58</a>
 </pre>
         <pre id="code">
 module Option = Core.Option
@@ -191,6 +193,7 @@ let rec generate () =
   <span data-count="9">l</span>et step = <span data-count="9">O</span>ption.value_map option ~default:generate ~f:const in
   <span data-count="9">s</span>tep ()
 
+
 let pair () =
   <span data-count="4">l</span>et priv = <span data-count="4">g</span>enerate () in
   <span data-count="4">l</span>et pub = <span data-count="4">d</span>erive priv in
@@ -198,7 +201,7 @@ let pair () =
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2019-03-10 20:28:32 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2019-03-16 22:36:24 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>
