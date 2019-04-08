@@ -2,7 +2,20 @@ module List = Core.List
 module String = Core.String
 module Char = Core.Char
 module Int = Core.Int
+module Lazy = Core.Lazy
 module Str = Re.Str
+
+module Defer = struct
+  let force = Lazy.force_val
+
+  let bind deferred ~f = lazy (force @@ f @@ force deferred)
+end
+
+let bytes_of_string string = Cstruct.to_bytes @@ Cstruct.of_hex string
+
+let bytes_to_string bytes =
+  Hex.show @@ Hex.of_cstruct @@ Cstruct.of_bytes bytes
+
 
 (* 16 hex chars and 128 chars/string length for hash under hex string format *)
 let _HASH_LENGTH = 128
@@ -17,16 +30,16 @@ let is_hash text =
   Str.string_match regexp text 0 && String.length text = _HASH_LENGTH
 
 
-let _int_to_cstruct number = Cstruct.of_string @@ string_of_int number
+let _int_to_cstruct number = lazy (Cstruct.of_string @@ string_of_int number)
 
 let _hash_both ~digest prefix suffix =
-  Cstruct.append prefix suffix |> Cstruct.to_bytes |> digest
+  lazy (digest @@ Cstruct.to_bytes @@ Cstruct.append prefix suffix)
 
 
 let generate_pieces ~digest random =
   let blob = Cstruct.of_bytes random in
   let nums = List.init _KEY_LENGTH ~f:_int_to_cstruct in
-  List.map nums ~f:(_hash_both ~digest blob)
+  List.map nums ~f:(Defer.bind ~f:(_hash_both ~digest blob))
 
 
 let validate_key list =
@@ -38,12 +51,14 @@ let to_hex text = "0x" ^ text
 
 let calculate_index (position, key) = (position * _HEX_SPACE) + key
 
-let index_at ~list position = List.nth_exn list position
+let index_at ~list position =
+  bytes_to_string @@ Defer.force @@ List.nth_exn list position
 
-let replace_index ~matrix pairs = pairs |> List.map ~f:(index_at ~list:matrix)
+
+let replace_index ~matrix pairs = List.map pairs ~f:(index_at ~list:matrix)
 
 let verify_at ~digest ~list (position, opening) =
-  let commitment = List.nth_exn list position in
+  let commitment = Defer.force @@ List.nth_exn list position in
   let hash = digest opening in
   hash = commitment
 
@@ -79,8 +94,3 @@ let pad ~basis msg =
 let nonzero char = char != nullchar
 
 let unpad msg = String.filter ~f:nonzero msg
-
-let bytes_of_string string = Cstruct.to_bytes @@ Cstruct.of_hex string
-
-let bytes_to_string bytes =
-  Hex.show @@ Hex.of_cstruct @@ Cstruct.of_bytes bytes

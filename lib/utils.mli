@@ -1,3 +1,9 @@
+module Defer : sig
+  val force : 'a Lazy.t -> 'a
+
+  val bind : 'a Lazy.t -> f:('a -> 'b Lazy.t) -> 'b Lazy.t
+end
+
 val _HASH_LENGTH : int
 
 val _KEY_LENGTH : int
@@ -10,14 +16,14 @@ val concat_hashes : string -> string -> string
 
 val validate_key : string list -> string list option
 
-val generate_pieces : digest:(bytes -> bytes) -> bytes -> bytes list
+val generate_pieces : digest:(bytes -> bytes) -> bytes -> bytes Lazy.t list
 
-val replace_index : matrix:'a list -> int list -> 'a list
+val replace_index : matrix:bytes Lazy.t list -> int list -> string list
 
 val indexed_keys : string -> int list
 
 val verify_with :
-     matrix:string list
+     matrix:string Lazy.t list
   -> digest:(string -> string)
   -> (int * string) list
   -> bool
