@@ -89,7 +89,7 @@ Then, your blacklist will be available under `/tmp/hg-data/state/blacklist`, and
 your Git repository under `/tmp/hg-data/state`.
 
 For the complete API reference, check the docs
-[here](https://marcoonroad.github.io/hieroglyphs/apiref/). Coverage reports are
+[here](https://marcoonroad.dev/hieroglyphs/apiref/hieroglyphs/Hieroglyphs/index.html). Coverage reports are
 shown at this [page](https://marcoonroad.github.io/hieroglyphs/coverage/).
 
 
