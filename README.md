@@ -13,6 +13,7 @@ Quantum-resistant, purely Hash-based, Stateful, One-Time Digital Signatures for 
 <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square&logo=github"/></a>
 <a style="margin: 0.1em;" href="https://www.blockchain.com/btc/address/1PEpBFvkKQtSHj56dCGgDFQBwz45VpMTTQ">
 <img src="https://img.shields.io/badge/donate-BTC-yellow.svg?logo=bitcoin&style=flat-square"/></a>
+<a href="https://app.fossa.io/projects/git%2Bgithub.com%2Fmarcoonroad%2Fhieroglyphs?ref=badge_shield" alt="FOSSA Status"><img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmarcoonroad%2Fhieroglyphs.svg?type=shield"/></a>
 </div>
 
 ---
@@ -88,7 +89,7 @@ Then, your blacklist will be available under `/tmp/hg-data/state/blacklist`, and
 your Git repository under `/tmp/hg-data/state`.
 
 For the complete API reference, check the docs
-[here](https://marcoonroad.github.io/hieroglyphs/apiref/). Coverage reports are
+[here](https://marcoonroad.dev/hieroglyphs/apiref/hieroglyphs/Hieroglyphs/index.html). Coverage reports are
 shown at this [page](https://marcoonroad.github.io/hieroglyphs/coverage/).
 
 
@@ -109,3 +110,7 @@ This library was not yet fully tested against many sort of attacks, such as timi
 attacks, but nevertheless the real security lies behind the `digestif` and `nocrypto`
 libraries, which both provide strong hashes, strong RNGs and strong encryption. Use
 with care and take responsibility by your own acts.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmarcoonroad%2Fhieroglyphs.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmarcoonroad%2Fhieroglyphs?ref=badge_large)
