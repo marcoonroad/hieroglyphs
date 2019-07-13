@@ -69,7 +69,7 @@ let verify_with ~matrix ~digest pairs =
   |> List.reduce_exn ~f:( && )
 
 
-let concat_hashes left right = left ^ "-" ^ right
+let concat_hashes left right = left ^ ":" ^ right
 
 let char_to_hex_int index char =
   let value = char |> Char.to_string |> to_hex |> Int.of_string in

@@ -18,11 +18,11 @@ let __signature_validation () =
   let parts = String.split ~on:'\n' signature in
   let vertext = List.nth_exn parts 0 in
   let verkey = List.nth_exn parts 1 in
-  let chunks = String.split ~on:'-' vertext in
+  let chunks = String.split ~on:':' vertext in
   let filtered = List.filter ~f:Utils.is_hash chunks in
   Alcotest.(check int) "valid signature size" (List.length chunks) 128 ;
   Alcotest.(check int) "valid chunks in signature" (List.length filtered) 128 ;
-  let chunks = String.split ~on:'-' verkey in
+  let chunks = String.split ~on:':' verkey in
   let filtered = List.filter ~f:Utils.is_hash chunks in
   Alcotest.(check int)
     "valid verification key size"

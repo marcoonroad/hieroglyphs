@@ -9,7 +9,7 @@ let show pub =
 
 
 let load text =
-  let list = String.split text ~on:'-' in
+  let list = String.split text ~on:':' in
   let open Option in
   Utils.validate_key list
   >>= fun list -> some @@ List.map ~f:Utils.bytes_of_string list

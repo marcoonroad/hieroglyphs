@@ -18,7 +18,7 @@ let delay_string_cast bytes = lazy (Utils.bytes_to_string bytes)
 let verify ~pub ~msg ~signature =
   try
     let parts = String.split signature ~on:'\n' in
-    let ver_text = List.nth_exn parts 0 |> String.split ~on:'-' in
+    let ver_text = List.nth_exn parts 0 |> String.split ~on:':' in
     let ver_key_bytes =
       Option.value_exn (Serialization.load @@ List.nth_exn parts 1)
     in
