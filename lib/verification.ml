@@ -3,15 +3,7 @@ module List = Core.List
 module Option = Core.Option
 module Defer = Utils.Defer
 
-let digest message =
-  message
-  |> Cstruct.of_hex
-  |> Cstruct.to_bytes
-  |> Hash.digest_bytes
-  |> Cstruct.of_bytes
-  |> Hex.of_cstruct
-  |> Hex.show
-
+let digest = Utils.digest_hex_string
 
 let delay_string_cast bytes = lazy (Utils.bytes_to_string bytes)
 

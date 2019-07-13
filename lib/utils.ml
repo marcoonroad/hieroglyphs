@@ -94,3 +94,12 @@ let pad ~basis msg =
 let nonzero char = char != nullchar
 
 let unpad msg = String.filter ~f:nonzero msg
+
+let digest_hex_string hex =
+  hex
+  |> Cstruct.of_hex
+  |> Cstruct.to_bytes
+  |> Hash.digest_bytes
+  |> Cstruct.of_bytes
+  |> Hex.of_cstruct
+  |> Hex.show

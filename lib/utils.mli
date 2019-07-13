@@ -35,3 +35,5 @@ val unpad : string -> string
 val bytes_of_string : string -> bytes
 
 val bytes_to_string : bytes -> string
+
+val digest_hex_string : string -> string
