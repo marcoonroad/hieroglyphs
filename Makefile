@@ -37,8 +37,11 @@ doc: build
 #  -  ALCOTEST_QUICK_TESTS=1
 #  -  ALCOTEST_SHOW_ERRORS=1
 #
-test: build
+spec-test: build
 	dune build @test/spec/runtest -f --no-buffer -j 1
+
+test:
+	HIEROGLYPHS_KEY_DIFFICULTY=3 make spec-test
 
 bench: clean build
 	opam install core_bench --yes
@@ -57,7 +60,9 @@ coverage: clean
 	rm -rf docs/coverage
 	rm -vf `find . -name 'bisect*.out'`
 	mkdir -p docs/coverage
-	BISECT_ENABLE=YES make test
+	BISECT_ENABLE=YES \
+	HIEROGLYPHS_KEY_DIFFICULTY=3 \
+	make spec-test
 	bisect-ppx-report -html coverage/ -I _build/default `find . -name 'bisect*.out'`
 	make doc-index
 	mv coverage/* docs/coverage/

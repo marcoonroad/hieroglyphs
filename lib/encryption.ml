@@ -19,7 +19,7 @@ let __compute_iv cstruct =
 
 
 let encrypt msg ~pass =
-  let proof = Hash.mine pass ~difficulty:5 in
+  let proof = Hash.mine pass ~difficulty:Constants._KEY_DIFFICULTY in
   let key = of_secret proof in
   let iv = __compute_iv proof in
   let blob = Utils.pad ~basis:16 msg in
@@ -28,7 +28,7 @@ let encrypt msg ~pass =
 
 
 let decrypt cipher ~pass =
-  let proof = Hash.mine pass ~difficulty:5 in
+  let proof = Hash.mine pass ~difficulty:Constants._KEY_DIFFICULTY in
   let key = of_secret proof in
   let iv = __compute_iv proof in
   let result = cipher |> Cstruct.of_string |> Base64.decode in
