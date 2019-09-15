@@ -10,7 +10,7 @@ val _KEY_LENGTH : int
 
 val is_hash : string -> bool
 
-val to_hex : string -> string
+val with_hex_prefix : string -> string
 
 val concat_hashes : string -> string -> string
 
@@ -30,10 +30,10 @@ val verify_with :
 
 val pad : basis:int -> string -> Cstruct.t
 
-val unpad : string -> string
+val unpad : Cstruct.t -> string
 
-val bytes_of_string : string -> bytes
+val bytes_of_hex : string -> bytes
 
-val bytes_to_string : bytes -> string
+val bytes_to_hex : bytes -> string
 
 val digest_hex_string : string -> string

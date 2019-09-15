@@ -5,7 +5,7 @@ module Defer = Utils.Defer
 
 let digest = Utils.digest_hex_string
 
-let delay_string_cast bytes = lazy (Utils.bytes_to_string bytes)
+let delay_string_cast bytes = lazy (Utils.bytes_to_hex bytes)
 
 let verify ~pub ~msg ~signature =
   try
@@ -21,6 +21,8 @@ let verify ~pub ~msg ~signature =
     if verified
     then
       let fingerprint = Serialization.digest ver_key_bytes in
-      fingerprint = Utils.bytes_to_string pub
+      fingerprint = Utils.bytes_to_hex pub
     else false
-  with _ -> false
+  with
+  | _ ->
+      false

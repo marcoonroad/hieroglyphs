@@ -2,7 +2,7 @@ module List = Core.List
 module Defer = Utils.Defer
 
 let digest_to_string lazy_bytes =
-  Utils.bytes_to_string @@ Hash.digest_bytes @@ Defer.force lazy_bytes
+  Utils.bytes_to_hex @@ Hash.digest_bytes @@ Defer.force lazy_bytes
 
 
 let sign ~priv ~msg =

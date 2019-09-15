@@ -22,7 +22,8 @@ let encrypt msg ~pass =
   let proof = Hash.mine pass ~difficulty:5 in
   let key = of_secret proof in
   let iv = __compute_iv proof in
-  let result = encrypt ~iv ~key (Utils.pad ~basis:16 msg) in
+  let blob = Utils.pad ~basis:16 msg in
+  let result = encrypt ~iv ~key blob in
   result |> Base64.encode |> Cstruct.to_string
 
 
@@ -32,6 +33,4 @@ let decrypt cipher ~pass =
   let iv = __compute_iv proof in
   let result = cipher |> Cstruct.of_string |> Base64.decode in
   let open Option in
-  result
-  >>= fun msg ->
-  msg |> decrypt ~iv ~key |> Cstruct.to_string |> Utils.unpad |> some
+  result >>= fun msg -> msg |> decrypt ~iv ~key |> Utils.unpad |> some
