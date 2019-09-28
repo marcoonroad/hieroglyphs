@@ -57,18 +57,6 @@ let index_at ~list position =
 
 let replace_index ~matrix pairs = List.map pairs ~f:(index_at ~list:matrix)
 
-let verify_at ~digest ~list (position, opening) =
-  let commitment = Defer.force @@ List.nth_exn list position in
-  let hash = digest opening in
-  hash = commitment
-
-
-let verify_with ~matrix ~digest pairs =
-  pairs
-  |> List.map ~f:(verify_at ~digest ~list:matrix)
-  |> List.reduce_exn ~f:( && )
-
-
 let concat_hashes left right = left ^ ":" ^ right
 
 let char_to_hex_int index char =

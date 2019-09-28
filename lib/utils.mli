@@ -22,12 +22,6 @@ val replace_index : matrix:bytes Lazy.t list -> int list -> string list
 
 val indexed_keys : string -> int list
 
-val verify_with :
-     matrix:string Lazy.t list
-  -> digest:(string -> string)
-  -> (int * string) list
-  -> bool
-
 val pad : basis:int -> string -> Cstruct.t
 
 val unpad : Cstruct.t -> string
