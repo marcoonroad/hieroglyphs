@@ -13,6 +13,8 @@ module Defer = struct
   let bind deferred ~f = lazy (force @@ f @@ force deferred)
 end
 
+let nullchar = Char.of_int_exn 0
+
 let cxor = Nocrypto.Uncommon.Cs.xor
 
 let bytes_of_hex string = Cstruct.to_bytes @@ Cstruct.of_hex string
@@ -22,10 +24,6 @@ let bytes_to_hex bytes = Hex.show @@ Hex.of_cstruct @@ Cstruct.of_bytes bytes
 (* 16 hex chars and 128 chars/string length for hash under hex string format *)
 let _HASH_LENGTH = 128
 
-let _HEX_SPACE = 16
-
-let _KEY_LENGTH = _HEX_SPACE * _HASH_LENGTH
-
 let _BYTES_LENGTH = 64
 
 let regexp = Str.regexp "^[a-f0-9]+$"
@@ -34,8 +32,19 @@ let is_hash text =
   Str.string_match regexp text 0 && String.length text = _HASH_LENGTH
 
 
+let pad_cstruct size input =
+  let padding = String.make size nullchar in
+  let blob = Cstruct.to_string input in
+  let padded = String.rev (padding ^ blob) in
+  let strip = String.sub ~pos:0 ~len:size padded in
+  Cstruct.of_string @@ String.rev strip
+
+
 let _int_to_cstruct number =
-  lazy (Nocrypto.Numeric.Z.to_cstruct_be @@ Z.of_int number)
+  lazy
+    ( pad_cstruct _BYTES_LENGTH
+    @@ Nocrypto.Numeric.Z.to_cstruct_be
+    @@ Z.of_int number )
 
 
 let _hash_both ~digest prefix suffix =
@@ -83,8 +92,6 @@ let indexed_keys msg =
   |> String.to_list
   |> List.mapi ~f:chained_index
 
-
-let nullchar = Char.of_int_exn 0
 
 let pad ~basis msg =
   let length = String.length msg in

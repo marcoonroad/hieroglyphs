@@ -8,7 +8,7 @@ val cxor : Cstruct.t -> Cstruct.t -> Cstruct.t
 
 val _HASH_LENGTH : int
 
-val _KEY_LENGTH : int
+val _BYTES_LENGTH : int
 
 val is_hash : string -> bool
 
@@ -28,6 +28,8 @@ val replace_index :
   -> string list
 
 val indexed_keys : string -> (int * int) list
+
+val pad_cstruct : int -> Cstruct.t -> Cstruct.t
 
 val pad : basis:int -> string -> Cstruct.t
 
