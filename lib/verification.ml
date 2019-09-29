@@ -16,7 +16,8 @@ let __compute_root cells pairs =
 let verify ~pub ~msg ~signature =
   try
     let cells = Option.value_exn (Serialization.load signature) in
-    let pairs = Utils.indexed_keys msg in
+    let payload = Checksum.make_payload @@ Bytes.of_string msg in
+    let pairs = Utils.indexed_keys payload in
     let root = __compute_root cells pairs in
     let fingerprint = Utils.bytes_to_hex pub in
     root = fingerprint

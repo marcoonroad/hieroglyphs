@@ -27,7 +27,7 @@ val replace_index :
   -> (int * int) list
   -> string list
 
-val indexed_keys : string -> (int * int) list
+val indexed_keys : bytes -> (int * int) list
 
 val pad_cstruct : int -> Cstruct.t -> Cstruct.t
 

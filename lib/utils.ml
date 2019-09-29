@@ -24,7 +24,11 @@ let bytes_to_hex bytes = Hex.show @@ Hex.of_cstruct @@ Cstruct.of_bytes bytes
 (* 16 hex chars and 128 chars/string length for hash under hex string format *)
 let _HASH_LENGTH = 128
 
+let _CHECKSUM_LENGTH = 2
+
 let _BYTES_LENGTH = 64
+
+let _KEYS_LENGTH = _BYTES_LENGTH + _CHECKSUM_LENGTH
 
 let regexp = Str.regexp "^[a-f0-9]+$"
 
@@ -58,13 +62,13 @@ type digest = steps:int -> bytes -> bytes
 let generate_pieces ~(digest : digest) random =
   let digest' = digest ~steps:1 in
   let blob = Cstruct.of_bytes random in
-  let nums = List.init _BYTES_LENGTH ~f:_int_to_cstruct in
+  let nums = List.init _KEYS_LENGTH ~f:_int_to_cstruct in
   List.map nums ~f:(Defer.bind ~f:(_hash_both ~digest:digest' blob))
 
 
 let validate_key list =
   let filtered = List.filter list ~f:is_hash in
-  if List.length filtered = _BYTES_LENGTH then Some list else None
+  if List.length filtered = _KEYS_LENGTH then Some list else None
 
 
 let with_hex_prefix text = "0x" ^ text
@@ -84,13 +88,8 @@ let concat_hashes left right = left ^ ":" ^ right
 
 let chained_index index value = (index, Char.to_int value)
 
-let indexed_keys msg =
-  msg
-  |> Bytes.of_string
-  |> Hash.digest_bytes ~steps:1
-  |> Bytes.to_string
-  |> String.to_list
-  |> List.mapi ~f:chained_index
+let indexed_keys payload =
+  payload |> Bytes.to_string |> String.to_list |> List.mapi ~f:chained_index
 
 
 let pad ~basis msg =

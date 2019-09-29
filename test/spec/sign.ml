@@ -17,8 +17,8 @@ let __signature_validation () =
   let signature = sign ~priv ~msg in
   let chunks = String.split ~on:':' signature in
   let filtered = List.filter ~f:Utils.is_hash chunks in
-  Alcotest.(check int) "valid signature size" (List.length chunks) 64 ;
-  Alcotest.(check int) "valid chunks in signature" (List.length filtered) 64
+  Alcotest.(check int) "valid signature size" (List.length chunks) 66 ;
+  Alcotest.(check int) "valid chunks in signature" (List.length filtered) 66
 
 
 let __signing_and_verification () =
