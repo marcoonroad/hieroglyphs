@@ -4,17 +4,14 @@ module Float = Core.Float
 module Int64 = Core.Int64
 module Option = Core.Option
 module Base64 = Nocrypto.Base64
-module Defer = Utils.Defer
 
 let generate () = Random.generate512 ()
 
-let __force_digest lazy_piece =
-  Hash.digest_bytes ~steps:255 @@ Defer.force lazy_piece
-
+let __digest piece = Hash.digest_bytes ~steps:255 piece
 
 let genpub priv =
   let pieces = Utils.generate_pieces ~digest:Hash.digest_bytes priv in
-  List.map pieces ~f:__force_digest
+  List.map pieces ~f:__digest
 
 
 let derive priv = Utils.bytes_of_hex @@ Serialization.digest @@ genpub priv

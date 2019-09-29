@@ -1,5 +1,4 @@
 module List = Core.List
-module Defer = Utils.Defer
 
 let sign ~priv:seed ~msg =
   let priv = Utils.generate_pieces ~digest:Hash.digest_bytes seed in

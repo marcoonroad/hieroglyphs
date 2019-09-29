@@ -1,9 +1,3 @@
-module Defer : sig
-  val force : 'a Lazy.t -> 'a
-
-  val bind : 'a Lazy.t -> f:('a -> 'b Lazy.t) -> 'b Lazy.t
-end
-
 val cxor : Cstruct.t -> Cstruct.t -> Cstruct.t
 
 val _HASH_LENGTH : int
@@ -19,11 +13,11 @@ val concat_hashes : string -> string -> string
 val validate_key : string list -> string list option
 
 val generate_pieces :
-  digest:(steps:int -> bytes -> bytes) -> bytes -> bytes Lazy.t list
+  digest:(steps:int -> bytes -> bytes) -> bytes -> bytes list
 
 val replace_index :
      digest:(steps:int -> bytes -> bytes)
-  -> matrix:bytes Lazy.t list
+  -> matrix:bytes list
   -> (int * int) list
   -> string list
 

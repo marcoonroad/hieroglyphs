@@ -1,7 +1,6 @@
 module String = Core.String
 module List = Core.List
 module Option = Core.Option
-module Defer = Utils.Defer
 
 let __compute_digest (cell, (_, value)) =
   Hash.digest_bytes ~steps:(255 - value) cell

@@ -7,12 +7,6 @@ module Str = Re.Str
 module Option = Core.Option
 module Base64 = Nocrypto.Base64
 
-module Defer = struct
-  let force = Lazy.force_val
-
-  let bind deferred ~f = lazy (force @@ f @@ force deferred)
-end
-
 let nullchar = Char.of_int_exn 0
 
 let cxor = Nocrypto.Uncommon.Cs.xor
@@ -45,14 +39,13 @@ let pad_cstruct size input =
 
 
 let _int_to_cstruct number =
-  lazy
-    ( pad_cstruct _BYTES_LENGTH
-    @@ Nocrypto.Numeric.Z.to_cstruct_be
-    @@ Z.of_int number )
+  pad_cstruct _BYTES_LENGTH
+  @@ Nocrypto.Numeric.Z.to_cstruct_be
+  @@ Z.of_int number
 
 
 let _hash_both ~digest prefix suffix =
-  lazy (digest @@ Cstruct.to_bytes @@ cxor prefix suffix)
+  digest @@ Cstruct.to_bytes @@ cxor prefix suffix
 
 
 type digest = steps:int -> bytes -> bytes
@@ -63,7 +56,7 @@ let generate_pieces ~(digest : digest) random =
   let digest' = digest ~steps:1 in
   let blob = Cstruct.of_bytes random in
   let nums = List.init _KEYS_LENGTH ~f:_int_to_cstruct in
-  List.map nums ~f:(Defer.bind ~f:(_hash_both ~digest:digest' blob))
+  List.map nums ~f:(_hash_both ~digest:digest' blob)
 
 
 let validate_key list =
@@ -74,10 +67,7 @@ let validate_key list =
 let with_hex_prefix text = "0x" ^ text
 
 let index_at ~(digest : digest) ~list (position, code) =
-  bytes_to_hex
-  @@ digest ~steps:code
-  @@ Defer.force
-  @@ List.nth_exn list position
+  bytes_to_hex @@ digest ~steps:code @@ List.nth_exn list position
 
 
 let replace_index ~(digest : digest) ~matrix pairs =
