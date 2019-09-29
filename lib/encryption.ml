@@ -13,9 +13,9 @@ let __compute_iv cstruct =
   (* then split 32 bytes into a pair of 16 *)
   let blob3, blob4 = Cstruct.split blob1 16 in
   let blob5, blob6 = Cstruct.split blob2 16 in
-  let blob7 = Nocrypto.Uncommon.Cs.xor blob3 blob4 in
-  let blob8 = Nocrypto.Uncommon.Cs.xor blob5 blob6 in
-  Nocrypto.Uncommon.Cs.xor blob7 blob8
+  let blob7 = Utils.cxor blob3 blob4 in
+  let blob8 = Utils.cxor blob5 blob6 in
+  Utils.cxor blob7 blob8
 
 
 let encrypt msg ~pass =

@@ -13,6 +13,8 @@ module Defer = struct
   let bind deferred ~f = lazy (force @@ f @@ force deferred)
 end
 
+let cxor = Nocrypto.Uncommon.Cs.xor
+
 let bytes_of_hex string = Cstruct.to_bytes @@ Cstruct.of_hex string
 
 let bytes_to_hex bytes = Hex.show @@ Hex.of_cstruct @@ Cstruct.of_bytes bytes
@@ -30,10 +32,12 @@ let is_hash text =
   Str.string_match regexp text 0 && String.length text = _HASH_LENGTH
 
 
-let _int_to_cstruct number = lazy (Cstruct.of_string @@ string_of_int number)
+let _int_to_cstruct number =
+  lazy (Nocrypto.Numeric.Z.to_cstruct_be @@ Z.of_int number)
+
 
 let _hash_both ~digest prefix suffix =
-  lazy (digest @@ Cstruct.to_bytes @@ Cstruct.append prefix suffix)
+  lazy (digest @@ Cstruct.to_bytes @@ cxor prefix suffix)
 
 
 let generate_pieces ~digest random =

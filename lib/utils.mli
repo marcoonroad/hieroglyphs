@@ -4,6 +4,8 @@ module Defer : sig
   val bind : 'a Lazy.t -> f:('a -> 'b Lazy.t) -> 'b Lazy.t
 end
 
+val cxor : Cstruct.t -> Cstruct.t -> Cstruct.t
+
 val _HASH_LENGTH : int
 
 val _KEY_LENGTH : int
