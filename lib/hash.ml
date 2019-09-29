@@ -1,18 +1,24 @@
 module Bytes = Core.Bytes
 
-let digest text =
-  text |> Digestif.BLAKE2B.digest_string |> Digestif.BLAKE2B.to_hex
+let rec __digest_string_steps count message =
+  if count <= 0
+  then message
+  else
+    let digest = Digestif.BLAKE2B.digest_string message in
+    __digest_string_steps (count - 1) @@ Digestif.BLAKE2B.to_raw_string digest
 
 
-let digest_bytes bytes =
-  bytes
-  |> Digestif.BLAKE2B.digest_bytes
-  |> Digestif.BLAKE2B.to_raw_string
-  |> Bytes.of_string
+let digest ?(steps = 1) text =
+  text |> __digest_string_steps steps |> Hex.of_string |> Hex.show
+
+
+let digest_bytes ~steps bytes =
+  bytes |> Bytes.to_string |> __digest_string_steps steps |> Bytes.of_string
 
 
 let __digest message = Nocrypto.Hash.SHA256.digest message
 
+(* TODO: use scrypt KDF here *)
 let rec __mining input pattern nonce =
   let length = Core.String.length pattern in
   let salt = Nocrypto.Numeric.Z.to_cstruct_be nonce in

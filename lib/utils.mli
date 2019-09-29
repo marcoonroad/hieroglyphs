@@ -18,11 +18,16 @@ val concat_hashes : string -> string -> string
 
 val validate_key : string list -> string list option
 
-val generate_pieces : digest:(bytes -> bytes) -> bytes -> bytes Lazy.t list
+val generate_pieces :
+  digest:(steps:int -> bytes -> bytes) -> bytes -> bytes Lazy.t list
 
-val replace_index : matrix:bytes Lazy.t list -> int list -> string list
+val replace_index :
+     digest:(steps:int -> bytes -> bytes)
+  -> matrix:bytes Lazy.t list
+  -> (int * int) list
+  -> string list
 
-val indexed_keys : string -> int list
+val indexed_keys : string -> (int * int) list
 
 val pad : basis:int -> string -> Cstruct.t
 
@@ -31,5 +36,3 @@ val unpad : Cstruct.t -> string
 val bytes_of_hex : string -> bytes
 
 val bytes_to_hex : bytes -> string
-
-val digest_hex_string : string -> string

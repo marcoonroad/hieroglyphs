@@ -8,7 +8,9 @@ module Defer = Utils.Defer
 
 let generate () = Random.generate512 ()
 
-let __force_digest lazy_piece = Hash.digest_bytes @@ Defer.force lazy_piece
+let __force_digest lazy_piece =
+  Hash.digest_bytes ~steps:255 @@ Defer.force lazy_piece
+
 
 let genpub priv =
   let pieces = Utils.generate_pieces ~digest:Hash.digest_bytes priv in
@@ -23,6 +25,7 @@ let export ~priv ~pass =
   Encryption.encrypt ~pass payload
 
 
+(* validates both private and public keys *)
 let validate_key blob =
   try
     let plain =

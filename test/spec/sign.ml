@@ -15,23 +15,10 @@ let __signature_validation () =
   let msg = "Yadda yadda yadda" in
   let priv = Hg.generate () in
   let signature = sign ~priv ~msg in
-  let parts = String.split ~on:'\n' signature in
-  let vertext = List.nth_exn parts 0 in
-  let verkey = List.nth_exn parts 1 in
-  let chunks = String.split ~on:':' vertext in
+  let chunks = String.split ~on:':' signature in
   let filtered = List.filter ~f:Utils.is_hash chunks in
-  Alcotest.(check int) "valid signature size" (List.length chunks) 128 ;
-  Alcotest.(check int) "valid chunks in signature" (List.length filtered) 128 ;
-  let chunks = String.split ~on:':' verkey in
-  let filtered = List.filter ~f:Utils.is_hash chunks in
-  Alcotest.(check int)
-    "valid verification key size"
-    (List.length chunks)
-    (128 * 16) ;
-  Alcotest.(check int)
-    "valid chunks in verification key"
-    (List.length filtered)
-    (128 * 16)
+  Alcotest.(check int) "valid signature size" (List.length chunks) 64 ;
+  Alcotest.(check int) "valid chunks in signature" (List.length filtered) 64
 
 
 let __signing_and_verification () =
@@ -104,4 +91,5 @@ let __one_time_signing () =
 let suite =
   [ ("signature validation size and format", `Quick, __signature_validation)
   ; ("signing and verification must match", `Quick, __signing_and_verification)
-  ; ("signing must be performed only once", `Slow, __one_time_signing) ]
+  ; ("signing must be performed only once", `Slow, __one_time_signing)
+  ]

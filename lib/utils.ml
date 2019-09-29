@@ -26,6 +26,8 @@ let _HEX_SPACE = 16
 
 let _KEY_LENGTH = _HEX_SPACE * _HASH_LENGTH
 
+let _BYTES_LENGTH = 64
+
 let regexp = Str.regexp "^[a-f0-9]+$"
 
 let is_hash text =
@@ -40,38 +42,46 @@ let _hash_both ~digest prefix suffix =
   lazy (digest @@ Cstruct.to_bytes @@ cxor prefix suffix)
 
 
-let generate_pieces ~digest random =
+type digest = steps:int -> bytes -> bytes
+
+(* random is our seed for the signing keys *)
+(* TODO: use HMAC/BLAKE-MAC here for a perfect PRF *)
+let generate_pieces ~(digest : digest) random =
+  let digest' = digest ~steps:1 in
   let blob = Cstruct.of_bytes random in
-  let nums = List.init _KEY_LENGTH ~f:_int_to_cstruct in
-  List.map nums ~f:(Defer.bind ~f:(_hash_both ~digest blob))
+  let nums = List.init _BYTES_LENGTH ~f:_int_to_cstruct in
+  List.map nums ~f:(Defer.bind ~f:(_hash_both ~digest:digest' blob))
 
 
 let validate_key list =
   let filtered = List.filter list ~f:is_hash in
-  if List.length filtered = _KEY_LENGTH then Some list else None
+  if List.length filtered = _BYTES_LENGTH then Some list else None
 
 
 let with_hex_prefix text = "0x" ^ text
 
-let calculate_index (position, key) = (position * _HEX_SPACE) + key
+let index_at ~(digest : digest) ~list (position, code) =
+  bytes_to_hex
+  @@ digest ~steps:code
+  @@ Defer.force
+  @@ List.nth_exn list position
 
-let index_at ~list position =
-  bytes_to_hex @@ Defer.force @@ List.nth_exn list position
 
+let replace_index ~(digest : digest) ~matrix pairs =
+  List.map pairs ~f:(index_at ~digest ~list:matrix)
 
-let replace_index ~matrix pairs = List.map pairs ~f:(index_at ~list:matrix)
 
 let concat_hashes left right = left ^ ":" ^ right
 
-let char_to_hex_int index char =
-  let value = char |> Char.to_string |> with_hex_prefix |> Int.of_string in
-  (index, value)
-
-
-let chained_index index value = calculate_index @@ char_to_hex_int index value
+let chained_index index value = (index, Char.to_int value)
 
 let indexed_keys msg =
-  msg |> Hash.digest |> String.to_list |> List.mapi ~f:chained_index
+  msg
+  |> Bytes.of_string
+  |> Hash.digest_bytes ~steps:1
+  |> Bytes.to_string
+  |> String.to_list
+  |> List.mapi ~f:chained_index
 
 
 let nullchar = Char.of_int_exn 0
@@ -86,12 +96,3 @@ let pad ~basis msg =
 let nonzero char = char != nullchar
 
 let unpad msg = String.filter ~f:nonzero @@ Cstruct.to_string msg
-
-let digest_hex_string hex =
-  hex
-  |> Cstruct.of_hex
-  |> Cstruct.to_bytes
-  |> Hash.digest_bytes
-  |> Cstruct.of_bytes
-  |> Hex.of_cstruct
-  |> Hex.show
