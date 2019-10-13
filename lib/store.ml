@@ -38,7 +38,7 @@ let get ~key =
 
 let boot () =
   let date = 946684800L (* Sat Jan 1 00:00:00 2000 +0000 *) in
-  let address = "0x" ^ String.make Utils._HASH_LENGTH '0' in
+  let address = Utils._NULL_ADDRESS in
   let path = [ "blacklist"; address ] in
   let msg = "Revoking private key for public key " ^ address ^ "." in
   let info = Core.const (Irmin.Info.v ~date ~author msg) in

@@ -92,3 +92,7 @@ let pad ~basis msg =
 let nonzero char = char != nullchar
 
 let unpad msg = String.filter ~f:nonzero @@ Cstruct.to_string msg
+
+let _NULL_HASH = String.make _HASH_LENGTH '0'
+
+let _NULL_ADDRESS = with_hex_prefix _NULL_HASH

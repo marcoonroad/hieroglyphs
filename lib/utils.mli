@@ -32,3 +32,7 @@ val unpad : Cstruct.t -> string
 val bytes_of_hex : string -> bytes
 
 val bytes_to_hex : bytes -> string
+
+val _NULL_HASH : string
+
+val _NULL_ADDRESS : string
