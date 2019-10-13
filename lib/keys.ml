@@ -22,6 +22,17 @@ let export ~priv ~pass =
   Encryption.encrypt ~pass payload
 
 
+let __extract_optional opt = Option.value_exn opt
+
+let __process_parts input =
+  input
+  |> Cstruct.of_string
+  |> Base64.decode
+  |> __extract_optional
+  |> Cstruct.to_bytes
+  |> Utils.bytes_to_hex
+
+
 (* validates both private and public keys *)
 let validate_key blob =
   try
@@ -29,19 +40,13 @@ let validate_key blob =
       blob
       |> Cstruct.of_string
       |> Base64.decode
-      |> (fun opt -> Option.value_exn opt)
+      |> __extract_optional
       |> Cstruct.to_string
     in
-    let parts =
-      String.split ~on:'\n' plain
-      |> List.map ~f:Cstruct.of_string
-      |> List.map ~f:Base64.decode
-      |> List.map ~f:(fun opt -> Option.value_exn opt)
-      |> List.map ~f:Cstruct.to_bytes
-      |> List.map ~f:Utils.bytes_to_hex
-    in
-    assert (Utils._HASH_LENGTH == String.length @@ List.nth_exn parts 0) ;
-    assert (Utils._HASH_LENGTH == String.length @@ List.nth_exn parts 1) ;
+    let parts = String.split ~on:'\n' plain |> List.map ~f:__process_parts in
+    assert (
+      Utils._HASH_LENGTH == String.length @@ List.nth_exn parts 0
+      && Utils._HASH_LENGTH == String.length @@ List.nth_exn parts 1 ) ;
     Some plain
   with
   | _ ->

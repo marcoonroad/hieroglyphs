@@ -5,11 +5,10 @@ module Int = Core.Int
 
 let __compute_diff byte = 255 - Char.to_int byte
 
+let __sum_diff x y = x + __compute_diff y
+
 let __compute_sum input =
-  input
-  |> Bytes.to_list
-  |> List.map ~f:__compute_diff
-  |> List.reduce_exn ~f:( + )
+  input |> Bytes.to_list |> List.fold ~init:0 ~f:__sum_diff
 
 
 let __generate input =
