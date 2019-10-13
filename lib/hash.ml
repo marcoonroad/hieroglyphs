@@ -1,11 +1,15 @@
 module Bytes = Core.Bytes
 
-let rec __digest_string_steps count message =
-  if count <= 0
-  then message
-  else
-    let digest = Digestif.BLAKE2B.digest_string message in
-    __digest_string_steps (count - 1) @@ Digestif.BLAKE2B.to_raw_string digest
+let blake2b input =
+  Digestif.BLAKE2B.to_raw_string @@ Digestif.BLAKE2B.digest_string input
+
+
+let __digest_string_steps count message =
+  let payload = ref message in
+  for _ = count downto 1 do
+    payload := blake2b !payload
+  done ;
+  !payload
 
 
 let digest ?(steps = 1) text =
