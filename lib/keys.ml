@@ -14,7 +14,12 @@ let genpub priv =
   List.map pieces ~f:__digest
 
 
-let derive priv = Utils.bytes_of_hex @@ Serialization.digest @@ genpub priv
+let derive priv =
+  Bytes.of_string
+  @@ Digestif.BLAKE2B.to_raw_string
+  @@ Serialization.digest
+  @@ genpub priv
+
 
 let export ~priv ~pass =
   let priv' = Bytes.to_string priv in

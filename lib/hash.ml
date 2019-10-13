@@ -20,6 +20,8 @@ let digest_bytes ~steps bytes =
   bytes |> Bytes.to_string |> __digest_string_steps steps |> Bytes.of_string
 
 
+let hash_bytes_seq list = Digestif.BLAKE2B.digestv_bytes list
+
 let __digest message = Nocrypto.Hash.SHA256.digest message
 
 (* TODO: use scrypt KDF here *)
@@ -38,3 +40,6 @@ let mine ~difficulty text =
   let nonce = Z.zero in
   let pattern = Core.String.init difficulty ~f:(Core.const '0') in
   __mining input pattern nonce
+
+
+let same left right = Digestif.BLAKE2B.equal left right

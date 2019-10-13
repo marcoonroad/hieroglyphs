@@ -1,19 +1,17 @@
-Estimated testing time 2m (12 benchmarks x 10s). Change using -quota SECS.
-┌─────────────────────────────────────────────────────┬──────────────────┬───────────────┬────────────────┬─────────────┬────────────┐
-│ Name                                                │         Time/Run │       mWd/Run │       mjWd/Run │    Prom/Run │ Percentage │
-├─────────────────────────────────────────────────────┼──────────────────┼───────────────┼────────────────┼─────────────┼────────────┤
-│ hieroglyphs + blake2b ------ private key generation │      18_250.29ns │       610.86w │          0.13w │       0.13w │            │
-│ hieroglyphs + blake2b ------ message signing        │ 830_777_285.22ns │ 1_126_055.43w │ 34_143_882.57w │ 110_337.57w │     84.82% │
-│ hieroglyphs + blake2b ------ public key derivation  │ 762_818_024.31ns │ 1_093_699.54w │ 33_944_068.46w │ 109_993.46w │     77.88% │
-│ hieroglyphs + blake2b ------ signature verification │ 979_464_860.27ns │ 5_363_258.26w │ 34_006_904.17w │ 137_739.17w │    100.00% │
-│ rsa pss/sha256 1024 bits --- private key generation │  43_341_991.32ns │       870.83w │         -0.27w │      -0.27w │      4.43% │
-│ rsa pss/sha256 1024 bits --- public key derivation  │          13.52ns │         3.00w │                │             │            │
-│ rsa pss/sha256 1024 bits --- message signing        │     884_425.40ns │     1_715.01w │          0.54w │       0.54w │      0.09% │
-│ rsa pss/sha256 1024 bits --- signature verification │      99_468.45ns │     1_547.02w │          0.35w │       0.35w │      0.01% │
-│ secp256k1 + sha256 hash ---- private key generation │      15_107.13ns │       355.80w │                │             │            │
-│ secp256k1 + sha256 hash ---- public key derivation  │     251_762.39ns │        13.00w │                │             │      0.03% │
-│ secp256k1 + sha256 hash ---- message signing        │     364_347.26ns │       230.00w │                │             │      0.04% │
-│ secp256k1 + sha256 hash ---- signature verification │     424_337.89ns │       214.00w │                │             │      0.04% │
-└─────────────────────────────────────────────────────┴──────────────────┴───────────────┴────────────────┴─────────────┴────────────┘
-Benchmarks that take 1ns to 100ms can be estimated precisely. For more reliable 
-estimates, redesign your benchmark to have a shorter execution time.
+Estimated testing time 2m (12 benchmarks x 10s). Change using '-quota'.
+┌─────────────────────────────────────────────────────┬─────────────────┬───────────────┬────────────┬───────────┬────────────┐
+│ Name                                                │        Time/Run │       mWd/Run │   mjWd/Run │  Prom/Run │ Percentage │
+├─────────────────────────────────────────────────────┼─────────────────┼───────────────┼────────────┼───────────┼────────────┤
+│ hieroglyphs + blake2b ------ private key generation │     14_168.25ns │       610.86w │      0.12w │     0.12w │      0.04% │
+│ hieroglyphs + blake2b ------ message signing        │  9_464_803.94ns │   638_898.85w │ 36_005.59w │ 2_214.59w │     26.54% │
+│ hieroglyphs + blake2b ------ public key derivation  │ 17_062_757.26ns │ 1_297_597.15w │  1_485.40w │ 1_485.40w │     47.84% │
+│ hieroglyphs + blake2b ------ signature verification │  9_770_490.21ns │   824_026.67w │  2_102.90w │ 2_102.90w │     27.40% │
+│ rsa pss/sha256 1024 bits --- private key generation │ 35_665_150.48ns │       870.82w │      0.45w │     0.45w │    100.00% │
+│ rsa pss/sha256 1024 bits --- public key derivation  │          9.92ns │         3.00w │            │           │            │
+│ rsa pss/sha256 1024 bits --- message signing        │    714_195.12ns │     1_714.57w │      0.58w │     0.58w │      2.00% │
+│ rsa pss/sha256 1024 bits --- signature verification │     81_259.61ns │     1_547.02w │      0.34w │     0.34w │      0.23% │
+│ secp256k1 + sha256 hash ---- private key generation │     12_522.57ns │       355.72w │            │           │      0.04% │
+│ secp256k1 + sha256 hash ---- public key derivation  │    201_243.30ns │        13.00w │            │           │      0.56% │
+│ secp256k1 + sha256 hash ---- message signing        │    295_076.97ns │       230.00w │            │           │      0.83% │
+│ secp256k1 + sha256 hash ---- signature verification │    332_174.62ns │       214.00w │            │           │      0.93% │
+└─────────────────────────────────────────────────────┴─────────────────┴───────────────┴────────────┴───────────┴────────────┘

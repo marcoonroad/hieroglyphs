@@ -18,8 +18,8 @@ let verify ~pub ~msg ~signature =
     let payload = Checksum.make_payload @@ Bytes.of_string msg in
     let pairs = Utils.indexed_keys payload in
     let root = __compute_root cells pairs in
-    let fingerprint = Utils.bytes_to_hex pub in
-    root = fingerprint
+    let fingerprint = Digestif.BLAKE2B.of_raw_string @@ Bytes.to_string pub in
+    Hash.same root fingerprint
   with
   | _ ->
       false
