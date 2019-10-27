@@ -10,7 +10,7 @@ let generate () = Random.generate512 ()
 let __digest piece = Hash.digest_bytes ~steps:255 piece
 
 let genpub priv =
-  let pieces = Utils.generate_pieces ~digest:Hash.digest_bytes priv in
+  let pieces = Utils.generate_pieces ~prf:Hash.mac_bytes priv in
   List.map pieces ~f:__digest
 
 

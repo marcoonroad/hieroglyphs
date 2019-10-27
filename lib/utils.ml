@@ -38,31 +38,27 @@ let pad_cstruct size input =
   Cstruct.of_string @@ String.rev strip
 
 
-let _int_to_cstruct number =
-  pad_cstruct _BYTES_LENGTH
-  @@ Nocrypto.Numeric.Z.to_cstruct_be
-  @@ Z.of_int number
-
-
-let _hash_both ~digest prefix suffix =
-  digest @@ Cstruct.to_bytes @@ cxor prefix suffix
+let _int_to_bytes number =
+  let cstruct =
+    pad_cstruct _BYTES_LENGTH
+    @@ Nocrypto.Numeric.Z.to_cstruct_be
+    @@ Z.of_int number
+  in
+  Cstruct.set_uint8 cstruct 0 255 ;
+  Cstruct.to_bytes cstruct
 
 
 type digest = steps:int -> bytes -> bytes
 
-let _NUMS = List.init _KEYS_LENGTH ~f:_int_to_cstruct
+type prf = key:bytes -> bytes -> bytes
+
+let _hash_both ~(prf : prf) prefix suffix = prf prefix ~key:suffix
+
+let _NUMS = List.init _KEYS_LENGTH ~f:_int_to_bytes
 
 (* random is our seed for the signing keys *)
-(* TODO: use HMAC/BLAKE-MAC here for a perfect PRF *)
-let generate_pieces ~(digest : digest) random =
-  let digest' = digest ~steps:1 in
-  let blob = Cstruct.of_bytes random in
-  List.map _NUMS ~f:(_hash_both ~digest:digest' blob)
-
-
-let validate_key list =
-  let filtered = List.filter list ~f:is_hash in
-  if List.length filtered = _KEYS_LENGTH then Some list else None
+let generate_pieces ~(prf : prf) random =
+  List.map _NUMS ~f:(_hash_both ~prf random)
 
 
 let with_hex_prefix text = "0x" ^ text
@@ -75,7 +71,7 @@ let replace_index ~(digest : digest) ~matrix pairs =
   List.map pairs ~f:(index_at ~digest ~list:matrix)
 
 
-let concat_hashes left right = left ^ ":" ^ right
+let concat_hashes left right = left ^ right
 
 let chained_index index value = (index, Char.to_int value)
 
@@ -97,3 +93,27 @@ let unpad msg = String.filter ~f:nonzero @@ Cstruct.to_string msg
 let _NULL_HASH = String.make _HASH_LENGTH '0'
 
 let _NULL_ADDRESS = with_hex_prefix _NULL_HASH
+
+let rec __split_cstruct_loop _LENGTH index splits blob =
+  let position = index * _BYTES_LENGTH in
+  let difference = _LENGTH - position in
+  if difference <= 0
+  then List.rev splits
+  else
+    let split = Cstruct.sub blob position _BYTES_LENGTH in
+    let splits' = split :: splits in
+    let index' = index + 1 in
+    __split_cstruct_loop _LENGTH index' splits' blob
+
+
+let __split_cstruct blob =
+  let length = Cstruct.len blob in
+  __split_cstruct_loop length 0 [] blob
+
+
+let is_blob_hash hash = Cstruct.len hash = _BYTES_LENGTH
+
+let validate_blob_key list =
+  let filtered = List.filter list ~f:is_blob_hash in
+  assert (List.length filtered = _KEYS_LENGTH) ;
+  Some list

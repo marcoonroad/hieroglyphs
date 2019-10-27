@@ -10,10 +10,7 @@ val with_hex_prefix : string -> string
 
 val concat_hashes : string -> string -> string
 
-val validate_key : string list -> string list option
-
-val generate_pieces :
-  digest:(steps:int -> bytes -> bytes) -> bytes -> bytes list
+val generate_pieces : prf:(key:bytes -> bytes -> bytes) -> bytes -> bytes list
 
 val replace_index :
      digest:(steps:int -> bytes -> bytes)
@@ -36,3 +33,7 @@ val bytes_to_hex : bytes -> string
 val _NULL_HASH : string
 
 val _NULL_ADDRESS : string
+
+val __split_cstruct : Cstruct.t -> Cstruct.t list
+
+val validate_blob_key : Cstruct.t list -> Cstruct.t list option

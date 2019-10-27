@@ -15,8 +15,8 @@ let __signature_validation () =
   let msg = "Yadda yadda yadda" in
   let priv = Hg.generate () in
   let signature = sign ~priv ~msg in
-  let chunks = String.split ~on:':' signature in
-  let filtered = List.filter ~f:Utils.is_hash chunks in
+  let chunks = Utils.split_signature signature in
+  let filtered = List.filter ~f:Utils.is_blob_hash chunks in
   Alcotest.(check int) "valid signature size" (List.length chunks) 66 ;
   Alcotest.(check int) "valid chunks in signature" (List.length filtered) 66
 

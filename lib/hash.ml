@@ -43,3 +43,14 @@ let mine ~difficulty text =
 
 
 let same left right = Digestif.BLAKE2B.equal left right
+
+let mac ~key message =
+  let digest = Digestif.BLAKE2B.Keyed.mac_string ~key message in
+  Digestif.BLAKE2B.to_raw_string digest
+
+
+let mac_bytes ~key message =
+  let message' = Bytes.to_string message in
+  let key' = Bytes.to_string key in
+  let tag = mac ~key:key' message' in
+  Bytes.of_string tag
