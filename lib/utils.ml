@@ -50,13 +50,14 @@ let _hash_both ~digest prefix suffix =
 
 type digest = steps:int -> bytes -> bytes
 
+let _NUMS = List.init _KEYS_LENGTH ~f:_int_to_cstruct
+
 (* random is our seed for the signing keys *)
 (* TODO: use HMAC/BLAKE-MAC here for a perfect PRF *)
 let generate_pieces ~(digest : digest) random =
   let digest' = digest ~steps:1 in
   let blob = Cstruct.of_bytes random in
-  let nums = List.init _KEYS_LENGTH ~f:_int_to_cstruct in
-  List.map nums ~f:(_hash_both ~digest:digest' blob)
+  List.map _NUMS ~f:(_hash_both ~digest:digest' blob)
 
 
 let validate_key list =
