@@ -5,13 +5,7 @@ module List = Core.List
 let __public_key_validation () =
   let _, pub = Hg.pair () in
   let result = Hg.show pub in
-  let chunks = String.split ~on:'-' result in
-  let filtered = List.filter ~f:Utils.is_hash chunks in
-  Alcotest.(check int) "valid public key size" (List.length chunks) (128 * 16) ;
-  Alcotest.(check int)
-    "valid chunks in public key"
-    (List.length filtered)
-    (128 * 16)
+  Alcotest.(check bool) "valid public key hash" true @@ Utils.is_hash result
 
 
 let __public_key_derivation () =

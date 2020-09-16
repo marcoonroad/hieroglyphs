@@ -15,10 +15,10 @@ let __signature_validation () =
   let msg = "Yadda yadda yadda" in
   let priv = Hg.generate () in
   let signature = sign ~priv ~msg in
-  let chunks = String.split ~on:'-' signature in
-  let filtered = List.filter ~f:Utils.is_hash chunks in
-  Alcotest.(check int) "valid signature size" (List.length chunks) 128 ;
-  Alcotest.(check int) "valid chunks in signature" (List.length filtered) 128
+  let chunks = Utils.split_signature signature in
+  let filtered = List.filter ~f:Utils.is_blob_hash chunks in
+  Alcotest.(check int) "valid signature size" (List.length chunks) 66 ;
+  Alcotest.(check int) "valid chunks in signature" (List.length filtered) 66
 
 
 let __signing_and_verification () =
@@ -28,12 +28,14 @@ let __signing_and_verification () =
   let priv2, pub2 = Hg.pair () in
   let sign1 = sign ~priv:priv1 ~msg:msg1 in
   let sign2 = sign ~priv:priv2 ~msg:msg2 in
+  let invalid = "This is an invalid signature...\ndeadbeefdeadbeef" in
   let resultA = Hg.verify ~pub:pub1 ~signature:sign1 ~msg:msg1 in
   let resultB = Hg.verify ~pub:pub2 ~signature:sign2 ~msg:msg2 in
   let resultC = Hg.verify ~pub:pub2 ~signature:sign1 ~msg:msg1 in
   let resultD = Hg.verify ~pub:pub1 ~signature:sign2 ~msg:msg2 in
   let resultE = Hg.verify ~pub:pub2 ~signature:sign2 ~msg:msg1 in
   let resultF = Hg.verify ~pub:pub1 ~signature:sign1 ~msg:msg2 in
+  let resultG = Hg.verify ~pub:pub2 ~signature:invalid ~msg:msg2 in
   Alcotest.(check bool)
     "verification for public key 1, signature 1 and message 1 pass"
     true
@@ -57,7 +59,11 @@ let __signing_and_verification () =
   Alcotest.(check bool)
     "verification for public key 1, signature 1 and message 2 fail"
     false
-    resultF
+    resultF ;
+  Alcotest.(check bool)
+    "verification for public key 2, invalid signature and message 2 fail"
+    false
+    resultG
 
 
 let __one_time_signing () =
@@ -85,4 +91,5 @@ let __one_time_signing () =
 let suite =
   [ ("signature validation size and format", `Quick, __signature_validation)
   ; ("signing and verification must match", `Quick, __signing_and_verification)
-  ; ("signing must be performed only once", `Quick, __one_time_signing) ]
+  ; ("signing must be performed only once", `Slow, __one_time_signing)
+  ]

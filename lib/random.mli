@@ -1,1 +1,1 @@
-val generate : unit -> int64
+val generate512 : unit -> bytes

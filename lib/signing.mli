@@ -1,1 +1,1 @@
-val sign : priv:string list -> msg:string -> string
+val sign : priv:bytes -> msg:string -> string

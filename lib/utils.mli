@@ -1,23 +1,39 @@
+val cxor : Cstruct.t -> Cstruct.t -> Cstruct.t
+
 val _HASH_LENGTH : int
 
-val _KEY_LENGTH : int
+val _BYTES_LENGTH : int
 
-val to_hex : string -> string
+val is_hash : string -> bool
+
+val with_hex_prefix : string -> string
 
 val concat_hashes : string -> string -> string
 
-val validate_key : string list -> string list option
+val generate_pieces : prf:(key:bytes -> bytes -> bytes) -> bytes -> bytes list
 
-val replace_index : matrix:string list -> int list -> string list
+val replace_index :
+     digest:(steps:int -> bytes -> bytes)
+  -> matrix:bytes list
+  -> (int * int) list
+  -> string list
 
-val indexed_keys : string -> int list
+val indexed_keys : bytes -> (int * int) list
 
-val verify_with :
-     matrix:string list
-  -> digest:(string -> string)
-  -> (int * string) list
-  -> bool
+val pad_cstruct : int -> Cstruct.t -> Cstruct.t
 
 val pad : basis:int -> string -> Cstruct.t
 
-val unpad : string -> string
+val unpad : Cstruct.t -> string
+
+val bytes_of_hex : string -> bytes
+
+val bytes_to_hex : bytes -> string
+
+val _NULL_HASH : string
+
+val _NULL_ADDRESS : string
+
+val __split_cstruct : Cstruct.t -> Cstruct.t list
+
+val validate_blob_key : Cstruct.t list -> Cstruct.t list option

@@ -1,8 +1,25 @@
 module String = Core.String
 module List = Core.List
+module Option = Core.Option
+
+let __compute_digest (cell, (_, value)) =
+  Hash.digest_bytes ~steps:(255 - value) cell
+
+
+let __compute_root cells pairs =
+  List.zip_exn cells pairs
+  |> List.map ~f:__compute_digest
+  |> Serialization.digest
+
 
 let verify ~pub ~msg ~signature =
-  let indexed_keys = Utils.indexed_keys msg in
-  let hashes = String.split signature ~on:'-' in
-  let proofs = List.zip_exn indexed_keys hashes in
-  Utils.verify_with ~matrix:pub ~digest:Hash.digest proofs
+  try
+    let cells = Option.value_exn (Serialization.load signature) in
+    let payload = Checksum.make_payload @@ Bytes.of_string msg in
+    let pairs = Utils.indexed_keys payload in
+    let root = __compute_root cells pairs in
+    let fingerprint = Digestif.BLAKE2B.of_raw_string @@ Bytes.to_string pub in
+    Hash.same root fingerprint
+  with
+  | _ ->
+      false

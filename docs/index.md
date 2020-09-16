@@ -24,7 +24,7 @@ For further information, see:
 This library uses the Blake2B hash algorithm, but further / additional hashes are
 planned as well. Currently, the following things are implemented now:
 
-- [x] Importing/exporting encrypted private key (by now using AES ECB).
+- [x] Importing/exporting encrypted private key (by now using AES CBC).
 - [x] Public Key serialization+validation (to share and receive such key for verification).
 - [x] Built-in one-time invariant protected by a blacklist of used private keys.
 - [x] Tests covering the things here and there.

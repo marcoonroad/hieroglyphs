@@ -1,12 +1,35 @@
-let digest text =
-  text |> Digestif.BLAKE2B.digest_string |> Digestif.BLAKE2B.to_hex
+module Bytes = Core.Bytes
+
+let blake2b input =
+  Digestif.BLAKE2B.to_raw_string @@ Digestif.BLAKE2B.digest_string input
 
 
+let __digest_string_steps count message =
+  let payload = ref message in
+  for _ = count downto 1 do
+    payload := blake2b !payload
+  done ;
+  !payload
+
+
+let digest ?(steps = 1) text =
+  text |> __digest_string_steps steps |> Hex.of_string |> Hex.show
+
+
+let digest_bytes ~steps bytes =
+  bytes |> Bytes.to_string |> __digest_string_steps steps |> Bytes.of_string
+
+
+let hash_bytes_seq list = Digestif.BLAKE2B.digestv_bytes list
+
+let __digest message = Nocrypto.Hash.SHA256.digest message
+
+(* TODO: use scrypt KDF here *)
 let rec __mining input pattern nonce =
   let length = Core.String.length pattern in
   let salt = Nocrypto.Numeric.Z.to_cstruct_be nonce in
   let message = Cstruct.append input salt in
-  let result = Nocrypto.Hash.SHA256.digest message in
+  let result = __digest message in
   let digest = Hex.show @@ Hex.of_cstruct result in
   let part = Core.String.sub ~pos:0 ~len:length digest in
   if pattern = part then result else __mining input pattern @@ Z.succ nonce
@@ -17,3 +40,17 @@ let mine ~difficulty text =
   let nonce = Z.zero in
   let pattern = Core.String.init difficulty ~f:(Core.const '0') in
   __mining input pattern nonce
+
+
+let same left right = Digestif.BLAKE2B.equal left right
+
+let mac ~key message =
+  let digest = Digestif.BLAKE2B.Keyed.mac_string ~key message in
+  Digestif.BLAKE2B.to_raw_string digest
+
+
+let mac_bytes ~key message =
+  let message' = Bytes.to_string message in
+  let key' = Bytes.to_string key in
+  let tag = mac ~key:key' message' in
+  Bytes.of_string tag

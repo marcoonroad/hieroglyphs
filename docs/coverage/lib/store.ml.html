@@ -188,7 +188,7 @@ let boot () =
   <span data-count="1">l</span>et date = <span data-count="1">9</span>46684800L (* Sat Jan 1 00:00:00 2000 +0000 *) in
   <span data-count="1">l</span>et address = <span data-count="1">"</span>0x" ^ String.make Utils._HASH_LENGTH '0' in
   <span data-count="1">l</span>et path = <span data-count="1">[</span>"blacklist"; address] in
-  <span data-count="1">l</span>et msg = <span data-count="1">"</span>Revoking private key " ^ address ^ "." in
+  <span data-count="1">l</span>et msg = <span data-count="1">"</span>Revoking private key for public key " ^ address ^ "." in
   <span data-count="1">l</span>et info = <span data-count="1">C</span>ore.const (Irmin.Info.v ~date ~author msg) in
   <span data-count="1">l</span>et transaction () =
     <span data-count="1">G</span>itStore.Repo.v config
@@ -204,7 +204,7 @@ let () =
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-24 20:15:12 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2019-04-07 21:45:55 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

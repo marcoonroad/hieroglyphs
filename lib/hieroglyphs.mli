@@ -5,7 +5,7 @@
 
 (** Hieroglyphs is a hash-based signature scheme, which, in so far, is resistant to
     Quantum machine attacks (unlike RSA and Elliptic Curves, which can be broken).
-    This "Quantum attack" is a mean to obtain the private key given the public key, that
+    This "Quantum attack" is a mean to obtain the private key with just the public key, that
     is, this break the said hard/infeasible public key inversion theorem, as proved on
     classical machines.
 

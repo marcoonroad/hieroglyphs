@@ -1,1 +1,1 @@
-val verify : pub:string list -> msg:string -> signature:string -> bool
+val verify : pub:bytes -> msg:string -> signature:string -> bool

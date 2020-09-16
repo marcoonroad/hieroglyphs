@@ -32,14 +32,25 @@ let verification () =
   |> ignore
 
 
-let suite =
-  [ Test.create
-      ~name:"rsa pss/sha256 1024 bits --- private key generation"
-      generate
-  ; Test.create
-      ~name:"rsa pss/sha256 1024 bits --- public key derivation"
-      derive
-  ; Test.create ~name:"rsa pss/sha256 1024 bits --- message signing" signing
-  ; Test.create
-      ~name:"rsa pss/sha256 1024 bits --- signature verification"
-      verification ]
+(*** test cases ***************************************************************)
+let __generation =
+  let name = "rsa pss/sha256 1024 bits --- private key generation" in
+  Test.create ~name generate
+
+
+let __derivation =
+  let name = "rsa pss/sha256 1024 bits --- public key derivation" in
+  Test.create ~name derive
+
+
+let __signing =
+  let name = "rsa pss/sha256 1024 bits --- message signing" in
+  Test.create ~name signing
+
+
+let __verification =
+  let name = "rsa pss/sha256 1024 bits --- signature verification" in
+  Test.create ~name verification
+
+
+let suite = [__generation; __derivation; __signing; __verification]
