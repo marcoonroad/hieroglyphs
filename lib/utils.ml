@@ -82,6 +82,7 @@ let indexed_keys payload =
 let pad ~basis msg =
   let length = String.length msg in
   let remainder = Int.( % ) length basis in
+  if remainder = 0 then msg else
   let zerofill = String.make (basis - remainder) nullchar in
   Cstruct.of_string (msg ^ zerofill)
 
