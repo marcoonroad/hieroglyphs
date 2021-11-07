@@ -14,7 +14,7 @@ let author = "Hieroglyphs library"
 
 let info fmt = Irmin_unix.info ~author fmt
 
-let set ~msg ~key value =
+let __set ~msg ~key value =
   let path = String.split ~on:'/' key in
   let msg = info (format_of_string "%s") msg in
   let transaction () =
@@ -25,6 +25,10 @@ let set ~msg ~key value =
   in
   Lwt_main.run (transaction ())
 
+let set ~msg ~key value =
+  match __set ~msg ~key value with
+  | Error _ -> failwith "GitStore WRITE ERROR: Failed to set key-value pair on .git repository as a commit!"
+  | Ok () -> ()
 
 let get ~key =
   let path = String.split ~on:'/' key in
@@ -51,5 +55,7 @@ let boot () =
 
 
 let () =
-  boot () ;
-  Irmin_unix.set_listen_dir_hook ()
+  match boot () with
+  | Error _ -> failwith "GitStore WRITE ERROR: Failed to initialize .git repository with deterministic initial commit!"
+  | Ok () -> Irmin_unix.set_listen_dir_hook ()
+

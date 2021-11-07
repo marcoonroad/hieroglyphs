@@ -79,10 +79,10 @@ let indexed_keys payload =
   payload |> Bytes.to_string |> String.to_list |> List.mapi ~f:chained_index
 
 
-let pad ~basis msg =
+let pad ~basis:(basis:int) (msg : string) : Cstruct.t =
   let length = String.length msg in
   let remainder = Int.( % ) length basis in
-  if remainder = 0 then msg else
+  if remainder = 0 then Cstruct.of_string msg else
   let zerofill = String.make (basis - remainder) nullchar in
   Cstruct.of_string (msg ^ zerofill)
 
