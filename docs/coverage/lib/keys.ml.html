@@ -26,43 +26,37 @@
 <a id="L6"></a><span > </span>
 <a id="L7"></a><span > </span>
 <a id="L8"></a><span class="visited"> </span>
-<a id="L9"></a><span class="visited"> </span>
-<a id="L10"></a><span class="visited"> </span>
+<a id="L9"></a><span > </span>
+<a id="L10"></a><span > </span>
 <a id="L11"></a><span class="visited"> </span>
-<a id="L12"></a><span class="visited"> </span>
-<a id="L13"></a><span class="visited"> </span>
-<a id="L14"></a><span > </span>
-<a id="L15"></a><span > </span>
-<a id="L16"></a><span class="visited"> </span>
-<a id="L17"></a><span > </span>
-<a id="L18"></a><span class="visited"> </span>
-<a id="L19"></a><span > </span>
+<a id="L12"></a><span > </span>
+<a id="L13"></a><span > </span>
+<a id="L14"></a><span class="visited"> </span>
+<a id="L15"></a><span class="visited"> </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span class="visited"> </span>
+<a id="L18"></a><span > </span>
+<a id="L19"></a><span class="visited"> </span>
 <a id="L20"></a><span > </span>
-<a id="L21"></a><span class="visited"> </span>
+<a id="L21"></a><span > </span>
 <a id="L22"></a><span class="visited"> </span>
 <a id="L23"></a><span > </span>
 <a id="L24"></a><span > </span>
-<a id="L25"></a><span class="visited"> </span>
-<a id="L26"></a><span > </span>
+<a id="L25"></a><span > </span>
+<a id="L26"></a><span class="visited"> </span>
 <a id="L27"></a><span > </span>
-<a id="L28"></a><span class="visited"> </span>
+<a id="L28"></a><span > </span>
 <a id="L29"></a><span > </span>
-<a id="L30"></a><span > </span>
+<a id="L30"></a><span class="visited"> </span>
 <a id="L31"></a><span > </span>
 <a id="L32"></a><span class="visited"> </span>
 <a id="L33"></a><span > </span>
 <a id="L34"></a><span class="visited"> </span>
 <a id="L35"></a><span > </span>
-<a id="L36"></a><span > </span>
-<a id="L37"></a><span class="visited"> </span>
+<a id="L36"></a><span class="visited"> </span>
+<a id="L37"></a><span > </span>
 <a id="L38"></a><span > </span>
 <a id="L39"></a><span class="visited"> </span>
-<a id="L40"></a><span > </span>
-<a id="L41"></a><span class="visited"> </span>
-<a id="L42"></a><span > </span>
-<a id="L43"></a><span class="visited"> </span>
-<a id="L44"></a><span > </span>
-<a id="L45"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -106,12 +100,6 @@
 <a href="#L37">37</a>
 <a href="#L38">38</a>
 <a href="#L39">39</a>
-<a href="#L40">40</a>
-<a href="#L41">41</a>
-<a href="#L42">42</a>
-<a href="#L43">43</a>
-<a href="#L44">44</a>
-<a href="#L45">45</a>
 </pre>
         <pre id="code">
 module List = Core.List
@@ -119,50 +107,44 @@ module String = Core.String
 module Float = Core.Float
 module Int64 = Core.Int64
 module Option = Core.Option
+module Defer = Utils.Defer
 
-let populate time _ =
-  <span data-count="18432">(</span>)
-  |&gt; <span data-count="18432">R</span>andom.generate
-  |&gt; <span data-count="18432">I</span>nt64.to_string
-  |&gt; <span data-count="18432">S</span>tring.( ^ ) time
-  |&gt; <span data-count="18432">H</span>ash.digest
-  |&gt; <span data-count="18432">H</span>ash.digest
+let generate () = <span data-count="9">R</span>andom.generate512 ()
 
+let __force_digest lazy_piece =
+  <span data-count="51200">H</span>ash.digest_bytes @@ Defer.force lazy_piece
 
-let length = <span data-count="1">U</span>tils._KEY_LENGTH
+let genpub priv =
+  <span data-count="25">l</span>et pieces = <span data-count="25">U</span>tils.generate_pieces ~digest:Hash.digest_bytes priv in
+  <span data-count="25">L</span>ist.map pieces ~f:(__force_digest)
 
-let timestamp () = <span data-count="9">(</span>) |&gt; <span data-count="9">U</span>nix.gettimeofday |&gt; <span data-count="9">F</span>loat.to_string
+let derive priv = <span data-count="25">U</span>tils.bytes_of_string @@ Serialization.digest @@ genpub priv
 
-let generate () =
-  <span data-count="9">l</span>et time = <span data-count="9">t</span>imestamp () in
-  <span data-count="9">L</span>ist.init length ~f:(populate time)
+let export ~priv ~pass = <span data-count="2">E</span>ncryption.encrypt ~pass @@ Utils.bytes_to_string priv
 
-
-let derive priv = <span data-count="25">L</span>ist.map priv ~f:Hash.digest
-
-let export ~priv ~pass =
-  <span data-count="2">p</span>riv |&gt; <span data-count="2">L</span>ist.reduce_exn ~f:Utils.concat_hashes |&gt; <span data-count="2">E</span>ncryption.encrypt ~pass
+let validate_key plain =
+  <span data-count="3">i</span>f String.length plain == Utils._HASH_LENGTH then <span data-count="2">S</span>ome plain else <span data-count="1">N</span>one
 
 
 let import ~cipher ~pass =
   <span data-count="3">l</span>et open Option in
-  Encryption.decrypt ~pass cipher
-  &gt;&gt;= fun result -&gt; <span data-count="3">r</span>esult |&gt; <span data-count="3">S</span>tring.split ~on:'-' |&gt; <span data-count="3">U</span>tils.validate_key
+  Encryption.decrypt ~pass cipher &gt;&gt;= validate_key &gt;&gt;| Utils.bytes_of_string
 
 
-let load = <span data-count="1">S</span>erialization.load
-
-let show = <span data-count="1">S</span>erialization.show
-
-let address = <span data-count="1">S</span>erialization.address
+let address pub = <span data-count="7">U</span>tils.to_hex @@ Utils.bytes_to_string pub
 
 let sign = <span data-count="1">S</span>igning.sign
 
 let verify = <span data-count="1">V</span>erification.verify
+
+let show = <span data-count="1">U</span>tils.bytes_to_string
+
+let load dump =
+  <span data-count="2">i</span>f Utils.is_hash dump then <span data-count="1">S</span>ome (Utils.bytes_of_string dump) else <span data-count="1">N</span>one
 </pre>
       </div>
     </div>
-    <div id="footer">Generated on 2018-11-24 20:15:12 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
+    <div id="footer">Generated on 2019-04-07 21:45:55 by <a href="https://github.com/aantron/bisect_ppx">Bisect_ppx</a> 1.3.4</div>
     <script src="../coverage.js"></script>
   </body>
 </html>

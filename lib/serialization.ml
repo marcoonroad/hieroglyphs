@@ -1,15 +1,14 @@
 module List = Core.List
 module String = Core.String
+module Option = Core.Option
 
-let show pub =
- List.reduce_exn pub ~f:Utils.concat_hashes
+let digest = Hash.hash_bytes_seq
 
-let load text =
-  let list = String.split text ~on:'-' in
-  Utils.validate_key list
-
-let address pub =
-  pub
-  |> show
-  |> Hash.digest
-  |> Utils.to_hex
+let load signature =
+  let open Option in
+  Encoding.decode signature
+  >>= fun signature' ->
+  let decoded = Cstruct.of_string signature' in
+  let pieces = Utils.__split_cstruct decoded in
+  Utils.validate_blob_key pieces
+  >>= fun validated -> some @@ List.map ~f:Cstruct.to_bytes validated

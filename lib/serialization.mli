@@ -1,5 +1,3 @@
-val address : string list -> string
+val load : string -> bytes list option
 
-val show : string list -> string
-
-val load : string -> string list option
+val digest : bytes list -> Digestif.BLAKE2B.t
